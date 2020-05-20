@@ -39,7 +39,7 @@ class TestData:
 
 
 def test_constant(prepare_inputs: Callable[[Any], List[Dict[str, Union[bytes, int]]]], init: Callable,
-                  do_one_computation: Callable):
+                  do_one_computation: Callable[[Any, List[Dict[str, Union[bytes, int]]]], Any]):
     init_result = init()
 
     inputs = prepare_inputs(init_result)
