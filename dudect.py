@@ -39,17 +39,18 @@ class TestData:
 
 
 def test_constant(init: Callable, prepare_inputs: Callable[[Any], List[Dict[str, Union[bytes, int]]]],
-                  do_one_computation: Callable[[Any, List[Dict[str, Union[bytes, int]]]], Any]) -> NoReturn:
+                  do_one_computation: Callable[[Any, bytes], Any]) -> NoReturn:
     """
     Test whether a computation is constant-time statistically against two provided classes of inputs.
     TODO: Make it the only public function to external in this package.
     Args:
-        init: A function, which initializes the state for measurement
+        init: A function, which initializes the state for measurement.
         prepare_inputs: A function, which must take the return of `init` function as argument (you may ignore it in the
             function body) and return a List of Dict{"data": bytes, "class_id": int}.
             TODO: Make the inputs data representation better?
         do_one_computation: A function, which takes as the first argument the return of `init` function and as the
-            second argument the return of `prepare_inputs` function, and then do the to be measured computation
+            second argument one input data (bytes) to be computed (from the return of `prepare_inputs` function), and
+            then do the to be measured computation based on them.
 
     Returns:
         No return. Print the test conclusion to stdout.
