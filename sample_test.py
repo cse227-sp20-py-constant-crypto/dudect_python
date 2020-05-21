@@ -33,4 +33,4 @@ def do_computation(cipher: BlockAlgo, in_msg: bytes):
 
 
 if __name__ == "__main__":
-    test_constant(prepare_inputs, init, do_computation)
+    test_constant(init, prepare_inputs, do_computation)
