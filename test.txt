@@ -1,0 +1,75 @@
+Pycrypto
+AES:
+256 bit random message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:   41.57, max tau: 1.86e-01, (5/tau)^2: 7.19e+02.
+Probably not constant time.
+
+16 bit 0 message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:    0.91, max tau: 4.08e-03, (5/tau)^2: 1.50e+06.
+For the moment, maybe constant time.
+
+32 bit 0 message vs 32 bit random message
+total measurements:    0.03 Millon
+max t-value:    1.37, max tau: 7.90e-03, (5/tau)^2: 4.01e+05.
+For the moment, maybe constant time.
+
+16 integer message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:    0.50, max tau: 2.22e-03, (5/tau)^2: 5.08e+06.
+For the moment, maybe constant time.
+
+64 integer message vs 64 bit random message
+total measurements:    0.05 Millon
+max t-value:    1.66, max tau: 7.40e-03, (5/tau)^2: 4.56e+05.
+For the moment, maybe constant time.
+
+DES:
+256 bit random message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:   89.15, max tau: 3.99e-01, (5/tau)^2: 1.57e+02.
+Probably not constant time.
+
+16 bit 0 message vs 16 bit random message
+total measurements:    0.03 Millon
+max t-value:    0.54, max tau: 3.13e-03, (5/tau)^2: 2.56e+06.
+For the moment, maybe constant time.
+
+32 bit 0 message vs 32 bit random message
+total measurements:    0.05 Millon
+max t-value:    2.55, max tau: 1.14e-02, (5/tau)^2: 1.93e+05.
+For the moment, maybe constant time.
+
+16 integer message vs 16 bit random message
+total measurements:    0.03 Millon
+max t-value:    1.45, max tau: 8.35e-03, (5/tau)^2: 3.59e+05.
+For the moment, maybe constant time.
+
+64 integer message vs 64 bit random message
+total measurements:    0.03 Millon
+max t-value:    0.47, max tau: 2.75e-03, (5/tau)^2: 3.31e+06.
+For the moment, maybe constant time.
+
+
+ElGamal:
+256 bit random message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:  327.52, max tau: 1.47e+00, (5/tau)^2: 1.16e+01.
+Probably not constant time.
+
+16 bit 0 message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:    0.29, max tau: 1.31e-03, (5/tau)^2: 1.45e+07.
+For the moment, maybe constant time.
+
+64 bit 0 message vs 64 bit random message
+total measurements:    0.05 Millon
+max t-value:   40.29, max tau: 1.80e-01, (5/tau)^2: 7.71e+02.
+Probably not constant time.
+
+16 integer message vs 16 bit random message
+total measurements:    0.05 Millon
+max t-value:   13.07, max tau: 5.84e-02, (5/tau)^2: 7.32e+03.
+Probably not constant time.
+

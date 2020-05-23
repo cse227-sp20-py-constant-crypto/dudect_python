@@ -2,6 +2,11 @@
 from typing import List, Callable, Dict, Any, Union, NoReturn
 import time
 import numpy
+from Crypto.PublicKey import ElGamal
+from Crypto.Hash import SHA
+from Crypto import Random
+from Crypto.Random import random
+from Crypto.Util.number import GCD
 
 number_percentiles = 10000  # Number of t-tests we will do on the test results
 enough_measurements = 10000  # Threshold for enough large measurements
@@ -9,7 +14,8 @@ number_tests = 1 + number_percentiles + 1
 
 t_threshold_bananas = 500  # test failed, with overwhelming probability
 t_threshold_moderate = 10  # test failed. Pankaj likes 4.5 but let's be more lenient
-
+#k = 0
+#key = ElGamal.generate(1024, Random.new().read)
 
 class TestData:
     mean: List[float] = [0.0, 0.0]
@@ -56,7 +62,14 @@ def test_constant(init: Callable, prepare_inputs: Callable[[Any], List[Dict[str,
         No return. Print the test conclusion to stdout.
     """
     init_result = init()
+    #
 
+#    while 1:
+#        k = random.StrongRandom().randint(1, key.p - 1)
+#
+#        if GCD(k, key.p - 1) == 1:
+#            break
+    #
     inputs = prepare_inputs(init_result)
     number_measurements = len(inputs)
     measurements: List[float] = do_measurement(init_result, inputs, number_measurements, do_one_computation)
@@ -72,6 +85,7 @@ def do_measurement(init: Any, inputs: List[Dict], number_measurements: int, do_o
     for i in range(number_measurements):
         start = time.perf_counter()
         do_one_computation(init, inputs[i]['data'])
+#        key.encrypt(inputs[i]['data'], k)
         end = time.perf_counter()
         measurements.append(end - start)
     return measurements
