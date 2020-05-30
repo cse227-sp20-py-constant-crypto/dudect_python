@@ -1,4 +1,6 @@
 from test_lib import TestLib
+from test_lib import inputs_zero_16
+from test_lib import constant_key, random_key, mixed_key
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -6,29 +8,53 @@ from cryptography.hazmat.backends import default_backend
 import os
 
 
-def init_aes():
+def init_aes(**kwargs):
     # AES
     backend = default_backend()
-    key = os.urandom(32)
-    iv = os.urandom(16)
+    if 'key' in kwargs and kwargs['key'] is not None:
+        f, p = kwargs['key'][:2]
+        key = f(*p)
+    else:
+        key = os.urandom(32)
+    if 'iv' in kwargs and kwargs['iv'] is not None:
+        f, p = kwargs['iv'][:2]
+        iv = f(*p)
+    else:
+        iv = os.urandom(16)
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
     return cipher
 
 
-def init_3des():
+def init_3des(**kwargs):
     # 3DES
     backend = default_backend()
-    key = os.urandom(16)
-    iv = os.urandom(8)
+    if 'key' in kwargs and kwargs['key'] is not None:
+        f, p = kwargs['key'][:2]
+        key = f(*p)
+    else:
+        key = os.urandom(16)
+    if 'iv' in kwargs and kwargs['iv'] is not None:
+        f, p = kwargs['iv'][:2]
+        iv = f(*p)
+    else:
+        iv = os.urandom(8)
     cipher = Cipher(algorithms.TripleDES(key), modes.OFB(iv), backend=backend)
     return cipher
 
 
-def init_chacha20():
+def init_chacha20(**kwargs):
     # ChaCha20
     backend = default_backend()
-    key = os.urandom(32)
-    nonce = os.urandom(16)
+    if 'key' in kwargs and kwargs['key'] is not None:
+        f, p = kwargs['key'][:2]
+        key = f(*p)
+    else:
+        key = os.urandom(32)
+    if 'nonce' in kwargs and kwargs['nonce'] is not None:
+        f, p = kwargs['nonce'][:2]
+        nonce = f(*p)
+    else:
+        nonce = os.urandom(16)
     cipher = Cipher(algorithms.ChaCha20(key, nonce), mode=None, backend=backend)
     return cipher
 
@@ -38,6 +64,17 @@ def do_computation(cipher, in_msg: bytes):
     ct = encryptor.update(in_msg)
 
 
-cryptography_aes_test = TestLib(init_aes, do_computation, name="cryptography-AES")
-cryptography_3des_test = TestLib(init_3des, do_computation, name="cryptography-3DES")
-cryptography_chacha20_test = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20")
+cryptography_aes_test_const = TestLib(init_aes, do_computation, name="cryptography-AES-const-key", key=constant_key)
+cryptography_aes_test_random = TestLib(init_aes, do_computation, name="cryptography-AES-random-key", key=random_key)
+cryptography_aes_test_mixed = TestLib(init_aes, do_computation, name="cryptography-AES-mixed-key",
+                                      key=mixed_key, inputs_info_pairs=(inputs_zero_16, inputs_zero_16))
+
+cryptography_3des_test_const = TestLib(init_3des, do_computation, name="cryptography-3DES-const-key", key=constant_key)
+cryptography_3des_test_random = TestLib(init_3des, do_computation, name="cryptography-3DES-random-key", key=random_key)
+cryptography_3des_test_mixed = TestLib(init_3des, do_computation, name="cryptography-3DES-mixed-key",
+                                       key=mixed_key, inputs_info_pairs=(inputs_zero_16, inputs_zero_16))
+
+cryptography_chacha20_test_const = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-const-key", key=constant_key)
+cryptography_chacha20_test_random = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-random-key", key=random_key)
+cryptography_chacha20_test_mixed = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-mixed-key",
+                                           key=mixed_key, inputs_info_pairs=(inputs_zero_16, inputs_zero_16))

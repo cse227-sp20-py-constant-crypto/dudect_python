@@ -21,6 +21,21 @@ def generate_random_message(n):
     return os.urandom(n)
 
 
+def generate_constant_key(n):
+    return ((n//16 + 1) * 'Sixteen byte key')[:n].encode()
+
+
+def generate_random_key(n):
+    return os.urandom(n)
+
+
+def generate_mixed_key(n):
+    if random.randrange(2) == 0:
+        return generate_constant_key(n)
+    else:
+        return generate_random_key(n)
+
+
 def generate_prepare_inputs(inputs_infos):
     num_class_id = len(inputs_infos)
     input_types = {}
@@ -38,30 +53,35 @@ def generate_prepare_inputs(inputs_infos):
     return prepare_inputs
 
 
-inputs_zero_16 = {"name": "16-bit zero", "func": "generate_zero_message", "len": 16}
-inputs_int_16 = {"name": "16-bit int", "func": "generate_integer_message", "len": 16}
-inputs_random_16 = {"name": "16-bit random", "func": "generate_random_message", "len": 16}
+inputs_zero_16 = {"name": "16-byte zero", "func": "generate_zero_message", "len": 16}
+inputs_int_16 = {"name": "16-byte int", "func": "generate_integer_message", "len": 16}
+inputs_random_16 = {"name": "16-byte random", "func": "generate_random_message", "len": 16}
 
-inputs_zero_64 = {"name": "16-bit zero", "func": "generate_zero_message", "len": 64}
-inputs_int_64 = {"name": "16-bit int", "func": "generate_integer_message", "len": 64}
-inputs_random_64 = {"name": "16-bit random", "func": "generate_random_message", "len": 64}
+inputs_zero_64 = {"name": "16-byte zero", "func": "generate_zero_message", "len": 64}
+inputs_int_64 = {"name": "16-byte int", "func": "generate_integer_message", "len": 64}
+inputs_random_64 = {"name": "16-byte random", "func": "generate_random_message", "len": 64}
 
-inputs_zero_256 = {"name": "256-bit zero", "func": "generate_zero_message", "len": 256}
-inputs_int_256 = {"name": "256-bit int", "func": "generate_integer_message", "len": 256}
-inputs_random_256 = {"name": "256-bit random", "func": "generate_random_message", "len": 256}
+inputs_zero_256 = {"name": "256-byte zero", "func": "generate_zero_message", "len": 256}
+inputs_int_256 = {"name": "256-byte int", "func": "generate_integer_message", "len": 256}
+inputs_random_256 = {"name": "256-byte random", "func": "generate_random_message", "len": 256}
+
+constant_key = (generate_constant_key, (16,), "16-byte constant key")
+random_key = (generate_random_key, (16,), "16-byte random key")
+mixed_key = (generate_mixed_key, (16,), "16-byte mixed key")
 
 default_inputs_info_pairs = (
     (inputs_zero_16, inputs_int_16),
     (inputs_zero_16, inputs_random_16),
-    (inputs_zero_16, inputs_random_16),
-    (inputs_zero_16, inputs_zero_256),
-    (inputs_int_16, inputs_int_256),
-    (inputs_random_16, inputs_random_256)
+    (inputs_int_16, inputs_random_16),
+    # (inputs_zero_16, inputs_zero_256),
+    # (inputs_int_16, inputs_int_256),
+    # (inputs_random_16, inputs_random_256)
 )
 
 
 class TestLib:
-    def __init__(self, init, do_computation, name="no name", inputs_infos=(), inputs_info_pairs=()):
+    def __init__(self, init, do_computation, name="no name",
+                 inputs_infos=(), inputs_info_pairs=(), **kwargs):
         self.name = name
         self.inputs_infos = inputs_infos
         if not (inputs_infos and inputs_info_pairs):
@@ -69,7 +89,11 @@ class TestLib:
         else:
             self.inputs_info_pairs = combinations(inputs_infos, 2) + inputs_info_pairs
         # self.name = " vs ".join([info["name"] for info in self.inputs_infos])
-        self.init = init
+
+        def _init():
+            return init(**kwargs)
+
+        self.init = _init
         self.do_computation = do_computation
 
     def do_test(self):
