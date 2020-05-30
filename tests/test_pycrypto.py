@@ -1,5 +1,5 @@
 from test_lib import TestLib
-from test_lib import inputs_zero_16
+from test_lib import fixed_inputs_info
 from test_lib import constant_key, random_key, mixed_key
 
 from Crypto.Cipher import AES, DES3
@@ -46,9 +46,9 @@ def do_computation(cipher: BlockAlgo, in_msg: bytes):
 pycrypto_aes_test_const = TestLib(init_aes, do_computation, name="pycrypto-AES-const-key", key=constant_key)
 pycrypto_aes_test_random = TestLib(init_aes, do_computation, name="pycrypto-AES-random-key", key=random_key)
 pycrypto_aes_test_mixed = TestLib(init_aes, do_computation, name="pycrypto-AES-mixed-key",
-                                  key=mixed_key, inputs_info_pairs=(inputs_zero_16, inputs_zero_16))
+                                  key=mixed_key, inputs_info_pairs=fixed_inputs_info)
 
 pycrypto_des3_test_const = TestLib(init_des3, do_computation, name="pycrypto-3DES-const-key", key=constant_key)
 pycrypto_des3_test_random = TestLib(init_des3, do_computation, name="pycrypto-3DES-random-key", key=random_key)
 pycrypto_des3_test_mixed = TestLib(init_des3, do_computation, name="pycrypto-3DES-mixed-key",
-                                   key=mixed_key, inputs_info_pairs=(inputs_zero_16, inputs_zero_16))
+                                   key=mixed_key, inputs_info_pairs=fixed_inputs_info)

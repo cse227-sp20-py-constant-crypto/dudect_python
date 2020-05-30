@@ -78,17 +78,18 @@ default_inputs_info_pairs = (
     # (inputs_random_16, inputs_random_256)
 )
 
+fixed_inputs_info = ((inputs_zero_16, inputs_zero_16), )
+
 
 class TestLib:
     def __init__(self, init, do_computation, name="no name",
                  inputs_infos=(), inputs_info_pairs=(), **kwargs):
         self.name = name
         self.inputs_infos = inputs_infos
-        if not (inputs_infos and inputs_info_pairs):
+        if not (inputs_infos or inputs_info_pairs):
             self.inputs_info_pairs = default_inputs_info_pairs
         else:
-            self.inputs_info_pairs = combinations(inputs_infos, 2) + inputs_info_pairs
-        # self.name = " vs ".join([info["name"] for info in self.inputs_infos])
+            self.inputs_info_pairs = tuple(combinations(inputs_infos, 2)) + tuple(inputs_info_pairs)
 
         def _init():
             return init(**kwargs)
@@ -98,8 +99,12 @@ class TestLib:
 
     def do_test(self):
         print("\nNow testing", self.name)
-        for info0, info1 in self.inputs_info_pairs:
+        try:
+            for info0, info1 in self.inputs_info_pairs:
+                print(info0["name"], "vs", info1["name"])
+                _prepare_inputs = generate_prepare_inputs([info0, info1])
+                test_constant(self.init, _prepare_inputs, self.do_computation)
+                print()
+        except Exception as e:
+            print(e)
             print()
-            print(info0["name"], "vs", info1["name"])
-            _prepare_inputs = generate_prepare_inputs([info0, info1])
-            test_constant(self.init, _prepare_inputs, self.do_computation)
