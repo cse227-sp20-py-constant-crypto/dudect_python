@@ -78,7 +78,7 @@ default_inputs_info_pairs = (
     (inputs_one_64, inputs_random_64),
 )
 
-fixed_inputs_info = ((inputs_one_16, inputs_one_16), )
+fixed_inputs_info = ((inputs_zero_16, inputs_zero_16), (inputs_one_16, inputs_one_16))
 
 
 class TestLib:
