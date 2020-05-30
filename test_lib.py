@@ -10,11 +10,11 @@ number_measurements = 100000
 
 
 def generate_zero_message(n):
-    return b'0' * n
+    return b'\x00' * n
 
 
-def generate_integer_message(n):
-    return ''.join(["{}".format(random.randint(0, 9)) for _ in range(0, n)]).encode()
+def generate_one_message(n):
+    return b'\xff' * n
 
 
 def generate_random_message(n):
@@ -48,37 +48,37 @@ def generate_prepare_inputs(inputs_infos):
         inputs = []
         for _ in range(number_measurements):
             class_id = random.randrange(num_class_id)
-            inputs.append({"data": eval(input_types[class_id])(input_lens[class_id]), "class": class_id})
+            inputs.append({"data": input_types[class_id](input_lens[class_id]), "class": class_id})
         return inputs
     return prepare_inputs
 
 
-inputs_zero_16 = {"name": "16-byte zero", "func": "generate_zero_message", "len": 16}
-inputs_int_16 = {"name": "16-byte int", "func": "generate_integer_message", "len": 16}
-inputs_random_16 = {"name": "16-byte random", "func": "generate_random_message", "len": 16}
+inputs_zero_16 = {"name": "16-byte zero", "func": generate_zero_message, "len": 16}
+inputs_one_16 = {"name": "16-byte one", "func": generate_one_message, "len": 16}
+inputs_random_16 = {"name": "16-byte random", "func": generate_random_message, "len": 16}
 
-inputs_zero_64 = {"name": "16-byte zero", "func": "generate_zero_message", "len": 64}
-inputs_int_64 = {"name": "16-byte int", "func": "generate_integer_message", "len": 64}
-inputs_random_64 = {"name": "16-byte random", "func": "generate_random_message", "len": 64}
+inputs_zero_64 = {"name": "16-byte zero", "func": generate_zero_message, "len": 64}
+inputs_one_64 = {"name": "16-byte one", "func": generate_one_message, "len": 64}
+inputs_random_64 = {"name": "16-byte random", "func": generate_random_message, "len": 64}
 
-inputs_zero_256 = {"name": "256-byte zero", "func": "generate_zero_message", "len": 256}
-inputs_int_256 = {"name": "256-byte int", "func": "generate_integer_message", "len": 256}
-inputs_random_256 = {"name": "256-byte random", "func": "generate_random_message", "len": 256}
+inputs_zero_256 = {"name": "256-byte zero", "func": generate_zero_message, "len": 256}
+inputs_one_256 = {"name": "256-byte one", "func": generate_one_message, "len": 256}
+inputs_random_256 = {"name": "256-byte random", "func": generate_random_message, "len": 256}
 
 constant_key = (generate_constant_key, (16,), "16-byte constant key")
 random_key = (generate_random_key, (16,), "16-byte random key")
 mixed_key = (generate_mixed_key, (16,), "16-byte mixed key")
 
 default_inputs_info_pairs = (
-    (inputs_zero_16, inputs_int_16),
+    (inputs_zero_16, inputs_one_16),
     (inputs_zero_16, inputs_random_16),
-    (inputs_int_16, inputs_random_16),
-    # (inputs_zero_16, inputs_zero_256),
-    # (inputs_int_16, inputs_int_256),
-    # (inputs_random_16, inputs_random_256)
+    (inputs_one_16, inputs_random_16),
+    (inputs_zero_64, inputs_one_64),
+    (inputs_zero_64, inputs_random_64),
+    (inputs_one_64, inputs_random_64),
 )
 
-fixed_inputs_info = ((inputs_zero_16, inputs_zero_16), )
+fixed_inputs_info = ((inputs_one_16, inputs_one_16), )
 
 
 class TestLib:
@@ -101,10 +101,15 @@ class TestLib:
         print("\nNow testing", self.name)
         try:
             for info0, info1 in self.inputs_info_pairs:
-                print(info0["name"], "vs", info1["name"])
-                _prepare_inputs = generate_prepare_inputs([info0, info1])
-                test_constant(self.init, _prepare_inputs, self.do_computation)
-                print()
+                try:
+                    print(info0["name"], "vs", info1["name"])
+                    _prepare_inputs = generate_prepare_inputs([info0, info1])
+                    test_constant(self.init, _prepare_inputs, self.do_computation)
+                    print()
+                except Exception as e:
+                    print("ERROR:", e)
+                    print()
         except Exception as e:
-            print(e)
+            print("ERROR:", e)
             print()
+        print("Done. ")
