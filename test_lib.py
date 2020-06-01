@@ -69,6 +69,10 @@ constant_key = (generate_constant_key, (16,), "16-byte constant key")
 random_key = (generate_random_key, (16,), "16-byte random key")
 mixed_key = (generate_mixed_key, (16,), "16-byte mixed key")
 
+constant_key_32 = (generate_constant_key, (32,), "16-byte constant key")
+random_key_32 = (generate_random_key, (32,), "16-byte random key")
+mixed_key_32 = (generate_mixed_key, (32,), "16-byte mixed key")
+
 default_inputs_info_pairs = (
     (inputs_zero_16, inputs_one_16),
     (inputs_zero_16, inputs_random_16),
@@ -83,7 +87,7 @@ fixed_inputs_info = ((inputs_zero_16, inputs_zero_16), (inputs_one_16, inputs_on
 
 class TestLib:
     def __init__(self, init, do_computation, name="no name",
-                 inputs_infos=(), inputs_info_pairs=(), **kwargs):
+                 inputs_infos=(), inputs_info_pairs=(), multi_init=False, **kwargs):
         self.name = name
         self.inputs_infos = inputs_infos
         if not (inputs_infos or inputs_info_pairs):
@@ -95,6 +99,7 @@ class TestLib:
             return init(**kwargs)
 
         self.init = _init
+        self.multi_init = multi_init
         self.do_computation = do_computation
 
     def do_test(self):
@@ -104,7 +109,7 @@ class TestLib:
                 try:
                     print(info0["name"], "vs", info1["name"])
                     _prepare_inputs = generate_prepare_inputs([info0, info1])
-                    test_constant(self.init, _prepare_inputs, self.do_computation)
+                    test_constant(self.init, _prepare_inputs, self.do_computation, self.multi_init)
                     print()
                 except Exception as e:
                     print("ERROR:", e)

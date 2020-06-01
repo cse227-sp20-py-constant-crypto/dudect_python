@@ -39,7 +39,7 @@ class TestData:
 
 
 def test_constant(init: Callable, prepare_inputs: Callable[[Any], List[Dict[str, Union[bytes, int]]]],
-                  do_one_computation: Callable[[Any, bytes], Any]) -> NoReturn:
+                  do_one_computation: Callable[[Any, bytes], Any], multi_init=False) -> NoReturn:
     """
     Test whether a computation is constant-time statistically against two provided classes of inputs.
     TODO: Make it the only public function to external in this package.
@@ -59,19 +59,26 @@ def test_constant(init: Callable, prepare_inputs: Callable[[Any], List[Dict[str,
 
     inputs = prepare_inputs(init_result)
     number_measurements = len(inputs)
-    measurements: List[float] = do_measurement(init_result, inputs, number_measurements, do_one_computation)
+    if multi_init:
+        measurements: List[float] = do_measurement(init, inputs, number_measurements, do_one_computation, inited=False)
+    else:
+        measurements: List[float] = do_measurement(init_result, inputs, number_measurements, do_one_computation)
 
     percentiles = prepare_percentiles(measurements)
     t = update_statics(measurements, inputs, percentiles)
     report(t)
 
 
-def do_measurement(init: Any, inputs: List[Dict], number_measurements: int, do_one_computation: Callable)\
+def do_measurement(init: Any, inputs: List[Dict], number_measurements: int, do_one_computation: Callable, inited=True)\
         -> List[float]:
     measurements: List[float] = []
     for i in range(number_measurements):
+        if not inited:
+            init_res = init()
+        else:
+            init_res = init
         start = time.perf_counter()
-        do_one_computation(init, inputs[i]['data'])
+        do_one_computation(init_res, inputs[i]['data'])
         end = time.perf_counter()
         measurements.append(end - start)
     return measurements

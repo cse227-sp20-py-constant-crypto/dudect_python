@@ -1,6 +1,6 @@
 from test_lib import TestLib
 from test_lib import fixed_inputs_info
-from test_lib import constant_key, random_key, mixed_key
+from test_lib import constant_key_32, random_key_32, mixed_key_32
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -64,17 +64,17 @@ def do_computation(cipher, in_msg: bytes):
     ct = encryptor.update(in_msg)
 
 
-cryptography_aes_test_const = TestLib(init_aes, do_computation, name="cryptography-AES-const-key", key=constant_key)
-cryptography_aes_test_random = TestLib(init_aes, do_computation, name="cryptography-AES-random-key", key=random_key)
+cryptography_aes_test_const = TestLib(init_aes, do_computation, name="cryptography-AES-const-key", key=constant_key_32)
+cryptography_aes_test_random = TestLib(init_aes, do_computation, name="cryptography-AES-random-key", key=random_key_32)
 cryptography_aes_test_mixed = TestLib(init_aes, do_computation, name="cryptography-AES-mixed-key",
-                                      key=mixed_key, inputs_info_pairs=fixed_inputs_info)
+                                      key=mixed_key_32, inputs_info_pairs=fixed_inputs_info, multi_init=True)
 
-cryptography_3des_test_const = TestLib(init_3des, do_computation, name="cryptography-3DES-const-key", key=constant_key)
-cryptography_3des_test_random = TestLib(init_3des, do_computation, name="cryptography-3DES-random-key", key=random_key)
+cryptography_3des_test_const = TestLib(init_3des, do_computation, name="cryptography-3DES-const-key", key=constant_key_32)
+cryptography_3des_test_random = TestLib(init_3des, do_computation, name="cryptography-3DES-random-key", key=random_key_32)
 cryptography_3des_test_mixed = TestLib(init_3des, do_computation, name="cryptography-3DES-mixed-key",
-                                       key=mixed_key, inputs_info_pairs=fixed_inputs_info)
+                                       key=mixed_key_32, inputs_info_pairs=fixed_inputs_info, multi_init=True)
 
-cryptography_chacha20_test_const = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-const-key", key=constant_key)
-cryptography_chacha20_test_random = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-random-key", key=random_key)
+cryptography_chacha20_test_const = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-const-key", key=constant_key_32)
+cryptography_chacha20_test_random = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-random-key", key=random_key_32)
 cryptography_chacha20_test_mixed = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-mixed-key",
-                                           key=mixed_key, inputs_info_pairs=fixed_inputs_info)
+                                           key=mixed_key_32, inputs_info_pairs=fixed_inputs_info, multi_init=True)
