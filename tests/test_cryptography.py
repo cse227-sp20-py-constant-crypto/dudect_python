@@ -24,7 +24,7 @@ def init_aes(**kwargs):
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
     return cipher
 
-
+  
 def init_3des(**kwargs):
     # 3DES
     backend = default_backend()
