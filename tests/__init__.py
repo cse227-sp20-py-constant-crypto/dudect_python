@@ -9,8 +9,8 @@ tests.append(test_pycrypto.pycrypto_aes_test_random)
 tests.append(test_pycrypto.pycrypto_aes_test_mixed)
 
 tests.append(test_pycrypto.pycrypto_des3_test_const)
-tests.append(test_pycrypto.pycrypto_des3_test_const)
-tests.append(test_pycrypto.pycrypto_des3_test_const)
+tests.append(test_pycrypto.pycrypto_des3_test_random)
+tests.append(test_pycrypto.pycrypto_des3_test_mixed)
 
 # cryptography
 tests.append(test_cryptography.cryptography_aes_test_const)
