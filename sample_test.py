@@ -1,13 +1,13 @@
-from dudect import test_constant
+from dudect import test_constant, Input
 
 from Crypto.Cipher import AES
 from Crypto import Random
-from Crypto.Cipher.blockalgo import BlockAlgo
+# from Crypto.Cipher.blockalgo import BlockAlgo
 
 import random
 
 
-number_measurements = 100000
+number_measurements = 1000000
 
 
 def prepare_inputs():
@@ -15,10 +15,10 @@ def prepare_inputs():
     for i in range(number_measurements):
         class_id = random.randrange(2)
         if class_id == 0:
-            inputs.append({"data": b'0000000000000000', "class": 0})
+            inputs.append(Input(data=b'0000000000000000', cla=0))
         else:
-            inputs.append({"data": b'0000000000000000', "class": 1})  # constant input msg
-            # inputs.append({"data": Random.new().read(16), "class": 1})  # random vs constant input msg
+            inputs.append(Input(data=b'0000000000000000', cla=1))  # constant input msg
+            # inputs.append(Input(data=Random.new().read(16), cla=0))  # random vs constant input msg
     return inputs
 
 

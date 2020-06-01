@@ -1,5 +1,5 @@
 # from dataclasses import dataclass
-from typing import List, Callable, Dict, Union, NoReturn
+from typing import List, Callable, NoReturn
 import time
 import numpy
 
@@ -11,7 +11,7 @@ t_threshold_bananas = 500  # test failed, with overwhelming probability
 t_threshold_moderate = 10  # test failed. Pankaj likes 4.5 but let's be more lenient
 
 
-class TestData:
+class __TestData:
     mean: List[float] = [0.0, 0.0]
     m2: List[float] = [0.0, 0.0]
     n: List[int] = [0, 0]
@@ -38,16 +38,34 @@ class TestData:
         return t_value
 
 
+class Input:
+    """
+    The class representation of a single input.
+
+    Args:
+        data: the bytes data to be fed into computation.
+        cla: the categorization of this data as 0 or 1.
+
+    Attributes:
+        Data: the bytes data to be fed into computation.
+        Class: the categorization of this data as 0 or 1.
+    """
+    Data: bytes
+    Class: int
+
+    def __init__(self, data: bytes, cla: int):
+        self.Data = data
+        self.Class = cla
+
+
 def test_constant(init: Callable[[int], Callable[[bytes], NoReturn]],
-                  prepare_inputs: Callable[[], List[Dict[str, Union[bytes, int]]]], init_repeatedly: bool) -> NoReturn:
+                  prepare_inputs: Callable[[], List[Input]], init_repeatedly: bool) -> NoReturn:
     """
     Test whether a computation is constant-time statistically against two provided classes of inputs.
     TODO: Make it the only public function to external in this package.
     Args:
         init: A function, which initializes the state for computations, returns a closure func to do one computation.
-        prepare_inputs: A function, which must take the return of `init` function as argument (you may ignore it in the
-            function body) and return a List of Dict{"data": bytes, "class_id": int}.
-            TODO: Make the inputs data representation better?
+        prepare_inputs: A function returns a List of Input.
         init_repeatedly: decide whether the init function should be executed once for every single measurement or once
             for all measurements.
 
@@ -55,15 +73,15 @@ def test_constant(init: Callable[[int], Callable[[bytes], NoReturn]],
         No return. Print the test conclusion to stdout.
     """
     inputs = prepare_inputs()
-    measurements: List[float] = do_measurement(init, inputs, init_repeatedly)
+    measurements: List[float] = __do_measurement(init, inputs, init_repeatedly)
 
-    t = update_statics(measurements, inputs)
+    t = __update_statics(measurements, inputs)
 
-    report(t)
+    __report(t)
 
 
-def do_measurement(init: Callable[[int], Callable[[bytes], NoReturn]], inputs: List[Dict],
-                   init_repeatedly: bool = False) \
+def __do_measurement(init: Callable[[int], Callable[[bytes], NoReturn]], inputs: List[Input],
+                     init_repeatedly: bool = False) \
         -> List[float]:
     number_measurements = len(inputs)
     measurements: List[float] = []
@@ -71,32 +89,32 @@ def do_measurement(init: Callable[[int], Callable[[bytes], NoReturn]], inputs: L
         do_one_computation = init(0)
         for i in range(number_measurements):
             start = time.perf_counter()
-            do_one_computation(inputs[i]['data'])
+            do_one_computation(inputs[i].Data)
             end = time.perf_counter()
             measurements.append(end - start)
         return measurements
     for i in range(number_measurements):
-        do_one_computation = init(inputs[i]['class'])
+        do_one_computation = init(inputs[i].Class)
         start = time.perf_counter()
-        do_one_computation(inputs[i]['data'])
+        do_one_computation(inputs[i].Data)
         end = time.perf_counter()
         measurements.append(end - start)
     return measurements
 
 
-def prepare_percentiles(data: List[float]) -> List[float]:
+def __prepare_percentiles(data: List[float]) -> List[float]:
     a = [numpy.percentile(data, 100 * (1 - 0.5 ** (10 * (i + 1) / number_percentiles))) for i in
          range(number_percentiles)]
     return a
 
 
-def update_statics(measurements: List[float], inputs: List[Dict]) -> List[TestData]:
-    percentiles = prepare_percentiles(measurements)
-    t: List[TestData] = [TestData([0.0, 0.0], [0.0, 0.0], [0, 0]) for _ in range(number_tests)]
+def __update_statics(measurements: List[float], inputs: List[Input]) -> List[__TestData]:
+    percentiles = __prepare_percentiles(measurements)
+    t: List[__TestData] = [__TestData([0.0, 0.0], [0.0, 0.0], [0, 0]) for _ in range(number_tests)]
 
     for i in range(len(measurements)):
         data = measurements[i]
-        class_id = inputs[i]['class']
+        class_id = inputs[i].Class
 
         assert data > 0
         t[0].push(data, class_id)
@@ -113,8 +131,8 @@ def update_statics(measurements: List[float], inputs: List[Dict]) -> List[TestDa
     return t
 
 
-def report(t: List[TestData]) -> None:
-    mt = max_test(t)
+def __report(t: List[__TestData]) -> None:
+    mt = __max_test(t)
     max_t = abs(t[mt].compute())
     max_t_n = t[mt].n[0] + t[mt].n[1]
     max_tau = max_t / max_t_n ** 0.5
@@ -129,7 +147,7 @@ def report(t: List[TestData]) -> None:
     print("For the moment, maybe constant time.")
 
 
-def max_test(t: List[TestData]) -> int:
+def __max_test(t: List[__TestData]) -> int:
     test_id = 0
     maximum = 0
     for i in range(number_tests):
