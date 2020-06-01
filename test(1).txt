@@ -1,0 +1,573 @@
+Now testing pycrypto-AES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.89, max tau: 3.15e-03, (5/tau)^2: 2.52e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.65, max tau: 2.07e-03, (5/tau)^2: 5.83e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.00, max tau: 3.53e-03, (5/tau)^2: 2.01e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.07, max tau: 2.10e-04, (5/tau)^2: 5.68e+08.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.18, max tau: 5.59e-04, (5/tau)^2: 8.00e+07.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.95, max tau: 6.17e-03, (5/tau)^2: 6.56e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycrypto-AES-random-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.81, max tau: 2.55e-03, (5/tau)^2: 3.86e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.75, max tau: 2.65e-03, (5/tau)^2: 3.57e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.67, max tau: 5.29e-03, (5/tau)^2: 8.95e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.16, max tau: 5.59e-04, (5/tau)^2: 8.00e+07.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.05, max tau: 3.71e-03, (5/tau)^2: 1.82e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.34, max tau: 4.24e-03, (5/tau)^2: 1.39e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycrypto-AES-mixed-key
+16-byte zero vs 16-byte zero
+total measurements:    0.10 Millon
+max t-value:    2.69, max tau: 8.50e-03, (5/tau)^2: 3.46e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.86, max tau: 2.72e-03, (5/tau)^2: 3.39e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycrypto-3DES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.35, max tau: 4.28e-03, (5/tau)^2: 1.36e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.44, max tau: 5.10e-03, (5/tau)^2: 9.62e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    2.35, max tau: 7.43e-03, (5/tau)^2: 4.53e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.13, max tau: 4.09e-04, (5/tau)^2: 1.50e+08.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.24, max tau: 3.92e-03, (5/tau)^2: 1.63e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.64, max tau: 5.82e-03, (5/tau)^2: 7.39e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycrypto-3DES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.24, max tau: 3.94e-03, (5/tau)^2: 1.61e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.00, max tau: 3.18e-03, (5/tau)^2: 2.48e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.14, max tau: 4.33e-04, (5/tau)^2: 1.33e+08.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.39, max tau: 1.38e-03, (5/tau)^2: 1.31e+07.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.71, max tau: 2.50e-03, (5/tau)^2: 4.01e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.30, max tau: 9.52e-04, (5/tau)^2: 2.76e+07.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycrypto-3DES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.43, max tau: 1.37e-03, (5/tau)^2: 1.34e+07.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.00, max tau: 3.54e-03, (5/tau)^2: 1.99e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.68, max tau: 2.16e-03, (5/tau)^2: 5.36e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    1.05, max tau: 3.71e-03, (5/tau)^2: 1.82e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.79, max tau: 2.78e-03, (5/tau)^2: 3.23e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.17, max tau: 4.16e-03, (5/tau)^2: 1.45e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-AES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.27, max tau: 4.02e-03, (5/tau)^2: 1.55e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.99, max tau: 3.50e-03, (5/tau)^2: 2.04e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.56, max tau: 5.50e-03, (5/tau)^2: 8.26e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.82, max tau: 2.61e-03, (5/tau)^2: 3.68e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.67, max tau: 2.12e-03, (5/tau)^2: 5.58e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.59, max tau: 5.63e-03, (5/tau)^2: 7.89e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-AES-random-key
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    1.28, max tau: 4.54e-03, (5/tau)^2: 1.21e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.99, max tau: 3.49e-03, (5/tau)^2: 2.05e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    2.06, max tau: 6.53e-03, (5/tau)^2: 5.87e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.03, max tau: 9.14e-05, (5/tau)^2: 3.00e+09.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.24, max tau: 3.92e-03, (5/tau)^2: 1.62e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.99, max tau: 3.48e-03, (5/tau)^2: 2.06e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-AES-mixed-key
+16-byte zero vs 16-byte zero
+total measurements:    0.10 Millon
+max t-value:    1.60, max tau: 5.06e-03, (5/tau)^2: 9.77e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    1.01, max tau: 3.57e-03, (5/tau)^2: 1.97e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-3DES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.83, max tau: 5.79e-03, (5/tau)^2: 7.46e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.11, max tau: 3.51e-03, (5/tau)^2: 2.02e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.57, max tau: 5.57e-03, (5/tau)^2: 8.06e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.58, max tau: 5.00e-03, (5/tau)^2: 1.00e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    2.38, max tau: 7.53e-03, (5/tau)^2: 4.40e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.72, max tau: 2.54e-03, (5/tau)^2: 3.88e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-3DES-random-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.72, max tau: 5.45e-03, (5/tau)^2: 8.42e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.93, max tau: 3.29e-03, (5/tau)^2: 2.31e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.08, max tau: 3.82e-03, (5/tau)^2: 1.71e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.96, max tau: 3.38e-03, (5/tau)^2: 2.18e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    2.04, max tau: 7.22e-03, (5/tau)^2: 4.79e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.52, max tau: 1.63e-03, (5/tau)^2: 9.36e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-3DES-mixed-key
+16-byte zero vs 16-byte zero
+total measurements:    0.08 Millon
+max t-value:    2.06, max tau: 7.31e-03, (5/tau)^2: 4.68e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.81, max tau: 2.56e-03, (5/tau)^2: 3.81e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-ChaCha20-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.51, max tau: 1.61e-03, (5/tau)^2: 9.60e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.95, max tau: 3.36e-03, (5/tau)^2: 2.21e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.42, max tau: 5.04e-03, (5/tau)^2: 9.86e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.56, max tau: 4.93e-03, (5/tau)^2: 1.03e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    2.47, max tau: 7.80e-03, (5/tau)^2: 4.11e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.09, max tau: 3.44e-03, (5/tau)^2: 2.11e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-ChaCha20-random-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.63, max tau: 2.01e-03, (5/tau)^2: 6.22e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.07, max tau: 3.39e-03, (5/tau)^2: 2.17e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.35, max tau: 4.28e-03, (5/tau)^2: 1.36e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.95, max tau: 3.36e-03, (5/tau)^2: 2.21e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.00, max tau: 3.53e-03, (5/tau)^2: 2.01e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.36, max tau: 1.15e-03, (5/tau)^2: 1.88e+07.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing cryptography-ChaCha20-mixed-key
+16-byte zero vs 16-byte zero
+total measurements:    0.08 Millon
+max t-value:    0.76, max tau: 2.70e-03, (5/tau)^2: 3.43e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.98, max tau: 3.49e-03, (5/tau)^2: 2.06e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycryptodomex-AES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.53, max tau: 4.83e-03, (5/tau)^2: 1.07e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.64, max tau: 2.03e-03, (5/tau)^2: 6.10e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.96, max tau: 6.19e-03, (5/tau)^2: 6.52e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.53, max tau: 1.66e-03, (5/tau)^2: 9.03e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.85, max tau: 2.68e-03, (5/tau)^2: 3.49e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.59, max tau: 5.63e-03, (5/tau)^2: 7.89e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycryptodomex-AES-random-key
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    0.31, max tau: 1.09e-03, (5/tau)^2: 2.10e+07.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    0.65, max tau: 2.04e-03, (5/tau)^2: 5.98e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.04, max tau: 3.67e-03, (5/tau)^2: 1.85e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.87, max tau: 2.76e-03, (5/tau)^2: 3.28e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.76, max tau: 2.68e-03, (5/tau)^2: 3.49e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.43, max tau: 5.07e-03, (5/tau)^2: 9.71e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycryptodomex-AES-mixed-key
+16-byte zero vs 16-byte zero
+total measurements:    0.10 Millon
+max t-value:    1.82, max tau: 5.76e-03, (5/tau)^2: 7.52e+05.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    0.78, max tau: 2.46e-03, (5/tau)^2: 4.12e+06.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycryptodomex-3DES-const-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.81, max tau: 5.74e-03, (5/tau)^2: 7.59e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.82, max tau: 2.89e-03, (5/tau)^2: 2.99e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.28, max tau: 4.52e-03, (5/tau)^2: 1.22e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    1.12, max tau: 3.97e-03, (5/tau)^2: 1.59e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.00, max tau: 3.16e-03, (5/tau)^2: 2.50e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.10 Millon
+max t-value:    1.72, max tau: 5.45e-03, (5/tau)^2: 8.40e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycryptodomex-3DES-random-key
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.95, max tau: 6.17e-03, (5/tau)^2: 6.57e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.42, max tau: 1.49e-03, (5/tau)^2: 1.13e+07.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    0.84, max tau: 2.98e-03, (5/tau)^2: 2.82e+06.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte one
+total measurements:    0.10 Millon
+max t-value:    1.97, max tau: 6.22e-03, (5/tau)^2: 6.47e+05.
+For the moment, maybe constant time.
+
+16-byte zero vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.00, max tau: 3.53e-03, (5/tau)^2: 2.00e+06.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte random
+total measurements:    0.08 Millon
+max t-value:    1.47, max tau: 5.20e-03, (5/tau)^2: 9.26e+05.
+For the moment, maybe constant time.
+
+Done.
+
+Now testing pycryptodomex-3DES-mixed-key
+16-byte zero vs 16-byte zero
+total measurements:    0.08 Millon
+max t-value:    0.21, max tau: 7.42e-04, (5/tau)^2: 4.54e+07.
+For the moment, maybe constant time.
+
+16-byte one vs 16-byte one
+total measurements:    0.08 Millon
+max t-value:    1.68, max tau: 5.95e-03, (5/tau)^2: 7.06e+05.
+For the moment, maybe constant time.
+
+Done.
+All tests finished.
