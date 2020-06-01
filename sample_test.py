@@ -10,27 +10,34 @@ import random
 number_measurements = 100000
 
 
-def prepare_inputs(_):
+def prepare_inputs():
     inputs = []
     for i in range(number_measurements):
         class_id = random.randrange(2)
         if class_id == 0:
             inputs.append({"data": b'0000000000000000', "class": 0})
         else:
-            inputs.append({"data": Random.new().read(16), "class": 1})
+            inputs.append({"data": b'0000000000000000', "class": 1})  # constant input msg
+            # inputs.append({"data": Random.new().read(16), "class": 1})  # random vs constant input msg
     return inputs
 
 
-def init():
-    key = b'Sixteen byte key'
-    iv = Random.new().read(AES.block_size)
+def init(class_id: int):
+    if class_id == 1:
+        key = Random.new().read(16)  # random key vs. constant key
+    else:
+        key = b'Sixteen byte key'
+    # key = b'Sixteen byte key'  # fixed key
+
+    # iv = Random.new().read(AES.block_size)
+    iv = b'Sixteen byte iv.'  # a fixed iv
     cipher = AES.new(key, AES.MODE_CBC, iv)
-    return cipher
 
+    def do_computation(msg: bytes):
+        cipher.encrypt(msg)
 
-def do_computation(cipher: BlockAlgo, in_msg: bytes):
-    cipher.encrypt(in_msg)
+    return do_computation
 
 
 if __name__ == "__main__":
-    test_constant(init, prepare_inputs, do_computation)
+    test_constant(init, prepare_inputs, True)
