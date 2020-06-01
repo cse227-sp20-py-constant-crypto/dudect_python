@@ -1,6 +1,6 @@
 # from dataclasses import dataclass
 from typing import List, Callable, NoReturn
-import time
+import timeit
 import numpy
 
 number_percentiles = 100  # Number of percentiles we will have to deal with long tail
@@ -88,16 +88,16 @@ def __do_measurement(init: Callable[[int], Callable[[bytes], NoReturn]], inputs:
     if not init_repeatedly:
         do_one_computation = init(0)
         for i in range(number_measurements):
-            start = time.perf_counter()
+            start = timeit.default_timer()
             do_one_computation(inputs[i].Data)
-            end = time.perf_counter()
+            end = timeit.default_timer()
             measurements.append(end - start)
         return measurements
     for i in range(number_measurements):
         do_one_computation = init(inputs[i].Class)
-        start = time.perf_counter()
+        start = timeit.default_timer()
         do_one_computation(inputs[i].Data)
-        end = time.perf_counter()
+        end = timeit.default_timer()
         measurements.append(end - start)
     return measurements
 
@@ -136,7 +136,13 @@ def __report(t: List[__TestData]) -> None:
     max_t = abs(t[mt].compute())
     max_t_n = t[mt].n[0] + t[mt].n[1]
     max_tau = max_t / max_t_n ** 0.5
-    print(f'total measurements: {max_t_n / 1e6:7.2f} Million')
+    print(f'total measurements: {max_t_n / 1e6:7.3f} Million')
+    print(
+        f'class-0 mean overall: {t[0].mean[0]:.2e}, population: {t[0].n[0]};'
+        f' class-1 mean overall: {t[0].mean[1]:.2e}, population: {t[0].n[0]}')
+    print(
+        f'class-0 mean of max_t: {t[mt].mean[0]:.2e}, population: {t[mt].n[0]};'
+        f' class-1 mean of max_t: {t[mt].mean[1]:.2e}, population: {t[mt].n[0]}')
     print(f"max t-value: {max_t:7.2f}, max tau: {max_tau:.2e}, (5/tau)^2: {(5 * 5) / (max_tau * max_tau):.2e}.")
     if max_t > t_threshold_bananas:
         print("Definitely not constant time.")

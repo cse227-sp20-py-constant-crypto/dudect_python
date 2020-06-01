@@ -7,7 +7,7 @@ from Crypto import Random
 import random
 
 
-number_measurements = 1000000
+number_measurements = 100000
 
 
 def prepare_inputs():
