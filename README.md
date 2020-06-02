@@ -19,10 +19,10 @@ Look at the docstring of `test_constant` function in `dudect.py`
 
 ## TODO
 Package implementation side:
-- [ ] Proofread the functionality
+- [x] Proofread the functionality
 - [ ] Wrap this to a package
-- [ ] Make `test_constant` function the only public function in this package
-- [ ] Use our own percentile implementation to remove dependencies on numpy
+- [x] Make `test_constant` function the only public function in this package
+- [ ] Use our own percentile implementation to remove dependencies on numpy (probably unnecessary)
 
 Research side:
 - [ ] Test more crypto primitives from more python packages with this package and see if there's non-constant implementations
