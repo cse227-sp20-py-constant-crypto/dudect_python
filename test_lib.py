@@ -1,4 +1,4 @@
-from dudect import test_constant
+from dudect import test_constant, Input
 
 import random
 import os
@@ -29,51 +29,99 @@ def generate_random_key(n):
     return os.urandom(n)
 
 
-def generate_mixed_key(n):
-    if random.randrange(2) == 0:
-        return generate_constant_key(n)
-    else:
-        return generate_random_key(n)
+def generate_prepare_inputs(inputs_info_pair):
+    info0, info1 = inputs_info_pair
 
-
-def generate_prepare_inputs(inputs_infos):
-    num_class_id = len(inputs_infos)
-    input_types = {}
-    input_lens = {}
-    for i, val in enumerate(inputs_infos):
-        input_types[i] = val["func"]
-        input_lens[i] = val["len"]
-
-    def prepare_inputs(_):
+    def _prepare_inputs():
         inputs = []
-        for _ in range(number_measurements):
-            class_id = random.randrange(num_class_id)
-            inputs.append({"data": input_types[class_id](input_lens[class_id]), "class": class_id})
+        for i in range(number_measurements):
+            class_id = random.randrange(2)
+            if class_id == 0:
+                inputs.append(Input(data=(info0['func'](*info0['params'])), cla=0))
+            else:
+                inputs.append(Input(data=(info1['func'](*info1['params'])), cla=1))  # constant input msg
+                # inputs.append(Input(data=Random.new().read(16), cla=0))  # random vs constant input msg
         return inputs
-    return prepare_inputs
+
+    return _prepare_inputs
 
 
-inputs_zero_16 = {"name": "16-byte zero", "func": generate_zero_message, "len": 16}
-inputs_one_16 = {"name": "16-byte one", "func": generate_one_message, "len": 16}
-inputs_random_16 = {"name": "16-byte random", "func": generate_random_message, "len": 16}
+def generate_init(key_info_pair, generate_do_computation, generate_do_computation_args, generate_do_computation_kwargs):
+    key0, key1 = key_info_pair
 
-inputs_zero_64 = {"name": "16-byte zero", "func": generate_zero_message, "len": 64}
-inputs_one_64 = {"name": "16-byte one", "func": generate_one_message, "len": 64}
-inputs_random_64 = {"name": "16-byte random", "func": generate_random_message, "len": 64}
+    def _init(class_id: int):
+        if class_id == 1:
+            key = key1['func'](*key1['params'])
+        else:
+            key = key0['func'](*key0['params'])
 
-inputs_zero_256 = {"name": "256-byte zero", "func": generate_zero_message, "len": 256}
-inputs_one_256 = {"name": "256-byte one", "func": generate_one_message, "len": 256}
-inputs_random_256 = {"name": "256-byte random", "func": generate_random_message, "len": 256}
+        do_computation = generate_do_computation(key, *generate_do_computation_args, **generate_do_computation_kwargs)
 
-constant_key = (generate_constant_key, (16,), "16-byte constant key")
-random_key = (generate_random_key, (16,), "16-byte random key")
-mixed_key = (generate_mixed_key, (16,), "16-byte mixed key")
+        return do_computation
 
-constant_key_32 = (generate_constant_key, (32,), "16-byte constant key")
-random_key_32 = (generate_random_key, (32,), "16-byte random key")
-mixed_key_32 = (generate_mixed_key, (32,), "16-byte mixed key")
+    return _init
 
-default_inputs_info_pairs = (
+
+class TestLib:
+    def __init__(self, inputs_infos, key_infos, 
+                 generate_do_computation, generate_do_computation_args=(), generate_do_computation_kwargs={},
+                 name="no name", multi_init=False, **kwargs):
+        self.name = name
+        self.inputs_infos = inputs_infos
+
+        self.key_infos = key_infos
+        self.generate_do_computation = generate_do_computation
+        self.generate_do_computation_args = generate_do_computation_args
+        self.generate_do_computation_kwargs = generate_do_computation_kwargs
+        self.multi_init = multi_init
+
+    def do_test(self):
+        print("Now testing", self.name, '\n')
+        try:
+            for info0, info1 in self.inputs_infos:
+                for key0, key1 in self.key_infos:
+                    try:
+                        print("class0:", "inputs is %s," % info0["name"], "key is %s." % key0["name"])
+                        print("class1:", "inputs is %s," % info1["name"], "key is %s." % key1["name"])
+                        _inputs_info_pair = (info0, info1)
+                        _prepare_inputs = generate_prepare_inputs(_inputs_info_pair)
+                        _key_info_pair = (key0, key1)
+                        _init = generate_init(_key_info_pair, self.generate_do_computation, 
+                                              self.generate_do_computation_args,
+                                              self.generate_do_computation_kwargs)
+                        test_constant(_init, _prepare_inputs, self.multi_init)
+                        print()
+                    except Exception as e:
+                        print("ERROR:", e)
+                        print()
+        except Exception as e:
+            print("ERROR:", e)
+            print()
+        print(self.name, "Done.", "\n")
+
+
+inputs_zero_16 = {"name": "16-byte zero", "func": generate_zero_message, "params": (16,)}
+inputs_one_16 = {"name": "16-byte one", "func": generate_one_message, "params": (16,)}
+inputs_random_16 = {"name": "16-byte random", "func": generate_random_message, "params": (16,)}
+
+inputs_zero_64 = {"name": "64-byte zero", "func": generate_zero_message, "params": (64,)}
+inputs_one_64 = {"name": "64-byte one", "func": generate_one_message, "params": (64,)}
+inputs_random_64 = {"name": "64-byte random", "func": generate_random_message, "params": (64,)}
+
+inputs_zero_256 = {"name": "256-byte zero", "func": generate_zero_message, "params": (256,)}
+inputs_one_256 = {"name": "256-byte one", "func": generate_one_message, "params": (256,)}
+inputs_random_256 = {"name": "256-byte random", "func": generate_random_message, "params": (256,)}
+
+constant_key_16 = {"func": generate_constant_key, "params": (16,), "name": "16-byte constant key"}
+random_key_16 = {"func": generate_random_key, "params": (16,), "name": "16-byte random key"}
+
+constant_key_32 = {"func": generate_constant_key, "params": (32,), "name": "32-byte constant key"}
+random_key_32 = {"func": generate_random_key, "params": (32,), "name": "32-byte random key"}
+
+constant_key_64 = {"func": generate_constant_key, "params": (64,), "name": "64-byte constant key"}
+random_key_64 = {"func": generate_random_key, "params": (64,), "name": "64-byte random key"}
+
+different_inputs_infos = (
     (inputs_zero_16, inputs_one_16),
     (inputs_zero_16, inputs_random_16),
     (inputs_one_16, inputs_random_16),
@@ -82,39 +130,13 @@ default_inputs_info_pairs = (
     (inputs_one_64, inputs_random_64),
 )
 
-fixed_inputs_info = ((inputs_zero_16, inputs_zero_16), (inputs_one_16, inputs_one_16))
+fixed_inputs_infos = ((inputs_zero_16, inputs_zero_16), (inputs_one_16, inputs_one_16))
 
+different_key_infos_16 = ((constant_key_16, random_key_16),)
+fixed_key_infos_16 = ((constant_key_16, constant_key_16), (random_key_16, random_key_16))
 
-class TestLib:
-    def __init__(self, init, do_computation, name="no name",
-                 inputs_infos=(), inputs_info_pairs=(), multi_init=False, **kwargs):
-        self.name = name
-        self.inputs_infos = inputs_infos
-        if not (inputs_infos or inputs_info_pairs):
-            self.inputs_info_pairs = default_inputs_info_pairs
-        else:
-            self.inputs_info_pairs = tuple(combinations(inputs_infos, 2)) + tuple(inputs_info_pairs)
+different_key_infos_32 = ((constant_key_32, random_key_32),)
+fixed_key_infos_32 = ((constant_key_32, constant_key_32), (random_key_32, random_key_32))
 
-        def _init():
-            return init(**kwargs)
-
-        self.init = _init
-        self.multi_init = multi_init
-        self.do_computation = do_computation
-
-    def do_test(self):
-        print("\nNow testing", self.name)
-        try:
-            for info0, info1 in self.inputs_info_pairs:
-                try:
-                    print(info0["name"], "vs", info1["name"])
-                    _prepare_inputs = generate_prepare_inputs([info0, info1])
-                    test_constant(self.init, _prepare_inputs, self.do_computation, self.multi_init)
-                    print()
-                except Exception as e:
-                    print("ERROR:", e)
-                    print()
-        except Exception as e:
-            print("ERROR:", e)
-            print()
-        print("Done. ")
+different_key_infos_64 = ((constant_key_64, random_key_64),)
+fixed_key_infos_64 = ((constant_key_64, constant_key_64), (random_key_64, random_key_64))
