@@ -4,10 +4,17 @@ import random
 import os
 from itertools import combinations
 
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
 
 number_measurements = 100000
 # tests = []
-
+with open("private.pem", "rb") as key_file:
+     rsaKey_preload = serialization.load_pem_private_key(
+         key_file.read(),
+         password=None,
+         backend=default_backend())
 
 def generate_zero_message(n):
     return b'\x00' * n
@@ -28,10 +35,14 @@ def generate_constant_key(n):
 def generate_random_key(n):
     return os.urandom(n)
 
+def generate_random_rsakey():
+    return rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
+def generate_constant_rsakey():
+    private_key = rsaKey_preload
+    return private_key
 
 def generate_prepare_inputs(inputs_info_pair):
     info0, info1 = inputs_info_pair
-
     def _prepare_inputs():
         inputs = []
         for i in range(number_measurements):
@@ -121,6 +132,10 @@ random_key_32 = {"func": generate_random_key, "params": (32,), "name": "32-byte 
 constant_key_64 = {"func": generate_constant_key, "params": (64,), "name": "64-byte constant key"}
 random_key_64 = {"func": generate_random_key, "params": (64,), "name": "64-byte random key"}
 
+random_key_rsa = {"func": generate_random_rsakey, "params": (), "name": "Random RSA key"}
+
+constant_key_rsa = {"func": generate_constant_rsakey, "params": (), "name": "Constant RSA key"}
+
 different_inputs_infos = (
     (inputs_zero_16, inputs_one_16),
     (inputs_zero_16, inputs_random_16),
@@ -140,3 +155,7 @@ fixed_key_infos_32 = ((constant_key_32, constant_key_32), (random_key_32, random
 
 different_key_infos_64 = ((constant_key_64, random_key_64),)
 fixed_key_infos_64 = ((constant_key_64, constant_key_64), (random_key_64, random_key_64))
+
+different_key_infos_rsa = ((constant_key_rsa, random_key_rsa),)
+fixed_key_infos_rsa = ((constant_key_rsa, constant_key_rsa), (random_key_rsa, random_key_rsa))
+
