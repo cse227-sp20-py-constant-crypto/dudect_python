@@ -1,1 +1,4 @@
 numpy
+pycrypto
+cryptography
+pycryptodomex

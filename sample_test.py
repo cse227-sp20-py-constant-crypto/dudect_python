@@ -1,66 +1,43 @@
-from dudect import test_constant
+from dudect import test_constant, Input
 
-from Crypto.Cipher import AES, DES3
+from Crypto.Cipher import AES
 from Crypto import Random
-from Crypto.Cipher.blockalgo import BlockAlgo
-from Crypto.PublicKey import ElGamal
-from Crypto.Hash import SHA
+# from Crypto.Cipher.blockalgo import BlockAlgo
 
 import random
-from random import randint
+
 
 number_measurements = 100000
 
 
-def prepare_inputs(_):
+def prepare_inputs():
     inputs = []
-    n = 64
     for i in range(number_measurements):
-        class_id = random.randrange(4)
+        class_id = random.randrange(2)
         if class_id == 0:
-            inputs.append({"data": ''.join(["{}".format(randint(0, 9)) for num in range(0, n)]), "class": 0})
-#            inputs.append({"data": ''.join(["{}".format(ord(str(randint(0, 9))), 'b') for num in range(0, n)]).encode('utf-8'), "class": 0})
-
-#            inputs.append({"data": b'00000000000000000000000000000000', "class": 0})
-        elif class_id == 1:
-            inputs.append({"data": Random.new().read(n), "class": 1})
-#        elif class_id == 2:
-#            inputs.append({"data": b'0000000000000000', "class": 2})
-#        else:
-#            inputs.append({"data": Random.new().read(32), "class": 3})
-#    print(inputs)
+            inputs.append(Input(data=b'0000000000000000', cla=0))
+        else:
+            inputs.append(Input(data=b'0000000000000000', cla=1))  # constant input msg
+            # inputs.append(Input(data=Random.new().read(16), cla=0))  # random vs constant input msg
     return inputs
 
 
-def init():
-    #AES
-#    key = b'Sixteen byte key'
-#    iv = Random.new().read(AES.block_size)
-#    cipher = AES.new(key, AES.MODE_CBC, iv)
-    #DES
-    key = b'Sixteen byte key'
-    iv = Random.new().read(DES3.block_size)
-    cipher = DES3.new(key, DES3.MODE_OFB, iv)
-    #ElGamal
+def init(class_id: int):
+    if class_id == 1:
+        key = Random.new().read(16)  # random key vs. constant key
+    else:
+        key = b'Sixteen byte key'
+    # key = b'Sixteen byte key'  # fixed key
 
-#    key = ElGamal.generate(1024, Random.new().read)
-#
-#    while 1:
-#        k = random.StrongRandom().randint(1, key.p - 1)
-#
-#        if GCD(k, key.p - 1) == 1:
-#            break
-#
-#    h = key.encrypt(message, k)
-#
-#    d = key.decrypt(h)
-#    cipher = None
-    return cipher
+    # iv = Random.new().read(AES.block_size)
+    iv = b'Sixteen byte iv.'  # a fixed iv
+    cipher = AES.new(key, AES.MODE_CBC, iv)
 
+    def do_computation(msg: bytes):
+        cipher.encrypt(msg)
 
-def do_computation(cipher: BlockAlgo, in_msg: bytes):
-    cipher.encrypt(in_msg)
+    return do_computation
 
 
 if __name__ == "__main__":
-    test_constant(init, prepare_inputs, do_computation)
+    test_constant(init, prepare_inputs, True)
