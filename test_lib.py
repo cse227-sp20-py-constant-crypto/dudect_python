@@ -1,6 +1,5 @@
 from dudect import test_constant, Input
-# from prime import generate_prime_key
-# from do_test import fixed_random_key_16, fixed_random_key_32, fixed_random_key_64
+import sympy
 import random
 import os
 from itertools import combinations
@@ -32,7 +31,11 @@ def generate_random_message(n):
 def generate_constant_key(n):
     return ((n//16 + 1) * 'Sixteen byte key')[:n].encode()
 
-# 16 bit prime number -> 32771
+def generate_prime_message(n):
+    prime_number = sympy.randprime(2**(8*n-1), 2**(8*n))
+    prime_number_bin = bin(prime_number).replace("0b","") 
+    return prime_number_bin.encode()
+
 def constant_prime_16():
     prime_number = 32771
     prime_number_bin = bin(prime_number).replace("0b","") 
@@ -162,10 +165,10 @@ random_key_rsa = {"func": generate_random_rsakey, "params": (), "name": "Random 
 
 constant_key_rsa = {"func": generate_constant_rsakey, "params": (), "name": "Constant RSA key"}
 
-inputs_prime_16 = {"func": constant_prime_128, "params": (), "name": "16-byte prime number message"}
-inputs_prime_32 = {"func": constant_prime_256, "params": (), "name": "32-byte prime number message"}
-inputs_prime_64 = {"func": constant_prime_512, "params": (), "name": "64-byte prime number message"}
-inputs_prime_128 = {"func": constant_prime_1024, "params": (), "name": "128-byte prime number message"}
+inputs_prime_16 = {"func": generate_prime_message, "params": (16,), "name": "16-byte prime number message"}
+inputs_prime_32 = {"func": generate_prime_message, "params": (32,), "name": "32-byte prime number message"}
+inputs_prime_64 = {"func": generate_prime_message, "params": (64,), "name": "64-byte prime number message"}
+inputs_prime_128 = {"func": generate_prime_message, "params": (128,), "name": "128-byte prime number message"}
 
 
 different_inputs_infos = (

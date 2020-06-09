@@ -1,5 +1,5 @@
 from test_lib import generate_zero_message
-
+import sympy
 def generate_prime_key(n):
     for i in range(2**(8*n), 2**(8*n+1)):
         if isPrime(i):
@@ -21,4 +21,12 @@ def isPrime(n) :
         i = i + 6
     return True
 
-print(generate_prime_key(8))
+# print(generate_prime_key(8))
+def generate_prime_message(n):
+    prime_number = sympy.randprime(2**(8*n-1), 2**(8*n))
+    prime_number_bin = bin(prime_number).replace("0b","") 
+    print(prime_number_bin)
+    print(prime_number)
+    return prime_number_bin
+
+print(len(str(generate_prime_message(16))))
