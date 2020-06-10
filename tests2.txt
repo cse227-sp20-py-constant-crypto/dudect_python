@@ -1,0 +1,1705 @@
+Now testing pycrypto-AES-inputs 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.091 Million
+class-0 mean overall: 5.07e-06, population: 50215; class-1 mean overall: 5.05e-06, population: 50215
+class-0 mean of max_t: 4.25e-06, population: 45466; class-1 mean of max_t: 4.25e-06, population: 45466
+max t-value:    2.89, max tau: 9.60e-03, (5/tau)^2: 2.71e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 5.22e-06, population: 49895; class-1 mean overall: 5.06e-06, population: 49895
+class-0 mean of max_t: 5.22e-06, population: 49895; class-1 mean of max_t: 5.06e-06, population: 49895
+max t-value:    2.51, max tau: 7.95e-03, (5/tau)^2: 3.96e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.078 Million
+class-0 mean overall: 5.10e-06, population: 50076; class-1 mean overall: 5.15e-06, population: 50076
+class-0 mean of max_t: 4.09e-06, population: 39219; class-1 mean of max_t: 4.09e-06, population: 39219
+max t-value:    2.09, max tau: 7.48e-03, (5/tau)^2: 4.47e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.098 Million
+class-0 mean overall: 5.94e-06, population: 49957; class-1 mean overall: 6.01e-06, population: 49957
+class-0 mean of max_t: 5.11e-06, population: 48759; class-1 mean of max_t: 5.13e-06, population: 48759
+max t-value:    2.05, max tau: 6.57e-03, (5/tau)^2: 5.80e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.090 Million
+class-0 mean overall: 5.45e-06, population: 49870; class-1 mean overall: 5.46e-06, population: 49870
+class-0 mean of max_t: 4.31e-06, population: 44872; class-1 mean of max_t: 4.30e-06, population: 44872
+max t-value:    2.55, max tau: 8.50e-03, (5/tau)^2: 3.46e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 4.99e-06, population: 49898; class-1 mean overall: 5.05e-06, population: 49898
+class-0 mean of max_t: 4.72e-06, population: 49844; class-1 mean of max_t: 4.77e-06, population: 49844
+max t-value:    2.21, max tau: 6.98e-03, (5/tau)^2: 5.13e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte constant key.
+total measurements:   0.085 Million
+class-0 mean overall: 5.66e-06, population: 49853; class-1 mean overall: 5.35e-06, population: 49853
+class-0 mean of max_t: 4.59e-06, population: 41695; class-1 mean of max_t: 4.34e-06, population: 41695
+max t-value:  188.12, max tau: 6.47e-01, (5/tau)^2: 5.98e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.087 Million
+class-0 mean overall: 5.44e-06, population: 49987; class-1 mean overall: 5.17e-06, population: 49987
+class-0 mean of max_t: 4.57e-06, population: 42616; class-1 mean of max_t: 4.31e-06, population: 42616
+max t-value:  207.23, max tau: 7.04e-01, (5/tau)^2: 5.04e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.062 Million
+class-0 mean overall: 5.67e-06, population: 50471; class-1 mean overall: 5.45e-06, population: 50471
+class-0 mean of max_t: 4.40e-06, population: 23152; class-1 mean of max_t: 4.23e-06, population: 23152
+max t-value:  245.63, max tau: 9.86e-01, (5/tau)^2: 2.57e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.053 Million
+class-0 mean overall: 5.91e-06, population: 50006; class-1 mean overall: 5.50e-06, population: 50006
+class-0 mean of max_t: 4.40e-06, population: 17269; class-1 mean of max_t: 4.23e-06, population: 17269
+max t-value:  220.11, max tau: 9.53e-01, (5/tau)^2: 2.75e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.067 Million
+class-0 mean overall: 5.36e-06, population: 50113; class-1 mean overall: 5.05e-06, population: 50113
+class-0 mean of max_t: 4.40e-06, population: 26719; class-1 mean of max_t: 4.21e-06, population: 26719
+max t-value:  264.90, max tau: 1.02e+00, (5/tau)^2: 2.39e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.065 Million
+class-0 mean overall: 5.72e-06, population: 49814; class-1 mean overall: 5.40e-06, population: 49814
+class-0 mean of max_t: 4.43e-06, population: 24927; class-1 mean of max_t: 4.25e-06, population: 24927
+max t-value:  245.64, max tau: 9.66e-01, (5/tau)^2: 2.68e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.069 Million
+class-0 mean overall: 4.68e-06, population: 49729; class-1 mean overall: 4.73e-06, population: 49729
+class-0 mean of max_t: 4.19e-06, population: 34374; class-1 mean of max_t: 4.19e-06, population: 34374
+max t-value:    1.72, max tau: 6.54e-03, (5/tau)^2: 5.84e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.094 Million
+class-0 mean overall: 6.88e-06, population: 50057; class-1 mean overall: 6.76e-06, population: 50057
+class-0 mean of max_t: 5.11e-06, population: 47052; class-1 mean of max_t: 5.14e-06, population: 47052
+max t-value:    3.10, max tau: 1.01e-02, (5/tau)^2: 2.45e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.099 Million
+class-0 mean overall: 5.36e-06, population: 50061; class-1 mean overall: 5.28e-06, population: 50061
+class-0 mean of max_t: 4.72e-06, population: 49650; class-1 mean of max_t: 4.76e-06, population: 49650
+max t-value:    2.59, max tau: 8.21e-03, (5/tau)^2: 3.71e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.071 Million
+class-0 mean overall: 5.27e-06, population: 50115; class-1 mean overall: 5.27e-06, population: 50115
+class-0 mean of max_t: 4.26e-06, population: 35667; class-1 mean of max_t: 4.26e-06, population: 35667
+max t-value:    2.60, max tau: 9.73e-03, (5/tau)^2: 2.64e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.083 Million
+class-0 mean overall: 5.70e-06, population: 50121; class-1 mean overall: 5.69e-06, population: 50121
+class-0 mean of max_t: 4.30e-06, population: 41873; class-1 mean of max_t: 4.29e-06, population: 41873
+max t-value:    3.15, max tau: 1.09e-02, (5/tau)^2: 2.11e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.096 Million
+class-0 mean overall: 5.22e-06, population: 49954; class-1 mean overall: 5.23e-06, population: 49954
+class-0 mean of max_t: 4.40e-06, population: 47915; class-1 mean of max_t: 4.39e-06, population: 47915
+max t-value:    1.93, max tau: 6.23e-03, (5/tau)^2: 6.44e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte zero, key is 16-byte constant key.
+total measurements:   0.062 Million
+class-0 mean overall: 7.09e-06, population: 49878; class-1 mean overall: 5.48e-06, population: 49878
+class-0 mean of max_t: 5.52e-06, population: 19098; class-1 mean of max_t: 4.47e-06, population: 19098
+max t-value:  880.24, max tau: 3.53e+00, (5/tau)^2: 2.00e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte zero, key is 16-byte random key.
+total measurements:   0.071 Million
+class-0 mean overall: 6.38e-06, population: 49956; class-1 mean overall: 4.93e-06, population: 49956
+class-0 mean of max_t: 5.49e-06, population: 24909; class-1 mean of max_t: 4.39e-06, population: 24909
+max t-value: 1069.33, max tau: 4.01e+00, (5/tau)^2: 1.56e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.059 Million
+class-0 mean overall: 7.60e-06, population: 50024; class-1 mean overall: 5.75e-06, population: 50024
+class-0 mean of max_t: 5.50e-06, population: 19905; class-1 mean of max_t: 4.41e-06, population: 19905
+max t-value:  969.54, max tau: 3.98e+00, (5/tau)^2: 1.58e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.085 Million
+class-0 mean overall: 5.70e-06, population: 50037; class-1 mean overall: 4.41e-06, population: 50037
+class-0 mean of max_t: 5.48e-06, population: 35372; class-1 mean of max_t: 4.33e-06, population: 35372
+max t-value: 1618.13, max tau: 5.56e+00, (5/tau)^2: 8.07e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.083 Million
+class-0 mean overall: 5.65e-06, population: 50048; class-1 mean overall: 4.40e-06, population: 50048
+class-0 mean of max_t: 5.44e-06, population: 34498; class-1 mean of max_t: 4.31e-06, population: 34498
+max t-value: 1559.12, max tau: 5.40e+00, (5/tau)^2: 8.58e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.078 Million
+class-0 mean overall: 5.71e-06, population: 50145; class-1 mean overall: 4.45e-06, population: 50145
+class-0 mean of max_t: 5.47e-06, population: 29264; class-1 mean of max_t: 4.34e-06, population: 29264
+max t-value: 1623.46, max tau: 5.80e+00, (5/tau)^2: 7.42e-01.
+Definitely not constant time.
+
+pycrypto-AES-inputs Done. 
+
+Now testing pycrypto-AES-key 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.086 Million
+class-0 mean overall: 5.40e-06, population: 49696; class-1 mean overall: 5.40e-06, population: 49696
+class-0 mean of max_t: 5.29e-06, population: 43149; class-1 mean of max_t: 5.30e-06, population: 43149
+max t-value:   15.03, max tau: 5.11e-02, (5/tau)^2: 9.57e+03.
+Probably not constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.092 Million
+class-0 mean overall: 5.44e-06, population: 49993; class-1 mean overall: 5.44e-06, population: 49993
+class-0 mean of max_t: 5.32e-06, population: 45898; class-1 mean of max_t: 5.33e-06, population: 45898
+max t-value:   14.87, max tau: 4.91e-02, (5/tau)^2: 1.04e+04.
+Probably not constant time.
+
+pycrypto-AES-key Done. 
+
+Now testing pycrypto-DES3-inputs 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.100 Million
+class-0 mean overall: 5.15e-06, population: 49972; class-1 mean overall: 5.12e-06, population: 49972
+class-0 mean of max_t: 5.15e-06, population: 49972; class-1 mean of max_t: 5.12e-06, population: 49972
+max t-value:    1.94, max tau: 6.14e-03, (5/tau)^2: 6.63e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 5.13e-06, population: 50022; class-1 mean overall: 5.11e-06, population: 50022
+class-0 mean of max_t: 5.08e-06, population: 49933; class-1 mean of max_t: 5.08e-06, population: 49933
+max t-value:    1.85, max tau: 5.87e-03, (5/tau)^2: 7.26e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.084 Million
+class-0 mean overall: 5.23e-06, population: 49898; class-1 mean overall: 5.25e-06, population: 49898
+class-0 mean of max_t: 4.95e-06, population: 41597; class-1 mean of max_t: 4.95e-06, population: 41597
+max t-value:    2.09, max tau: 7.25e-03, (5/tau)^2: 4.76e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.042 Million
+class-0 mean overall: 5.11e-06, population: 50058; class-1 mean overall: 5.11e-06, population: 50058
+class-0 mean of max_t: 4.90e-06, population: 21054; class-1 mean of max_t: 4.90e-06, population: 21054
+max t-value:    2.31, max tau: 1.12e-02, (5/tau)^2: 1.98e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.100 Million
+class-0 mean overall: 5.12e-06, population: 49751; class-1 mean overall: 5.14e-06, population: 49751
+class-0 mean of max_t: 5.12e-06, population: 49751; class-1 mean of max_t: 5.14e-06, population: 49751
+max t-value:    1.67, max tau: 5.27e-03, (5/tau)^2: 8.99e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.078 Million
+class-0 mean overall: 5.15e-06, population: 50167; class-1 mean overall: 5.15e-06, population: 50167
+class-0 mean of max_t: 4.95e-06, population: 39297; class-1 mean of max_t: 4.95e-06, population: 39297
+max t-value:    2.49, max tau: 8.90e-03, (5/tau)^2: 3.15e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte constant key.
+total measurements:   0.085 Million
+class-0 mean overall: 1.03e-05, population: 50177; class-1 mean overall: 5.22e-06, population: 50177
+class-0 mean of max_t: 1.01e-05, population: 34870; class-1 mean of max_t: 5.17e-06, population: 34870
+max t-value: 2902.48, max tau: 9.98e+00, (5/tau)^2: 2.51e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.078 Million
+class-0 mean overall: 1.04e-05, population: 49961; class-1 mean overall: 5.28e-06, population: 49961
+class-0 mean of max_t: 1.01e-05, population: 28311; class-1 mean of max_t: 5.23e-06, population: 28311
+max t-value: 2557.09, max tau: 9.14e+00, (5/tau)^2: 2.99e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.062 Million
+class-0 mean overall: 1.04e-05, population: 50091; class-1 mean overall: 5.27e-06, population: 50091
+class-0 mean of max_t: 1.01e-05, population: 12360; class-1 mean of max_t: 5.21e-06, population: 12360
+max t-value: 2480.89, max tau: 9.96e+00, (5/tau)^2: 2.52e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.069 Million
+class-0 mean overall: 1.04e-05, population: 50013; class-1 mean overall: 5.29e-06, population: 50013
+class-0 mean of max_t: 1.01e-05, population: 19419; class-1 mean of max_t: 5.22e-06, population: 19419
+max t-value: 2490.61, max tau: 9.47e+00, (5/tau)^2: 2.79e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.065 Million
+class-0 mean overall: 1.04e-05, population: 50177; class-1 mean overall: 5.23e-06, population: 50177
+class-0 mean of max_t: 1.00e-05, population: 14926; class-1 mean of max_t: 5.18e-06, population: 14926
+max t-value: 2618.95, max tau: 1.03e+01, (5/tau)^2: 2.35e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.065 Million
+class-0 mean overall: 1.05e-05, population: 49944; class-1 mean overall: 5.34e-06, population: 49944
+class-0 mean of max_t: 1.01e-05, population: 14797; class-1 mean of max_t: 5.26e-06, population: 14797
+max t-value: 2193.77, max tau: 8.63e+00, (5/tau)^2: 3.36e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.100 Million
+class-0 mean overall: 7.39e-06, population: 50153; class-1 mean overall: 7.40e-06, population: 50153
+class-0 mean of max_t: 7.34e-06, population: 50059; class-1 mean of max_t: 7.35e-06, population: 50059
+max t-value:    2.00, max tau: 6.33e-03, (5/tau)^2: 6.25e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.098 Million
+class-0 mean overall: 7.40e-06, population: 49925; class-1 mean overall: 7.41e-06, population: 49925
+class-0 mean of max_t: 7.30e-06, population: 48790; class-1 mean of max_t: 7.29e-06, population: 48790
+max t-value:    2.42, max tau: 7.75e-03, (5/tau)^2: 4.17e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.099 Million
+class-0 mean overall: 7.40e-06, population: 49902; class-1 mean overall: 7.39e-06, population: 49902
+class-0 mean of max_t: 7.31e-06, population: 49515; class-1 mean of max_t: 7.31e-06, population: 49515
+max t-value:    2.28, max tau: 7.25e-03, (5/tau)^2: 4.76e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 7.65e-06, population: 50092; class-1 mean overall: 7.66e-06, population: 50092
+class-0 mean of max_t: 7.26e-06, population: 29754; class-1 mean of max_t: 7.26e-06, population: 29754
+max t-value:    2.55, max tau: 1.05e-02, (5/tau)^2: 2.29e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.086 Million
+class-0 mean overall: 7.45e-06, population: 49871; class-1 mean overall: 7.46e-06, population: 49871
+class-0 mean of max_t: 7.28e-06, population: 42724; class-1 mean of max_t: 7.28e-06, population: 42724
+max t-value:    2.86, max tau: 9.78e-03, (5/tau)^2: 2.62e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 7.42e-06, population: 49909; class-1 mean overall: 7.42e-06, population: 49909
+class-0 mean of max_t: 7.37e-06, population: 49778; class-1 mean of max_t: 7.36e-06, population: 49778
+max t-value:    1.88, max tau: 5.96e-03, (5/tau)^2: 7.05e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte zero, key is 16-byte constant key.
+total measurements:   0.062 Million
+class-0 mean overall: 2.73e-05, population: 50209; class-1 mean overall: 7.53e-06, population: 50209
+class-0 mean of max_t: 2.68e-05, population: 12281; class-1 mean of max_t: 7.51e-06, population: 12281
+max t-value: 4674.70, max tau: 1.88e+01, (5/tau)^2: 7.10e-02.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte zero, key is 16-byte random key.
+total measurements:   0.065 Million
+class-0 mean overall: 2.75e-05, population: 50042; class-1 mean overall: 7.63e-06, population: 50042
+class-0 mean of max_t: 2.68e-05, population: 14643; class-1 mean of max_t: 7.58e-06, population: 14643
+max t-value: 3961.48, max tau: 1.56e+01, (5/tau)^2: 1.03e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.69e-05, population: 49919; class-1 mean overall: 1.24e-05, population: 49919
+class-0 mean of max_t: 2.69e-05, population: 11431; class-1 mean of max_t: 1.11e-05, population: 11431
+max t-value:  702.54, max tau: 2.88e+00, (5/tau)^2: 3.01e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.069 Million
+class-0 mean overall: 3.34e-05, population: 50058; class-1 mean overall: 1.08e-05, population: 50058
+class-0 mean of max_t: 2.69e-05, population: 20607; class-1 mean of max_t: 9.89e-06, population: 20607
+max t-value:  868.21, max tau: 3.30e+00, (5/tau)^2: 2.29e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.37e-05, population: 50114; class-1 mean overall: 1.10e-05, population: 50114
+class-0 mean of max_t: 2.68e-05, population: 10934; class-1 mean of max_t: 1.02e-05, population: 10934
+max t-value:  819.24, max tau: 3.36e+00, (5/tau)^2: 2.21e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.48e-05, population: 50152; class-1 mean overall: 1.14e-05, population: 50152
+class-0 mean of max_t: 2.69e-05, population: 11266; class-1 mean of max_t: 1.04e-05, population: 11266
+max t-value:  800.66, max tau: 3.29e+00, (5/tau)^2: 2.32e+00.
+Definitely not constant time.
+
+pycrypto-DES3-inputs Done. 
+
+Now testing pycrypto-DES3-key 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 1.11e-05, population: 49839; class-1 mean overall: 1.13e-05, population: 49839
+class-0 mean of max_t: 6.85e-06, population: 22407; class-1 mean of max_t: 6.91e-06, population: 22407
+max t-value:   39.34, max tau: 1.91e-01, (5/tau)^2: 6.87e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.038 Million
+class-0 mean overall: 1.09e-05, population: 49982; class-1 mean overall: 1.13e-05, population: 49982
+class-0 mean of max_t: 6.82e-06, population: 20652; class-1 mean of max_t: 6.88e-06, population: 20652
+max t-value:   40.80, max tau: 2.08e-01, (5/tau)^2: 5.77e+02.
+Probably not constant time.
+
+pycrypto-DES3-key Done. 
+
+Now testing cryptography-AES-inputs 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.100 Million
+class-0 mean overall: 3.53e-05, population: 49882; class-1 mean overall: 3.72e-05, population: 49882
+class-0 mean of max_t: 3.53e-05, population: 49882; class-1 mean of max_t: 3.72e-05, population: 49882
+max t-value:    1.35, max tau: 4.27e-03, (5/tau)^2: 1.37e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.078 Million
+class-0 mean overall: 3.48e-05, population: 50046; class-1 mean overall: 3.48e-05, population: 50046
+class-0 mean of max_t: 2.60e-05, population: 39168; class-1 mean of max_t: 2.59e-05, population: 39168
+max t-value:    2.71, max tau: 9.67e-03, (5/tau)^2: 2.67e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.075 Million
+class-0 mean overall: 3.50e-05, population: 49881; class-1 mean overall: 3.48e-05, population: 49881
+class-0 mean of max_t: 2.52e-05, population: 37382; class-1 mean of max_t: 2.52e-05, population: 37382
+max t-value:    2.04, max tau: 7.45e-03, (5/tau)^2: 4.50e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.81e-05, population: 50049; class-1 mean overall: 3.82e-05, population: 50049
+class-0 mean of max_t: 2.44e-05, population: 29763; class-1 mean of max_t: 2.44e-05, population: 29763
+max t-value:    1.95, max tau: 8.00e-03, (5/tau)^2: 3.91e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.081 Million
+class-0 mean overall: 3.72e-05, population: 49808; class-1 mean overall: 3.75e-05, population: 49808
+class-0 mean of max_t: 2.77e-05, population: 40502; class-1 mean of max_t: 2.76e-05, population: 40502
+max t-value:    2.15, max tau: 7.54e-03, (5/tau)^2: 4.40e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.099 Million
+class-0 mean overall: 3.70e-05, population: 50224; class-1 mean overall: 3.70e-05, population: 50224
+class-0 mean of max_t: 3.50e-05, population: 49579; class-1 mean of max_t: 3.47e-05, population: 49579
+max t-value:    2.64, max tau: 8.42e-03, (5/tau)^2: 3.53e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte constant key.
+total measurements:   0.053 Million
+class-0 mean overall: 3.77e-05, population: 49838; class-1 mean overall: 3.76e-05, population: 49838
+class-0 mean of max_t: 2.43e-05, population: 26517; class-1 mean of max_t: 2.42e-05, population: 26517
+max t-value:   52.65, max tau: 2.28e-01, (5/tau)^2: 4.81e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.70e-05, population: 50015; class-1 mean overall: 3.68e-05, population: 50015
+class-0 mean of max_t: 2.43e-05, population: 28293; class-1 mean of max_t: 2.42e-05, population: 28293
+max t-value:   50.17, max tau: 2.11e-01, (5/tau)^2: 5.61e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.053 Million
+class-0 mean overall: 3.79e-05, population: 50171; class-1 mean overall: 3.74e-05, population: 50171
+class-0 mean of max_t: 2.44e-05, population: 26360; class-1 mean of max_t: 2.42e-05, population: 26360
+max t-value:   49.66, max tau: 2.15e-01, (5/tau)^2: 5.41e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 3.56e-05, population: 49910; class-1 mean overall: 3.55e-05, population: 49910
+class-0 mean of max_t: 2.42e-05, population: 24561; class-1 mean of max_t: 2.41e-05, population: 24561
+max t-value:   49.04, max tau: 2.19e-01, (5/tau)^2: 5.20e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.050 Million
+class-0 mean overall: 3.81e-05, population: 49735; class-1 mean overall: 3.84e-05, population: 49735
+class-0 mean of max_t: 2.51e-05, population: 24210; class-1 mean of max_t: 2.49e-05, population: 24210
+max t-value:   46.84, max tau: 2.09e-01, (5/tau)^2: 5.70e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.034 Million
+class-0 mean overall: 3.65e-05, population: 49986; class-1 mean overall: 3.65e-05, population: 49986
+class-0 mean of max_t: 2.42e-05, population: 16383; class-1 mean of max_t: 2.41e-05, population: 16383
+max t-value:   29.58, max tau: 1.60e-01, (5/tau)^2: 9.72e+02.
+Probably not constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.080 Million
+class-0 mean overall: 3.71e-05, population: 50247; class-1 mean overall: 3.71e-05, population: 50247
+class-0 mean of max_t: 4.37e-10, population: 40247; class-1 mean of max_t: 4.72e-10, population: 40247
+max t-value:    1.53, max tau: 5.42e-03, (5/tau)^2: 8.51e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.094 Million
+class-0 mean overall: 3.69e-05, population: 49942; class-1 mean overall: 3.68e-05, population: 49942
+class-0 mean of max_t: 3.36e-05, population: 47056; class-1 mean of max_t: 3.34e-05, population: 47056
+max t-value:    2.42, max tau: 7.90e-03, (5/tau)^2: 4.01e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.075 Million
+class-0 mean overall: 3.67e-05, population: 49843; class-1 mean overall: 3.66e-05, population: 49843
+class-0 mean of max_t: 2.70e-05, population: 37432; class-1 mean of max_t: 2.70e-05, population: 37432
+max t-value:    1.46, max tau: 5.33e-03, (5/tau)^2: 8.81e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.065 Million
+class-0 mean overall: 3.96e-05, population: 49862; class-1 mean overall: 3.78e-05, population: 49862
+class-0 mean of max_t: 2.58e-05, population: 32344; class-1 mean of max_t: 2.58e-05, population: 32344
+max t-value:    2.14, max tau: 8.40e-03, (5/tau)^2: 3.54e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.071 Million
+class-0 mean overall: 3.62e-05, population: 49905; class-1 mean overall: 3.63e-05, population: 49905
+class-0 mean of max_t: 2.64e-05, population: 35605; class-1 mean of max_t: 2.65e-05, population: 35605
+max t-value:    2.75, max tau: 1.03e-02, (5/tau)^2: 2.35e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 3.65e-05, population: 50103; class-1 mean overall: 3.67e-05, population: 50103
+class-0 mean of max_t: 3.60e-05, population: 49944; class-1 mean of max_t: 3.62e-05, population: 49944
+max t-value:    1.97, max tau: 6.23e-03, (5/tau)^2: 6.45e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte zero, key is 16-byte constant key.
+total measurements:   0.053 Million
+class-0 mean overall: 4.24e-05, population: 49921; class-1 mean overall: 4.01e-05, population: 49921
+class-0 mean of max_t: 2.81e-05, population: 23240; class-1 mean of max_t: 2.69e-05, population: 23240
+max t-value:  380.20, max tau: 1.65e+00, (5/tau)^2: 9.22e+00.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte zero, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 4.32e-05, population: 49904; class-1 mean overall: 4.12e-05, population: 49904
+class-0 mean of max_t: 2.81e-05, population: 15959; class-1 mean of max_t: 2.70e-05, population: 15959
+max t-value:  321.86, max tau: 1.56e+00, (5/tau)^2: 1.03e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.046 Million
+class-0 mean overall: 4.45e-05, population: 50250; class-1 mean overall: 4.13e-05, population: 50250
+class-0 mean of max_t: 2.82e-05, population: 18880; class-1 mean of max_t: 2.70e-05, population: 18880
+max t-value:  386.97, max tau: 1.80e+00, (5/tau)^2: 7.75e+00.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 3.82e-05, population: 49917; class-1 mean overall: 3.61e-05, population: 49917
+class-0 mean of max_t: 2.61e-05, population: 14146; class-1 mean of max_t: 2.51e-05, population: 14146
+max t-value:  333.17, max tau: 1.62e+00, (5/tau)^2: 9.58e+00.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.046 Million
+class-0 mean overall: 3.92e-05, population: 50073; class-1 mean overall: 3.64e-05, population: 50073
+class-0 mean of max_t: 2.62e-05, population: 16992; class-1 mean of max_t: 2.53e-05, population: 16992
+max t-value:  304.93, max tau: 1.42e+00, (5/tau)^2: 1.25e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 4.01e-05, population: 49888; class-1 mean overall: 3.79e-05, population: 49888
+class-0 mean of max_t: 2.72e-05, population: 20671; class-1 mean of max_t: 2.61e-05, population: 20671
+max t-value:  363.51, max tau: 1.63e+00, (5/tau)^2: 9.46e+00.
+Probably not constant time.
+
+cryptography-AES-inputs Done. 
+
+Now testing cryptography-AES-key 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.062 Million
+class-0 mean overall: 4.25e-05, population: 49971; class-1 mean overall: 4.29e-05, population: 49971
+class-0 mean of max_t: 3.07e-05, population: 31178; class-1 mean of max_t: 3.08e-05, population: 31178
+max t-value:    4.73, max tau: 1.90e-02, (5/tau)^2: 6.94e+04.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.071 Million
+class-0 mean overall: 4.36e-05, population: 49980; class-1 mean overall: 4.37e-05, population: 49980
+class-0 mean of max_t: 3.13e-05, population: 35725; class-1 mean of max_t: 3.13e-05, population: 35725
+max t-value:    5.49, max tau: 2.06e-02, (5/tau)^2: 5.91e+04.
+For the moment, maybe constant time.
+
+cryptography-AES-key Done. 
+
+Now testing cryptography-DES3-inputs 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.100 Million
+class-0 mean overall: 3.84e-05, population: 49772; class-1 mean overall: 3.89e-05, population: 49772
+class-0 mean of max_t: 3.78e-05, population: 49610; class-1 mean of max_t: 3.80e-05, population: 49610
+max t-value:    2.38, max tau: 7.52e-03, (5/tau)^2: 4.42e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.046 Million
+class-0 mean overall: 3.97e-05, population: 50102; class-1 mean overall: 3.98e-05, population: 50102
+class-0 mean of max_t: 2.64e-05, population: 23286; class-1 mean of max_t: 2.64e-05, population: 23286
+max t-value:    1.71, max tau: 7.93e-03, (5/tau)^2: 3.98e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.034 Million
+class-0 mean overall: 3.92e-05, population: 49810; class-1 mean overall: 3.92e-05, population: 49810
+class-0 mean of max_t: 2.55e-05, population: 16860; class-1 mean of max_t: 2.55e-05, population: 16860
+max t-value:    2.69, max tau: 1.46e-02, (5/tau)^2: 1.17e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.090 Million
+class-0 mean overall: 3.96e-05, population: 49960; class-1 mean overall: 3.94e-05, population: 49960
+class-0 mean of max_t: 3.49e-05, population: 44881; class-1 mean of max_t: 3.46e-05, population: 44881
+max t-value:    2.86, max tau: 9.55e-03, (5/tau)^2: 2.74e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.081 Million
+class-0 mean overall: 4.07e-05, population: 49966; class-1 mean overall: 4.09e-05, population: 49966
+class-0 mean of max_t: 3.21e-05, population: 40500; class-1 mean of max_t: 3.23e-05, population: 40500
+max t-value:    2.67, max tau: 9.38e-03, (5/tau)^2: 2.84e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 4.26e-05, population: 49956; class-1 mean overall: 4.12e-05, population: 49956
+class-0 mean of max_t: 3.98e-05, population: 49850; class-1 mean of max_t: 3.95e-05, population: 49850
+max t-value:    2.17, max tau: 6.86e-03, (5/tau)^2: 5.32e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte constant key.
+total measurements:   0.053 Million
+class-0 mean overall: 4.15e-05, population: 50085; class-1 mean overall: 3.69e-05, population: 50085
+class-0 mean of max_t: 2.96e-05, population: 21457; class-1 mean of max_t: 2.58e-05, population: 21457
+max t-value:  599.57, max tau: 2.60e+00, (5/tau)^2: 3.71e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 4.55e-05, population: 50027; class-1 mean overall: 4.09e-05, population: 50027
+class-0 mean of max_t: 3.08e-05, population: 13205; class-1 mean of max_t: 2.69e-05, population: 13205
+max t-value:  650.30, max tau: 3.15e+00, (5/tau)^2: 2.52e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.050 Million
+class-0 mean overall: 4.48e-05, population: 49856; class-1 mean overall: 4.00e-05, population: 49856
+class-0 mean of max_t: 3.07e-05, population: 20065; class-1 mean of max_t: 2.67e-05, population: 20065
+max t-value:  564.48, max tau: 2.52e+00, (5/tau)^2: 3.92e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 4.55e-05, population: 50124; class-1 mean overall: 3.97e-05, population: 50124
+class-0 mean of max_t: 2.97e-05, population: 12249; class-1 mean of max_t: 2.59e-05, population: 12249
+max t-value:  790.10, max tau: 3.83e+00, (5/tau)^2: 1.70e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.043 Million
+class-0 mean overall: 4.10e-05, population: 50279; class-1 mean overall: 3.62e-05, population: 50279
+class-0 mean of max_t: 2.87e-05, population: 10900; class-1 mean of max_t: 2.51e-05, population: 10900
+max t-value:  723.22, max tau: 3.51e+00, (5/tau)^2: 2.03e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 4.18e-05, population: 49735; class-1 mean overall: 3.71e-05, population: 49735
+class-0 mean of max_t: 2.87e-05, population: 11166; class-1 mean of max_t: 2.51e-05, population: 11166
+max t-value:  733.90, max tau: 3.56e+00, (5/tau)^2: 1.97e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.071 Million
+class-0 mean overall: 3.91e-05, population: 50349; class-1 mean overall: 3.91e-05, population: 50349
+class-0 mean of max_t: 2.83e-05, population: 35844; class-1 mean of max_t: 2.83e-05, population: 35844
+max t-value:    2.75, max tau: 1.03e-02, (5/tau)^2: 2.36e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.069 Million
+class-0 mean overall: 3.91e-05, population: 50303; class-1 mean overall: 3.92e-05, population: 50303
+class-0 mean of max_t: 2.80e-05, population: 34851; class-1 mean of max_t: 2.80e-05, population: 34851
+max t-value:    2.17, max tau: 8.24e-03, (5/tau)^2: 3.68e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.080 Million
+class-0 mean overall: 3.63e-05, population: 50135; class-1 mean overall: 3.63e-05, population: 50135
+class-0 mean of max_t: 6.05e-10, population: 40135; class-1 mean of max_t: 3.67e-10, population: 40135
+max t-value:    1.48, max tau: 5.22e-03, (5/tau)^2: 9.19e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.053 Million
+class-0 mean overall: 3.44e-05, population: 49846; class-1 mean overall: 3.43e-05, population: 49846
+class-0 mean of max_t: 2.56e-05, population: 26681; class-1 mean of max_t: 2.56e-05, population: 26681
+max t-value:    1.42, max tau: 6.14e-03, (5/tau)^2: 6.62e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.077 Million
+class-0 mean overall: 3.82e-05, population: 49810; class-1 mean overall: 3.82e-05, population: 49810
+class-0 mean of max_t: 2.84e-05, population: 38212; class-1 mean of max_t: 2.83e-05, population: 38212
+max t-value:    1.87, max tau: 6.76e-03, (5/tau)^2: 5.47e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.077 Million
+class-0 mean overall: 3.78e-05, population: 49951; class-1 mean overall: 3.78e-05, population: 49951
+class-0 mean of max_t: 2.79e-05, population: 38300; class-1 mean of max_t: 2.79e-05, population: 38300
+max t-value:    1.07, max tau: 3.85e-03, (5/tau)^2: 1.68e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte zero, key is 16-byte constant key.
+total measurements:   0.050 Million
+class-0 mean overall: 5.71e-05, population: 49999; class-1 mean overall: 3.75e-05, population: 49999
+class-0 mean of max_t: 4.31e-05, population: 11567; class-1 mean of max_t: 2.83e-05, population: 11567
+max t-value:  781.67, max tau: 3.50e+00, (5/tau)^2: 2.05e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte zero, key is 16-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 5.99e-05, population: 49858; class-1 mean overall: 3.97e-05, population: 49858
+class-0 mean of max_t: 4.37e-05, population: 12918; class-1 mean of max_t: 2.80e-05, population: 12918
+max t-value:  878.89, max tau: 3.93e+00, (5/tau)^2: 1.62e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.046 Million
+class-0 mean overall: 5.93e-05, population: 49766; class-1 mean overall: 3.91e-05, population: 49766
+class-0 mean of max_t: 4.24e-05, population: 10087; class-1 mean of max_t: 2.79e-05, population: 10087
+max t-value:  775.91, max tau: 3.60e+00, (5/tau)^2: 1.93e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 5.68e-05, population: 50039; class-1 mean overall: 3.71e-05, population: 50039
+class-0 mean of max_t: 4.23e-05, population: 12571; class-1 mean of max_t: 2.73e-05, population: 12571
+max t-value:  876.81, max tau: 3.92e+00, (5/tau)^2: 1.63e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.050 Million
+class-0 mean overall: 5.54e-05, population: 50227; class-1 mean overall: 3.63e-05, population: 50227
+class-0 mean of max_t: 4.22e-05, population: 11592; class-1 mean of max_t: 2.72e-05, population: 11592
+max t-value:  856.57, max tau: 3.83e+00, (5/tau)^2: 1.70e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 6.24e-05, population: 50252; class-1 mean overall: 4.15e-05, population: 50252
+class-0 mean of max_t: 4.53e-05, population: 13415; class-1 mean of max_t: 2.93e-05, population: 13415
+max t-value:  810.83, max tau: 3.63e+00, (5/tau)^2: 1.90e+00.
+Definitely not constant time.
+
+cryptography-DES3-inputs Done. 
+
+Now testing cryptography-DES3-key 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.062 Million
+class-0 mean overall: 4.23e-05, population: 49813; class-1 mean overall: 4.30e-05, population: 49813
+class-0 mean of max_t: 2.99e-05, population: 31213; class-1 mean of max_t: 3.00e-05, population: 31213
+max t-value:    9.68, max tau: 3.88e-02, (5/tau)^2: 1.66e+04.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.053 Million
+class-0 mean overall: 4.67e-05, population: 49925; class-1 mean overall: 4.71e-05, population: 49925
+class-0 mean of max_t: 3.08e-05, population: 26981; class-1 mean of max_t: 3.09e-05, population: 26981
+max t-value:   27.52, max tau: 1.19e-01, (5/tau)^2: 1.76e+03.
+Probably not constant time.
+
+cryptography-DES3-key Done. 
+
+Now testing cryptography-ChaCha20-inputs 
+
+class0: inputs is 16-byte zero, key is 32-byte constant key.
+class1: inputs is 16-byte one, key is 32-byte constant key.
+total measurements:   0.073 Million
+class-0 mean overall: 3.70e-05, population: 50000; class-1 mean overall: 3.70e-05, population: 50000
+class-0 mean of max_t: 2.59e-05, population: 36630; class-1 mean of max_t: 2.59e-05, population: 36630
+max t-value:    1.34, max tau: 4.96e-03, (5/tau)^2: 1.02e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 32-byte random key.
+class1: inputs is 16-byte one, key is 32-byte random key.
+total measurements:   0.071 Million
+class-0 mean overall: 3.85e-05, population: 50044; class-1 mean overall: 3.84e-05, population: 50044
+class-0 mean of max_t: 2.66e-05, population: 35615; class-1 mean of max_t: 2.67e-05, population: 35615
+max t-value:    2.30, max tau: 8.60e-03, (5/tau)^2: 3.38e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 32-byte constant key.
+class1: inputs is 16-byte random, key is 32-byte constant key.
+total measurements:   0.034 Million
+class-0 mean overall: 3.67e-05, population: 49968; class-1 mean overall: 3.66e-05, population: 49968
+class-0 mean of max_t: 2.39e-05, population: 17005; class-1 mean of max_t: 2.39e-05, population: 17005
+max t-value:    1.39, max tau: 7.53e-03, (5/tau)^2: 4.41e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 32-byte random key.
+class1: inputs is 16-byte random, key is 32-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.61e-05, population: 50085; class-1 mean overall: 3.60e-05, population: 50085
+class-0 mean of max_t: 2.43e-05, population: 29677; class-1 mean of max_t: 2.43e-05, population: 29677
+max t-value:    2.22, max tau: 9.11e-03, (5/tau)^2: 3.01e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 32-byte constant key.
+class1: inputs is 16-byte random, key is 32-byte constant key.
+total measurements:   0.100 Million
+class-0 mean overall: 3.39e-05, population: 49998; class-1 mean overall: 3.42e-05, population: 49998
+class-0 mean of max_t: 3.35e-05, population: 49950; class-1 mean of max_t: 3.38e-05, population: 49950
+max t-value:    2.33, max tau: 7.37e-03, (5/tau)^2: 4.61e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 32-byte random key.
+class1: inputs is 16-byte random, key is 32-byte random key.
+total measurements:   0.062 Million
+class-0 mean overall: 3.34e-05, population: 50000; class-1 mean overall: 3.35e-05, population: 50000
+class-0 mean of max_t: 2.36e-05, population: 31025; class-1 mean of max_t: 2.36e-05, population: 31025
+max t-value:    2.77, max tau: 1.11e-02, (5/tau)^2: 2.02e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 32-byte constant key.
+class1: inputs is 16-byte zero, key is 32-byte constant key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.45e-05, population: 50132; class-1 mean overall: 3.45e-05, population: 50132
+class-0 mean of max_t: 2.34e-05, population: 27943; class-1 mean of max_t: 2.33e-05, population: 27943
+max t-value:   58.48, max tau: 2.46e-01, (5/tau)^2: 4.13e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 32-byte random key.
+class1: inputs is 16-byte zero, key is 32-byte random key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.56e-05, population: 49973; class-1 mean overall: 3.54e-05, population: 49973
+class-0 mean of max_t: 2.42e-05, population: 27679; class-1 mean of max_t: 2.41e-05, population: 27679
+max t-value:   58.14, max tau: 2.45e-01, (5/tau)^2: 4.18e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 32-byte constant key.
+class1: inputs is 16-byte one, key is 32-byte constant key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.15e-05, population: 50288; class-1 mean overall: 3.16e-05, population: 50288
+class-0 mean of max_t: 2.26e-05, population: 29520; class-1 mean of max_t: 2.25e-05, population: 29520
+max t-value:   69.83, max tau: 2.87e-01, (5/tau)^2: 3.04e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 32-byte random key.
+class1: inputs is 16-byte one, key is 32-byte random key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.48e-05, population: 50154; class-1 mean overall: 3.47e-05, population: 50154
+class-0 mean of max_t: 2.42e-05, population: 27966; class-1 mean of max_t: 2.41e-05, population: 27966
+max t-value:   51.63, max tau: 2.17e-01, (5/tau)^2: 5.30e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 32-byte constant key.
+class1: inputs is 16-byte random, key is 32-byte constant key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.49e-05, population: 49973; class-1 mean overall: 3.48e-05, population: 49973
+class-0 mean of max_t: 2.42e-05, population: 27975; class-1 mean of max_t: 2.40e-05, population: 27975
+max t-value:   52.89, max tau: 2.23e-01, (5/tau)^2: 5.05e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 32-byte random key.
+class1: inputs is 16-byte random, key is 32-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 3.50e-05, population: 49893; class-1 mean overall: 3.46e-05, population: 49893
+class-0 mean of max_t: 2.33e-05, population: 20407; class-1 mean of max_t: 2.33e-05, population: 20407
+max t-value:   35.48, max tau: 1.72e-01, (5/tau)^2: 8.45e+02.
+Probably not constant time.
+
+class0: inputs is 64-byte zero, key is 32-byte constant key.
+class1: inputs is 64-byte one, key is 32-byte constant key.
+total measurements:   0.067 Million
+class-0 mean overall: 3.30e-05, population: 50106; class-1 mean overall: 3.29e-05, population: 50106
+class-0 mean of max_t: 2.41e-05, population: 33534; class-1 mean of max_t: 2.41e-05, population: 33534
+max t-value:    2.82, max tau: 1.09e-02, (5/tau)^2: 2.11e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 32-byte random key.
+class1: inputs is 64-byte one, key is 32-byte random key.
+total measurements:   0.075 Million
+class-0 mean overall: 3.05e-05, population: 50170; class-1 mean overall: 3.04e-05, population: 50170
+class-0 mean of max_t: 2.33e-05, population: 37637; class-1 mean of max_t: 2.33e-05, population: 37637
+max t-value:    2.08, max tau: 7.58e-03, (5/tau)^2: 4.35e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 32-byte constant key.
+class1: inputs is 64-byte random, key is 32-byte constant key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.27e-05, population: 50131; class-1 mean overall: 3.28e-05, population: 50131
+class-0 mean of max_t: 2.32e-05, population: 28301; class-1 mean of max_t: 2.32e-05, population: 28301
+max t-value:    1.98, max tau: 8.32e-03, (5/tau)^2: 3.61e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 32-byte random key.
+class1: inputs is 64-byte random, key is 32-byte random key.
+total measurements:   0.024 Million
+class-0 mean overall: 3.26e-05, population: 50033; class-1 mean overall: 3.26e-05, population: 50033
+class-0 mean of max_t: 2.37e-05, population: 12199; class-1 mean of max_t: 2.37e-05, population: 12199
+max t-value:    1.45, max tau: 9.34e-03, (5/tau)^2: 2.87e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 32-byte constant key.
+class1: inputs is 64-byte random, key is 32-byte constant key.
+total measurements:   0.078 Million
+class-0 mean overall: 3.27e-05, population: 49934; class-1 mean overall: 3.28e-05, population: 49934
+class-0 mean of max_t: 2.53e-05, population: 39043; class-1 mean of max_t: 2.53e-05, population: 39043
+max t-value:    1.14, max tau: 4.07e-03, (5/tau)^2: 1.51e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 32-byte random key.
+class1: inputs is 64-byte random, key is 32-byte random key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.50e-05, population: 50218; class-1 mean overall: 3.64e-05, population: 50218
+class-0 mean of max_t: 2.47e-05, population: 28429; class-1 mean of max_t: 2.47e-05, population: 28429
+max t-value:    2.29, max tau: 9.63e-03, (5/tau)^2: 2.70e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 32-byte constant key.
+class1: inputs is 64-byte zero, key is 32-byte constant key.
+total measurements:   0.050 Million
+class-0 mean overall: 3.46e-05, population: 49951; class-1 mean overall: 3.23e-05, population: 49951
+class-0 mean of max_t: 2.36e-05, population: 21230; class-1 mean of max_t: 2.28e-05, population: 21230
+max t-value:  318.97, max tau: 1.43e+00, (5/tau)^2: 1.23e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 32-byte random key.
+class1: inputs is 64-byte zero, key is 32-byte random key.
+total measurements:   0.056 Million
+class-0 mean overall: 3.63e-05, population: 49862; class-1 mean overall: 3.45e-05, population: 49862
+class-0 mean of max_t: 2.50e-05, population: 26247; class-1 mean of max_t: 2.41e-05, population: 26247
+max t-value:  192.08, max tau: 8.08e-01, (5/tau)^2: 3.83e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 32-byte constant key.
+class1: inputs is 64-byte one, key is 32-byte constant key.
+total measurements:   0.053 Million
+class-0 mean overall: 3.92e-05, population: 50274; class-1 mean overall: 3.72e-05, population: 50274
+class-0 mean of max_t: 2.52e-05, population: 24001; class-1 mean of max_t: 2.44e-05, population: 24001
+max t-value:  307.94, max tau: 1.33e+00, (5/tau)^2: 1.41e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 32-byte random key.
+class1: inputs is 64-byte one, key is 32-byte random key.
+total measurements:   0.053 Million
+class-0 mean overall: 3.70e-05, population: 50110; class-1 mean overall: 3.49e-05, population: 50110
+class-0 mean of max_t: 2.52e-05, population: 23931; class-1 mean of max_t: 2.43e-05, population: 23931
+max t-value:  303.95, max tau: 1.32e+00, (5/tau)^2: 1.44e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 32-byte constant key.
+class1: inputs is 64-byte random, key is 32-byte constant key.
+total measurements:   0.053 Million
+class-0 mean overall: 3.84e-05, population: 49899; class-1 mean overall: 3.64e-05, population: 49899
+class-0 mean of max_t: 2.53e-05, population: 23937; class-1 mean of max_t: 2.45e-05, population: 23937
+max t-value:  308.59, max tau: 1.34e+00, (5/tau)^2: 1.40e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte prime number message, key is 32-byte random key.
+class1: inputs is 64-byte random, key is 32-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 3.77e-05, population: 49957; class-1 mean overall: 3.59e-05, population: 49957
+class-0 mean of max_t: 2.52e-05, population: 21061; class-1 mean of max_t: 2.43e-05, population: 21061
+max t-value:  291.81, max tau: 1.31e+00, (5/tau)^2: 1.47e+01.
+Probably not constant time.
+
+cryptography-ChaCha20-inputs Done. 
+
+Now testing cryptography-ChaCha20-key 
+
+class0: inputs is 16-byte zero, key is 32-byte constant key.
+class1: inputs is 16-byte zero, key is 32-byte random key.
+total measurements:   0.024 Million
+class-0 mean overall: 4.59e-05, population: 49984; class-1 mean overall: 4.67e-05, population: 49984
+class-0 mean of max_t: 2.91e-05, population: 12229; class-1 mean of max_t: 2.92e-05, population: 12229
+max t-value:    5.16, max tau: 3.31e-02, (5/tau)^2: 2.28e+04.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 32-byte constant key.
+class1: inputs is 16-byte one, key is 32-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 4.49e-05, population: 50046; class-1 mean overall: 4.52e-05, population: 50046
+class-0 mean of max_t: 2.96e-05, population: 25081; class-1 mean of max_t: 2.97e-05, population: 25081
+max t-value:    6.61, max tau: 2.96e-02, (5/tau)^2: 2.86e+04.
+For the moment, maybe constant time.
+
+cryptography-ChaCha20-key Done. 
+
+Now testing cryptography-RSA-inputs 
+
+class0: inputs is 16-byte zero, key is Constant RSA key.
+class1: inputs is 16-byte one, key is Constant RSA key.
+total measurements:   0.059 Million
+class-0 mean overall: 1.01e-03, population: 50177; class-1 mean overall: 1.01e-03, population: 50177
+class-0 mean of max_t: 8.75e-04, population: 29962; class-1 mean of max_t: 8.73e-04, population: 29962
+max t-value:    1.88, max tau: 7.72e-03, (5/tau)^2: 4.19e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is Random RSA key.
+class1: inputs is 16-byte one, key is Random RSA key.
+total measurements:   0.034 Million
+class-0 mean overall: 1.03e-03, population: 50103; class-1 mean overall: 1.03e-03, population: 50103
+class-0 mean of max_t: 8.38e-04, population: 17018; class-1 mean of max_t: 8.39e-04, population: 17018
+max t-value:    1.35, max tau: 7.32e-03, (5/tau)^2: 4.66e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is Constant RSA key.
+class1: inputs is 16-byte random, key is Constant RSA key.
+total measurements:   0.080 Million
+class-0 mean overall: 1.03e-03, population: 50186; class-1 mean overall: 1.03e-03, population: 50186
+class-0 mean of max_t: 5.49e-08, population: 40186; class-1 mean of max_t: 5.91e-08, population: 40186
+max t-value:    1.44, max tau: 5.10e-03, (5/tau)^2: 9.62e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is Random RSA key.
+class1: inputs is 16-byte random, key is Random RSA key.
+total measurements:   0.053 Million
+class-0 mean overall: 1.03e-03, population: 50030; class-1 mean overall: 1.03e-03, population: 50030
+class-0 mean of max_t: 8.47e-04, population: 26689; class-1 mean of max_t: 8.46e-04, population: 26689
+max t-value:    2.05, max tau: 8.89e-03, (5/tau)^2: 3.16e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is Constant RSA key.
+class1: inputs is 16-byte random, key is Constant RSA key.
+total measurements:   0.095 Million
+class-0 mean overall: 1.03e-03, population: 49951; class-1 mean overall: 1.03e-03, population: 49951
+class-0 mean of max_t: 9.91e-04, population: 47371; class-1 mean of max_t: 9.93e-04, population: 47371
+max t-value:    1.09, max tau: 3.52e-03, (5/tau)^2: 2.01e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is Random RSA key.
+class1: inputs is 16-byte random, key is Random RSA key.
+total measurements:   0.029 Million
+class-0 mean overall: 1.04e-03, population: 50079; class-1 mean overall: 1.04e-03, population: 50079
+class-0 mean of max_t: 8.31e-04, population: 14650; class-1 mean of max_t: 8.32e-04, population: 14650
+max t-value:    1.68, max tau: 9.83e-03, (5/tau)^2: 2.59e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is Constant RSA key.
+class1: inputs is 16-byte zero, key is Constant RSA key.
+total measurements:   0.100 Million
+class-0 mean overall: 1.02e-03, population: 49804; class-1 mean overall: 1.02e-03, population: 49804
+class-0 mean of max_t: 1.02e-03, population: 49652; class-1 mean of max_t: 1.01e-03, population: 49652
+max t-value:    1.60, max tau: 5.07e-03, (5/tau)^2: 9.72e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is Random RSA key.
+class1: inputs is 16-byte zero, key is Random RSA key.
+total measurements:   0.080 Million
+class-0 mean overall: 1.02e-03, population: 50229; class-1 mean overall: 1.02e-03, population: 50229
+class-0 mean of max_t: 9.36e-04, population: 40058; class-1 mean of max_t: 9.33e-04, population: 40058
+max t-value:    2.77, max tau: 9.81e-03, (5/tau)^2: 2.60e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is Constant RSA key.
+class1: inputs is 16-byte one, key is Constant RSA key.
+total measurements:   0.024 Million
+class-0 mean overall: 1.03e-03, population: 50185; class-1 mean overall: 1.03e-03, population: 50185
+class-0 mean of max_t: 7.98e-04, population: 12054; class-1 mean of max_t: 7.99e-04, population: 12054
+max t-value:    2.48, max tau: 1.60e-02, (5/tau)^2: 9.81e+04.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is Random RSA key.
+class1: inputs is 16-byte one, key is Random RSA key.
+total measurements:   0.086 Million
+class-0 mean overall: 1.02e-03, population: 50008; class-1 mean overall: 1.02e-03, population: 50008
+class-0 mean of max_t: 9.51e-04, population: 42779; class-1 mean of max_t: 9.52e-04, population: 42779
+max t-value:    1.58, max tau: 5.41e-03, (5/tau)^2: 8.55e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is Constant RSA key.
+class1: inputs is 16-byte random, key is Constant RSA key.
+total measurements:   0.038 Million
+class-0 mean overall: 1.02e-03, population: 49854; class-1 mean overall: 1.02e-03, population: 49854
+class-0 mean of max_t: 8.37e-04, population: 19176; class-1 mean of max_t: 8.37e-04, population: 19176
+max t-value:    1.44, max tau: 7.34e-03, (5/tau)^2: 4.64e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is Random RSA key.
+class1: inputs is 16-byte random, key is Random RSA key.
+total measurements:   0.034 Million
+class-0 mean overall: 1.02e-03, population: 49569; class-1 mean overall: 1.02e-03, population: 49569
+class-0 mean of max_t: 8.37e-04, population: 16887; class-1 mean of max_t: 8.38e-04, population: 16887
+max t-value:    1.66, max tau: 9.00e-03, (5/tau)^2: 3.09e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is Constant RSA key.
+class1: inputs is 64-byte one, key is Constant RSA key.
+total measurements:   0.056 Million
+class-0 mean overall: 1.04e-03, population: 49830; class-1 mean overall: 1.04e-03, population: 49830
+class-0 mean of max_t: 8.48e-04, population: 28187; class-1 mean of max_t: 8.47e-04, population: 28187
+max t-value:    2.18, max tau: 9.18e-03, (5/tau)^2: 2.96e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is Random RSA key.
+class1: inputs is 64-byte one, key is Random RSA key.
+total measurements:   0.094 Million
+class-0 mean overall: 8.69e-04, population: 50061; class-1 mean overall: 8.70e-04, population: 50061
+class-0 mean of max_t: 8.01e-04, population: 47128; class-1 mean of max_t: 8.02e-04, population: 47128
+max t-value:    1.63, max tau: 5.30e-03, (5/tau)^2: 8.88e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is Constant RSA key.
+class1: inputs is 64-byte random, key is Constant RSA key.
+total measurements:   0.091 Million
+class-0 mean overall: 8.50e-04, population: 49756; class-1 mean overall: 8.51e-04, population: 49756
+class-0 mean of max_t: 8.11e-04, population: 45414; class-1 mean of max_t: 8.11e-04, population: 45414
+max t-value:    1.40, max tau: 4.62e-03, (5/tau)^2: 1.17e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is Random RSA key.
+class1: inputs is 64-byte random, key is Random RSA key.
+total measurements:   0.075 Million
+class-0 mean overall: 8.60e-04, population: 50012; class-1 mean overall: 8.59e-04, population: 50012
+class-0 mean of max_t: 8.01e-04, population: 37433; class-1 mean of max_t: 8.02e-04, population: 37433
+max t-value:    2.18, max tau: 7.96e-03, (5/tau)^2: 3.95e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is Constant RSA key.
+class1: inputs is 64-byte random, key is Constant RSA key.
+total measurements:   0.043 Million
+class-0 mean overall: 8.50e-04, population: 50005; class-1 mean overall: 8.50e-04, population: 50005
+class-0 mean of max_t: 7.76e-04, population: 21278; class-1 mean of max_t: 7.75e-04, population: 21278
+max t-value:    2.55, max tau: 1.23e-02, (5/tau)^2: 1.64e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is Random RSA key.
+class1: inputs is 64-byte random, key is Random RSA key.
+total measurements:   0.034 Million
+class-0 mean overall: 8.64e-04, population: 49963; class-1 mean overall: 8.65e-04, population: 49963
+class-0 mean of max_t: 7.75e-04, population: 16995; class-1 mean of max_t: 7.75e-04, population: 16995
+max t-value:    3.40, max tau: 1.85e-02, (5/tau)^2: 7.34e+04.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is Constant RSA key.
+class1: inputs is 64-byte zero, key is Constant RSA key.
+ERROR: Data too long for key size. Encrypt less data or use a larger key size.
+
+class0: inputs is 64-byte prime number message, key is Random RSA key.
+class1: inputs is 64-byte zero, key is Random RSA key.
+ERROR: Data too long for key size. Encrypt less data or use a larger key size.
+
+class0: inputs is 64-byte prime number message, key is Constant RSA key.
+class1: inputs is 64-byte one, key is Constant RSA key.
+ERROR: Data too long for key size. Encrypt less data or use a larger key size.
+
+class0: inputs is 64-byte prime number message, key is Random RSA key.
+class1: inputs is 64-byte one, key is Random RSA key.
+ERROR: Data too long for key size. Encrypt less data or use a larger key size.
+
+class0: inputs is 64-byte prime number message, key is Constant RSA key.
+class1: inputs is 64-byte random, key is Constant RSA key.
+ERROR: Data too long for key size. Encrypt less data or use a larger key size.
+
+class0: inputs is 64-byte prime number message, key is Random RSA key.
+class1: inputs is 64-byte random, key is Random RSA key.
+ERROR: Data too long for key size. Encrypt less data or use a larger key size.
+
+cryptography-RSA-inputs Done. 
+
+Now testing cryptography-RSA-key 
+
+class0: inputs is 16-byte zero, key is Constant RSA key.
+class1: inputs is 16-byte zero, key is Random RSA key.
+total measurements:   0.062 Million
+class-0 mean overall: 9.89e-04, population: 49982; class-1 mean overall: 1.63e-03, population: 49982
+class-0 mean of max_t: 9.16e-04, population: 46552; class-1 mean of max_t: 1.38e-03, population: 46552
+max t-value:  678.77, max tau: 2.72e+00, (5/tau)^2: 3.37e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte one, key is Constant RSA key.
+class1: inputs is 16-byte one, key is Random RSA key.
+total measurements:   0.056 Million
+class-0 mean overall: 1.02e-03, population: 49829; class-1 mean overall: 1.67e-03, population: 49829
+class-0 mean of max_t: 9.18e-04, population: 45476; class-1 mean of max_t: 1.38e-03, population: 45476
+max t-value:  699.57, max tau: 2.94e+00, (5/tau)^2: 2.88e+00.
+Definitely not constant time.
+
+cryptography-RSA-key Done. 
+
+Now testing pycryptodomex-AES-inputs 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.067 Million
+class-0 mean overall: 5.89e-06, population: 49804; class-1 mean overall: 5.94e-06, population: 49804
+class-0 mean of max_t: 4.49e-06, population: 33322; class-1 mean of max_t: 4.49e-06, population: 33322
+max t-value:    2.32, max tau: 8.97e-03, (5/tau)^2: 3.11e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.100 Million
+class-0 mean overall: 5.29e-06, population: 49868; class-1 mean overall: 5.27e-06, population: 49868
+class-0 mean of max_t: 5.16e-06, population: 49717; class-1 mean of max_t: 5.14e-06, population: 49717
+max t-value:    1.73, max tau: 5.47e-03, (5/tau)^2: 8.35e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.098 Million
+class-0 mean overall: 5.10e-06, population: 49901; class-1 mean overall: 5.08e-06, population: 49901
+class-0 mean of max_t: 4.88e-06, population: 49083; class-1 mean of max_t: 4.89e-06, population: 49083
+max t-value:    1.58, max tau: 5.05e-03, (5/tau)^2: 9.81e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.089 Million
+class-0 mean overall: 4.83e-06, population: 50077; class-1 mean overall: 4.84e-06, population: 50077
+class-0 mean of max_t: 4.29e-06, population: 44683; class-1 mean of max_t: 4.28e-06, population: 44683
+max t-value:    1.47, max tau: 4.93e-03, (5/tau)^2: 1.03e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.093 Million
+class-0 mean overall: 4.76e-06, population: 50138; class-1 mean overall: 4.87e-06, population: 50138
+class-0 mean of max_t: 4.32e-06, population: 46533; class-1 mean of max_t: 4.33e-06, population: 46533
+max t-value:    2.26, max tau: 7.41e-03, (5/tau)^2: 4.56e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.087 Million
+class-0 mean overall: 4.79e-06, population: 49886; class-1 mean overall: 4.77e-06, population: 49886
+class-0 mean of max_t: 4.21e-06, population: 43634; class-1 mean of max_t: 4.21e-06, population: 43634
+max t-value:    1.41, max tau: 4.78e-03, (5/tau)^2: 1.10e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte constant key.
+total measurements:   0.073 Million
+class-0 mean overall: 5.25e-06, population: 50056; class-1 mean overall: 4.97e-06, population: 50056
+class-0 mean of max_t: 4.48e-06, population: 32583; class-1 mean of max_t: 4.31e-06, population: 32583
+max t-value:  208.97, max tau: 7.72e-01, (5/tau)^2: 4.19e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.050 Million
+class-0 mean overall: 5.48e-06, population: 50081; class-1 mean overall: 5.11e-06, population: 50081
+class-0 mean of max_t: 4.42e-06, population: 15980; class-1 mean of max_t: 4.25e-06, population: 15980
+max t-value:  225.87, max tau: 1.01e+00, (5/tau)^2: 2.45e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.078 Million
+class-0 mean overall: 5.04e-06, population: 50153; class-1 mean overall: 4.75e-06, population: 50153
+class-0 mean of max_t: 4.46e-06, population: 34923; class-1 mean of max_t: 4.26e-06, population: 34923
+max t-value:  269.37, max tau: 9.63e-01, (5/tau)^2: 2.70e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.087 Million
+class-0 mean overall: 4.70e-06, population: 50078; class-1 mean overall: 4.43e-06, population: 50078
+class-0 mean of max_t: 4.46e-06, population: 39953; class-1 mean of max_t: 4.25e-06, population: 39953
+max t-value:  303.56, max tau: 1.03e+00, (5/tau)^2: 2.37e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.086 Million
+class-0 mean overall: 4.78e-06, population: 49961; class-1 mean overall: 4.52e-06, population: 49961
+class-0 mean of max_t: 4.49e-06, population: 38490; class-1 mean of max_t: 4.30e-06, population: 38490
+max t-value:  256.73, max tau: 8.77e-01, (5/tau)^2: 3.25e+01.
+Probably not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.075 Million
+class-0 mean overall: 4.84e-06, population: 49803; class-1 mean overall: 4.62e-06, population: 49803
+class-0 mean of max_t: 4.45e-06, population: 31144; class-1 mean of max_t: 4.26e-06, population: 31144
+max t-value:  254.06, max tau: 9.28e-01, (5/tau)^2: 2.90e+01.
+Probably not constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.080 Million
+class-0 mean overall: 4.57e-06, population: 49938; class-1 mean overall: 4.58e-06, population: 49938
+class-0 mean of max_t: 7.09e-12, population: 39938; class-1 mean of max_t: 2.37e-11, population: 39938
+max t-value:    1.90, max tau: 6.73e-03, (5/tau)^2: 5.52e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.096 Million
+class-0 mean overall: 4.78e-06, population: 50182; class-1 mean overall: 4.81e-06, population: 50182
+class-0 mean of max_t: 4.43e-06, population: 48295; class-1 mean of max_t: 4.42e-06, population: 48295
+max t-value:    1.63, max tau: 5.25e-03, (5/tau)^2: 9.06e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.099 Million
+class-0 mean overall: 4.58e-06, population: 50037; class-1 mean overall: 4.56e-06, population: 50037
+class-0 mean of max_t: 4.40e-06, population: 49711; class-1 mean of max_t: 4.39e-06, population: 49711
+max t-value:    2.11, max tau: 6.71e-03, (5/tau)^2: 5.56e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.093 Million
+class-0 mean overall: 4.45e-06, population: 50047; class-1 mean overall: 4.45e-06, population: 50047
+class-0 mean of max_t: 4.23e-06, population: 46745; class-1 mean of max_t: 4.22e-06, population: 46745
+max t-value:    2.58, max tau: 8.45e-03, (5/tau)^2: 3.50e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.056 Million
+class-0 mean overall: 5.19e-06, population: 50200; class-1 mean overall: 5.38e-06, population: 50200
+class-0 mean of max_t: 4.23e-06, population: 28280; class-1 mean of max_t: 4.23e-06, population: 28280
+max t-value:    3.37, max tau: 1.42e-02, (5/tau)^2: 1.24e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.093 Million
+class-0 mean overall: 5.02e-06, population: 50117; class-1 mean overall: 5.17e-06, population: 50117
+class-0 mean of max_t: 4.32e-06, population: 46552; class-1 mean of max_t: 4.32e-06, population: 46552
+max t-value:    1.40, max tau: 4.59e-03, (5/tau)^2: 1.19e+06.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte zero, key is 16-byte constant key.
+total measurements:   0.069 Million
+class-0 mean overall: 6.44e-06, population: 49888; class-1 mean overall: 4.86e-06, population: 49888
+class-0 mean of max_t: 5.52e-06, population: 21397; class-1 mean of max_t: 4.43e-06, population: 21397
+max t-value: 1142.81, max tau: 4.34e+00, (5/tau)^2: 1.32e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte zero, key is 16-byte random key.
+total measurements:   0.067 Million
+class-0 mean overall: 6.84e-06, population: 50167; class-1 mean overall: 5.29e-06, population: 50167
+class-0 mean of max_t: 5.51e-06, population: 23080; class-1 mean of max_t: 4.40e-06, population: 23080
+max t-value: 1098.13, max tau: 4.24e+00, (5/tau)^2: 1.39e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.056 Million
+class-0 mean overall: 7.54e-06, population: 49926; class-1 mean overall: 4.97e-06, population: 49926
+class-0 mean of max_t: 5.43e-06, population: 11605; class-1 mean of max_t: 4.36e-06, population: 11605
+max t-value: 1179.06, max tau: 4.96e+00, (5/tau)^2: 1.01e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 7.99e-06, population: 49753; class-1 mean overall: 5.98e-06, population: 49753
+class-0 mean of max_t: 5.53e-06, population: 16337; class-1 mean of max_t: 4.49e-06, population: 16337
+max t-value:  899.37, max tau: 3.69e+00, (5/tau)^2: 1.84e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.069 Million
+class-0 mean overall: 6.28e-06, population: 50196; class-1 mean overall: 4.69e-06, population: 50196
+class-0 mean of max_t: 5.47e-06, population: 22019; class-1 mean of max_t: 4.36e-06, population: 22019
+max t-value: 1148.03, max tau: 4.36e+00, (5/tau)^2: 1.31e+00.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.071 Million
+class-0 mean overall: 6.32e-06, population: 50051; class-1 mean overall: 4.96e-06, population: 50051
+class-0 mean of max_t: 5.50e-06, population: 25035; class-1 mean of max_t: 4.43e-06, population: 25035
+max t-value: 1032.43, max tau: 3.87e+00, (5/tau)^2: 1.67e+00.
+Definitely not constant time.
+
+pycryptodomex-AES-inputs Done. 
+
+Now testing pycryptodomex-AES-key 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.046 Million
+class-0 mean overall: 6.32e-06, population: 50080; class-1 mean overall: 6.37e-06, population: 50080
+class-0 mean of max_t: 5.34e-06, population: 23286; class-1 mean of max_t: 5.34e-06, population: 23286
+max t-value:    4.40, max tau: 2.04e-02, (5/tau)^2: 6.00e+04.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.046 Million
+class-0 mean overall: 7.24e-06, population: 50026; class-1 mean overall: 7.02e-06, population: 50026
+class-0 mean of max_t: 5.35e-06, population: 23240; class-1 mean of max_t: 5.36e-06, population: 23240
+max t-value:    7.58, max tau: 3.52e-02, (5/tau)^2: 2.02e+04.
+For the moment, maybe constant time.
+
+pycryptodomex-AES-key Done. 
+
+Now testing pycryptodomex-DES3-inputs 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.034 Million
+class-0 mean overall: 5.53e-06, population: 50101; class-1 mean overall: 5.50e-06, population: 50101
+class-0 mean of max_t: 4.92e-06, population: 17119; class-1 mean of max_t: 4.92e-06, population: 17119
+max t-value:    2.84, max tau: 1.54e-02, (5/tau)^2: 1.05e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 5.64e-06, population: 49734; class-1 mean overall: 5.62e-06, population: 49734
+class-0 mean of max_t: 4.95e-06, population: 21129; class-1 mean of max_t: 4.95e-06, population: 21129
+max t-value:    3.09, max tau: 1.50e-02, (5/tau)^2: 1.11e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.024 Million
+class-0 mean overall: 5.52e-06, population: 50028; class-1 mean overall: 5.55e-06, population: 50028
+class-0 mean of max_t: 4.88e-06, population: 12059; class-1 mean of max_t: 4.88e-06, population: 12059
+max t-value:    1.97, max tau: 1.27e-02, (5/tau)^2: 1.55e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte zero, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.098 Million
+class-0 mean overall: 6.03e-06, population: 49881; class-1 mean overall: 6.01e-06, population: 49881
+class-0 mean of max_t: 5.49e-06, population: 48745; class-1 mean of max_t: 5.50e-06, population: 48745
+max t-value:    2.29, max tau: 7.31e-03, (5/tau)^2: 4.68e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.062 Million
+class-0 mean overall: 6.33e-06, population: 50163; class-1 mean overall: 6.42e-06, population: 50163
+class-0 mean of max_t: 5.00e-06, population: 31241; class-1 mean of max_t: 5.00e-06, population: 31241
+max t-value:    2.53, max tau: 1.01e-02, (5/tau)^2: 2.43e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte one, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.099 Million
+class-0 mean overall: 5.33e-06, population: 50126; class-1 mean overall: 5.31e-06, population: 50126
+class-0 mean of max_t: 5.17e-06, population: 49849; class-1 mean of max_t: 5.15e-06, population: 49849
+max t-value:    2.76, max tau: 8.75e-03, (5/tau)^2: 3.27e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte constant key.
+total measurements:   0.078 Million
+class-0 mean overall: 1.09e-05, population: 50325; class-1 mean overall: 5.62e-06, population: 50325
+class-0 mean of max_t: 1.01e-05, population: 29275; class-1 mean of max_t: 5.31e-06, population: 29275
+max t-value: 1625.67, max tau: 5.81e+00, (5/tau)^2: 7.39e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 1.17e-05, population: 49933; class-1 mean overall: 6.15e-06, population: 49933
+class-0 mean of max_t: 1.00e-05, population: 10629; class-1 mean of max_t: 5.44e-06, population: 10629
+max t-value: 1195.25, max tau: 4.91e+00, (5/tau)^2: 1.04e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte constant key.
+total measurements:   0.062 Million
+class-0 mean overall: 1.15e-05, population: 49893; class-1 mean overall: 6.12e-06, population: 49893
+class-0 mean of max_t: 1.00e-05, population: 13657; class-1 mean of max_t: 5.50e-06, population: 13657
+max t-value: 1075.05, max tau: 4.31e+00, (5/tau)^2: 1.34e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.075 Million
+class-0 mean overall: 1.20e-05, population: 49963; class-1 mean overall: 6.46e-06, population: 49963
+class-0 mean of max_t: 1.00e-05, population: 26735; class-1 mean of max_t: 5.75e-06, population: 26735
+max t-value:  713.67, max tau: 2.61e+00, (5/tau)^2: 3.68e+00.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte constant key.
+class1: inputs is 16-byte random, key is 16-byte constant key.
+total measurements:   0.059 Million
+class-0 mean overall: 1.13e-05, population: 49838; class-1 mean overall: 5.87e-06, population: 49838
+class-0 mean of max_t: 9.95e-06, population: 10541; class-1 mean of max_t: 5.35e-06, population: 10541
+max t-value: 1397.66, max tau: 5.74e+00, (5/tau)^2: 7.60e-01.
+Definitely not constant time.
+
+class0: inputs is 16-byte prime number message, key is 16-byte random key.
+class1: inputs is 16-byte random, key is 16-byte random key.
+total measurements:   0.059 Million
+class-0 mean overall: 1.10e-05, population: 49991; class-1 mean overall: 5.64e-06, population: 49991
+class-0 mean of max_t: 1.00e-05, population: 10011; class-1 mean of max_t: 5.40e-06, population: 10011
+max t-value: 1248.26, max tau: 5.13e+00, (5/tau)^2: 9.52e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.093 Million
+class-0 mean overall: 7.68e-06, population: 50190; class-1 mean overall: 7.68e-06, population: 50190
+class-0 mean of max_t: 7.24e-06, population: 46791; class-1 mean of max_t: 7.24e-06, population: 46791
+max t-value:    2.47, max tau: 8.08e-03, (5/tau)^2: 3.83e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.085 Million
+class-0 mean overall: 7.61e-06, population: 50101; class-1 mean overall: 7.65e-06, population: 50101
+class-0 mean of max_t: 7.16e-06, population: 42362; class-1 mean of max_t: 7.16e-06, population: 42362
+max t-value:    2.51, max tau: 8.62e-03, (5/tau)^2: 3.37e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.024 Million
+class-0 mean overall: 7.52e-06, population: 50040; class-1 mean overall: 7.51e-06, population: 50040
+class-0 mean of max_t: 7.08e-06, population: 12000; class-1 mean of max_t: 7.08e-06, population: 12000
+max t-value:    1.84, max tau: 1.19e-02, (5/tau)^2: 1.77e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte zero, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.029 Million
+class-0 mean overall: 7.59e-06, population: 49888; class-1 mean overall: 7.57e-06, population: 49888
+class-0 mean of max_t: 7.12e-06, population: 14437; class-1 mean of max_t: 7.12e-06, population: 14437
+max t-value:    1.63, max tau: 9.60e-03, (5/tau)^2: 2.71e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.080 Million
+class-0 mean overall: 7.77e-06, population: 50063; class-1 mean overall: 7.80e-06, population: 50063
+class-0 mean of max_t: 1.34e-11, population: 40063; class-1 mean of max_t: 2.10e-11, population: 40063
+max t-value:    1.57, max tau: 5.54e-03, (5/tau)^2: 8.15e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte one, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.090 Million
+class-0 mean overall: 8.45e-06, population: 50045; class-1 mean overall: 8.48e-06, population: 50045
+class-0 mean of max_t: 7.38e-06, population: 44925; class-1 mean of max_t: 7.38e-06, population: 44925
+max t-value:    2.42, max tau: 8.08e-03, (5/tau)^2: 3.82e+05.
+For the moment, maybe constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte zero, key is 16-byte constant key.
+total measurements:   0.059 Million
+class-0 mean overall: 3.28e-05, population: 50224; class-1 mean overall: 9.81e-06, population: 50224
+class-0 mean of max_t: 2.68e-05, population: 10744; class-1 mean of max_t: 8.67e-06, population: 10744
+max t-value: 1314.89, max tau: 5.40e+00, (5/tau)^2: 8.58e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte zero, key is 16-byte random key.
+total measurements:   0.069 Million
+class-0 mean overall: 3.16e-05, population: 50044; class-1 mean overall: 9.32e-06, population: 50044
+class-0 mean of max_t: 2.68e-05, population: 20144; class-1 mean of max_t: 8.60e-06, population: 20144
+max t-value: 1369.98, max tau: 5.21e+00, (5/tau)^2: 9.22e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte one, key is 16-byte constant key.
+total measurements:   0.065 Million
+class-0 mean overall: 3.30e-05, population: 49865; class-1 mean overall: 1.01e-05, population: 49865
+class-0 mean of max_t: 2.68e-05, population: 15714; class-1 mean of max_t: 8.67e-06, population: 15714
+max t-value: 1324.46, max tau: 5.21e+00, (5/tau)^2: 9.21e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte one, key is 16-byte random key.
+total measurements:   0.071 Million
+class-0 mean overall: 3.12e-05, population: 49917; class-1 mean overall: 9.03e-06, population: 49917
+class-0 mean of max_t: 2.68e-05, population: 22095; class-1 mean of max_t: 8.35e-06, population: 22095
+max t-value: 1424.22, max tau: 5.34e+00, (5/tau)^2: 8.78e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte constant key.
+class1: inputs is 64-byte random, key is 16-byte constant key.
+total measurements:   0.067 Million
+class-0 mean overall: 2.91e-05, population: 50277; class-1 mean overall: 8.11e-06, population: 50277
+class-0 mean of max_t: 2.67e-05, population: 17558; class-1 mean of max_t: 7.83e-06, population: 17558
+max t-value: 2215.03, max tau: 8.56e+00, (5/tau)^2: 3.41e-01.
+Definitely not constant time.
+
+class0: inputs is 64-byte prime number message, key is 16-byte random key.
+class1: inputs is 64-byte random, key is 16-byte random key.
+total measurements:   0.065 Million
+class-0 mean overall: 3.39e-05, population: 50035; class-1 mean overall: 1.04e-05, population: 50035
+class-0 mean of max_t: 2.69e-05, population: 15816; class-1 mean of max_t: 8.82e-06, population: 15816
+max t-value: 1380.89, max tau: 5.43e+00, (5/tau)^2: 8.47e-01.
+Definitely not constant time.
+
+pycryptodomex-DES3-inputs Done. 
+
+Now testing pycryptodomex-DES3-key 
+
+class0: inputs is 16-byte zero, key is 16-byte constant key.
+class1: inputs is 16-byte zero, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 9.94e-06, population: 49969; class-1 mean overall: 1.04e-05, population: 49969
+class-0 mean of max_t: 6.79e-06, population: 22415; class-1 mean of max_t: 6.85e-06, population: 22415
+max t-value:   39.56, max tau: 1.92e-01, (5/tau)^2: 6.80e+02.
+Probably not constant time.
+
+class0: inputs is 16-byte one, key is 16-byte constant key.
+class1: inputs is 16-byte one, key is 16-byte random key.
+total measurements:   0.043 Million
+class-0 mean overall: 1.02e-05, population: 50244; class-1 mean overall: 1.05e-05, population: 50244
+class-0 mean of max_t: 6.80e-06, population: 22423; class-1 mean of max_t: 6.86e-06, population: 22423
+max t-value:   39.60, max tau: 1.92e-01, (5/tau)^2: 6.78e+02.
+Probably not constant time.
+
+pycryptodomex-DES3-key Done. 
+
+All tests finished.
