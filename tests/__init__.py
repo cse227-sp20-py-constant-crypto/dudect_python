@@ -4,32 +4,34 @@ from . import test_pycryptodomex
 
 tests = []
 # pycrypto
-tests.append(test_pycrypto.pycrypto_aes_test_const)
-tests.append(test_pycrypto.pycrypto_aes_test_random)
-tests.append(test_pycrypto.pycrypto_aes_test_mixed)
+#tests.append(test_pycrypto.pycrypto_aes_test_inputs)
+#tests.append(test_pycrypto.pycrypto_aes_test_key)
 
-tests.append(test_pycrypto.pycrypto_des3_test_const)
-tests.append(test_pycrypto.pycrypto_des3_test_const)
-tests.append(test_pycrypto.pycrypto_des3_test_const)
+#tests.append(test_pycrypto.pycrypto_des3_test_inputs)
+#tests.append(test_pycrypto.pycrypto_des3_test_key)
 
 # cryptography
-tests.append(test_cryptography.cryptography_aes_test_const)
-tests.append(test_cryptography.cryptography_aes_test_random)
-tests.append(test_cryptography.cryptography_aes_test_mixed)
+#tests.append(test_cryptography.cryptography_aes_test_inputs)
+#tests.append(test_cryptography.cryptography_aes_test_key)
 
-tests.append(test_cryptography.cryptography_3des_test_const)
-tests.append(test_cryptography.cryptography_3des_test_random)
-tests.append(test_cryptography.cryptography_3des_test_mixed)
+#tests.append(test_cryptography.cryptography_des3_test_inputs)
+#tests.append(test_cryptography.cryptography_des3_test_key)
 
-tests.append(test_cryptography.cryptography_chacha20_test_const)
-tests.append(test_cryptography.cryptography_chacha20_test_random)
-tests.append(test_cryptography.cryptography_chacha20_test_mixed)
+#tests.append(test_cryptography.cryptography_chacha20_test_inputs)
+#tests.append(test_cryptography.cryptography_chacha20_test_key)
+
+#tests.append(test_cryptography.cryptography_rsa_test_inputs)
+#tests.append(test_cryptography.cryptography_rsa_test_key)
+
+#tests.append(test_cryptography.cryptography_dsa_test_inputs)
+#tests.append(test_cryptography.cryptography_dsa_test_key)
+
+tests.append(test_cryptography.cryptography_ecdsa_test_inputs)
+tests.append(test_cryptography.cryptography_ecdsa_test_key)
 
 # pycryptodomex
-tests.append(test_pycryptodomex.pycryptodomex_aes_test_const)
-tests.append(test_pycryptodomex.pycryptodomex_aes_test_random)
-tests.append(test_pycryptodomex.pycryptodomex_aes_test_mixed)
+#tests.append(test_pycryptodomex.pycryptodomex_aes_test_inputs)
+#tests.append(test_pycryptodomex.pycryptodomex_aes_test_key)
 
-tests.append(test_pycryptodomex.pycryptodomex_des3_test_const)
-tests.append(test_pycryptodomex.pycryptodomex_des3_test_random)
-tests.append(test_pycryptodomex.pycryptodomex_des3_test_mixed)
+#tests.append(test_pycryptodomex.pycryptodomex_des3_test_inputs)
+#tests.append(test_pycryptodomex.pycryptodomex_des3_test_key)

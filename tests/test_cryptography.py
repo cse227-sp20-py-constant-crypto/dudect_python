@@ -1,84 +1,117 @@
 from test_lib import TestLib
-from test_lib import fixed_inputs_info
-from test_lib import constant_key, random_key, mixed_key, generate_constant_key, generate_random_key, generate_mixed_key
+from test_lib import different_inputs_infos, fixed_inputs_infos
+from test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_32, fixed_key_infos_32, \
+    different_key_infos_64, fixed_key_infos_64, fixed_key_infos_rsa, different_key_infos_rsa, fixed_key_infos_dsa, \
+        different_key_infos_dsa, fixed_key_infos_ecdsa, different_key_infos_ecdsa
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-
+from cryptography.hazmat.primitives.asymmetric import rsa, dsa, ec
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
 import os
+import base64
 
-
-def init_aes(**kwargs):
-    # AES
+def generate_aes(key):
     backend = default_backend()
-    if 'key' in kwargs and kwargs['key'] is not None:
-        f, p = kwargs['key'][:2]
-        key = f(*p)
-    else:
-        key = os.urandom(32)
-    if 'iv' in kwargs and kwargs['iv'] is not None:
-        f, p = kwargs['iv'][:2]
-        iv = f(*p)
-    else:
-        iv = os.urandom(16)
+    iv = os.urandom(16)
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
-    return cipher
 
-  
-def init_3des(**kwargs):
-    # 3DES
+    def do_computation(msg: bytes):
+        encryptor = cipher.encryptor()
+        ct = encryptor.update(msg) + encryptor.finalize()
+        
+
+    return do_computation
+
+
+def generate_des3(key):
     backend = default_backend()
-    if 'key' in kwargs and kwargs['key'] is not None:
-        f, p = kwargs['key'][:2]
-        key = f(*p)
-    else:
-        key = os.urandom(16)
-    if 'iv' in kwargs and kwargs['iv'] is not None:
-        f, p = kwargs['iv'][:2]
-        iv = f(*p)
-    else:
-        iv = os.urandom(8)
+    iv = os.urandom(8)
     cipher = Cipher(algorithms.TripleDES(key), modes.OFB(iv), backend=backend)
-    return cipher
+
+    def do_computation(msg: bytes):
+        encryptor = cipher.encryptor()
+        ct = encryptor.update(msg) + encryptor.finalize()
+
+    return do_computation
 
 
-def init_chacha20(**kwargs):
-    # ChaCha20
+def generate_chacha20(key):
     backend = default_backend()
-    if 'key' in kwargs and kwargs['key'] is not None:
-        f, p = kwargs['key'][:2]
-        key = f(*p)
-    else:
-        key = os.urandom(32)
-    if 'nonce' in kwargs and kwargs['nonce'] is not None:
-        f, p = kwargs['nonce'][:2]
-        nonce = f(*p)
-    else:
-        nonce = os.urandom(16)
+    nonce = os.urandom(16)
     cipher = Cipher(algorithms.ChaCha20(key, nonce), mode=None, backend=backend)
-    return cipher
+
+    def do_computation(msg: bytes):
+        encryptor = cipher.encryptor()
+        ct = encryptor.update(msg) + encryptor.finalize()
+
+    return do_computation
 
 
-def do_computation(cipher, in_msg: bytes):
-    encryptor = cipher.encryptor()
-    ct = encryptor.update(in_msg)
+def generate_rsa(PrivateKey):
+    PublicKey=PrivateKey.public_key()
+    def do_computation(msg: bytes):
+        ciphertext = PublicKey.encrypt(
+            msg,
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA1()),
+                algorithm=hashes.SHA1(),label=None))
+        ciphertext = str(base64.b64encode(ciphertext), encoding='utf-8')
+        signer = PrivateKey.sign(
+            msg,
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH),
+            hashes.SHA256()
+        )
+        signature = str(base64.b64encode(signer),encoding='utf-8')
+        ct=(ciphertext, signature)
+    return do_computation
 
-constant_key_32 = (generate_constant_key, (32,), "32-byte constant key")
-random_key_32 = (generate_random_key, (32,), "32-byte random key")
-mixed_key_32 = (generate_mixed_key, (32,), "32-byte mixed key")
+def generate_dsa(PrivateKey):
+    def do_computation(msg: bytes):
+        signature = PrivateKey.sign(
+            msg,
+            hashes.SHA256()
+        )
+    return do_computation
 
+def generate_ecdsa(PrivateKey):
+    def do_computation(msg: bytes):
+        signature = PrivateKey.sign(
+            msg,
+            ec.ECDSA(hashes.SHA256())
+        )
+    return do_computation
 
-cryptography_aes_test_const = TestLib(init_aes, do_computation, name="cryptography-AES-const-key", key=constant_key)
-cryptography_aes_test_random = TestLib(init_aes, do_computation, name="cryptography-AES-random-key", key=random_key)
-cryptography_aes_test_mixed = TestLib(init_aes, do_computation, name="cryptography-AES-mixed-key",
-                                      key=mixed_key, inputs_info_pairs=fixed_inputs_info)
+cryptography_ecdsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+                                        generate_ecdsa, name="cryptography-ECDSA-inputs")
+cryptography_ecdsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+                                    generate_ecdsa, name="cryptography-ECDSA-key", multi_init=True)
 
-cryptography_3des_test_const = TestLib(init_3des, do_computation, name="cryptography-3DES-const-key", key=constant_key)
-cryptography_3des_test_random = TestLib(init_3des, do_computation, name="cryptography-3DES-random-key", key=random_key)
-cryptography_3des_test_mixed = TestLib(init_3des, do_computation, name="cryptography-3DES-mixed-key",
-                                       key=mixed_key, inputs_info_pairs=fixed_inputs_info)
+cryptography_dsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_dsa,
+                                        generate_dsa, name="cryptography-DSA-inputs")
+cryptography_dsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_dsa,
+                                    generate_dsa, name="cryptography-DSA-key", multi_init=True)
 
-cryptography_chacha20_test_const = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-const-key", key=constant_key_32)
-cryptography_chacha20_test_random = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-random-key", key=random_key_32)
-cryptography_chacha20_test_mixed = TestLib(init_chacha20, do_computation, name="cryptography-ChaCha20-mixed-key",
-                                           key=mixed_key_32, inputs_info_pairs=fixed_inputs_info)
+cryptography_rsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_rsa,
+                                        generate_rsa, name="cryptography-RSA-inputs")
+cryptography_rsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_rsa,
+                                    generate_rsa, name="cryptography-RSA-key", multi_init=True)
+
+cryptography_aes_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
+                                       generate_aes, name="cryptography-AES-inputs")
+cryptography_aes_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
+                                    generate_aes, name="cryptography-AES-key", multi_init=True)
+
+cryptography_des3_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
+                                        generate_des3, name="cryptography-DES3-inputs")
+cryptography_des3_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
+                                     generate_des3, name="cryptography-DES3-key", multi_init=True)
+
+cryptography_chacha20_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_32,
+                                        generate_chacha20, name="cryptography-ChaCha20-inputs")
+cryptography_chacha20_test_key = TestLib(fixed_inputs_infos, different_key_infos_32,
+                                     generate_chacha20, name="cryptography-ChaCha20-key", multi_init=True)
+
