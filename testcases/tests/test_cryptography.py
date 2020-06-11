@@ -89,7 +89,7 @@ def generate_ecdsa(PrivateKey):
 cryptography_ecdsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
                                         generate_ecdsa, name="cryptography-ECDSA-inputs")
 cryptography_ecdsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
-                                    generate_rsa, name="cryptography-ECDSA-key", multi_init=True)
+                                    generate_ecdsa, name="cryptography-ECDSA-key", multi_init=True)
 
 cryptography_dsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_dsa,
                                         generate_dsa, name="cryptography-DSA-inputs")
