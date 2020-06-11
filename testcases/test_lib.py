@@ -272,7 +272,7 @@ different_key_infos_dsa = ((constant_key_dsa, random_key_dsa),)
 fixed_key_infos_dsa = ((constant_key_dsa, constant_key_dsa),
                        (random_key_dsa, random_key_dsa))
 
-different_key_infos_ecdsa = ((constant_key_dsa, random_key_dsa),)
+different_key_infos_ecdsa = ((constant_key_ecdsa, random_key_ecdsa),)
 
 fixed_key_infos_ecdsa = ((constant_key_ecdsa, constant_key_ecdsa),
                        (random_key_ecdsa, random_key_ecdsa))
