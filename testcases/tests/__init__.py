@@ -23,6 +23,11 @@ tests.append(test_cryptography.cryptography_chacha20_test_key)
 tests.append(test_cryptography.cryptography_rsa_test_inputs)
 tests.append(test_cryptography.cryptography_rsa_test_key)
 
+tests.append(test_cryptography.cryptography_dsa_test_inputs)
+tests.append(test_cryptography.cryptography_dsa_test_key)
+
+tests.append(test_cryptography.cryptography_ecdsa_test_inputs)
+tests.append(test_cryptography.cryptography_ecdsa_test_key)
 
 # pycryptodomex
 tests.append(test_pycryptodomex.pycryptodomex_aes_test_inputs)

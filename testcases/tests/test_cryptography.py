@@ -1,11 +1,12 @@
 from testcases.test_lib import TestLib
 from testcases.test_lib import different_inputs_infos, fixed_inputs_infos
 from testcases.test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_32, fixed_key_infos_32, \
-    different_key_infos_64, fixed_key_infos_64, fixed_key_infos_rsa, different_key_infos_rsa
+    different_key_infos_64, fixed_key_infos_64, fixed_key_infos_rsa, different_key_infos_rsa,fixed_key_infos_dsa, different_key_infos_dsa,\
+        fixed_key_infos_ecdsa, different_key_infos_ecdsa
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.asymmetric import rsa, dsa, ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 import os
@@ -67,6 +68,33 @@ def generate_rsa(PrivateKey):
         signature = str(base64.b64encode(signer),encoding='utf-8')
         ct=(ciphertext, signature)
     return do_computation
+
+
+def generate_dsa(PrivateKey):
+    def do_computation(msg: bytes):
+        signature = PrivateKey.sign(
+            msg,
+            hashes.SHA256()
+        )
+    return do_computation
+
+def generate_ecdsa(PrivateKey):
+    def do_computation(msg: bytes):
+        signature = PrivateKey.sign(
+            msg,
+            ec.ECDSA(hashes.SHA256())
+        )
+    return do_computation
+
+cryptography_ecdsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+                                        generate_ecdsa, name="cryptography-ECDSA-inputs")
+cryptography_ecdsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+                                    generate_rsa, name="cryptography-ECDSA-key", multi_init=True)
+
+cryptography_dsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_dsa,
+                                        generate_dsa, name="cryptography-DSA-inputs")
+cryptography_dsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_dsa,
+                                    generate_dsa, name="cryptography-DSA-key", multi_init=True)
 
 cryptography_rsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_rsa,
                                         generate_rsa, name="cryptography-RSA-inputs")
