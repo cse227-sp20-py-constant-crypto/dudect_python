@@ -1,6 +1,6 @@
-from test_lib import TestLib
-from test_lib import different_inputs_infos, fixed_inputs_infos
-from test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_32, fixed_key_infos_32, \
+from testcases.test_lib import TestLib
+from testcases.test_lib import different_inputs_infos, fixed_inputs_infos
+from testcases.test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_32, fixed_key_infos_32, \
     different_key_infos_64, fixed_key_infos_64, fixed_key_infos_rsa, different_key_infos_rsa
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes

@@ -1,6 +1,6 @@
-from test_lib import TestLib
-from test_lib import different_inputs_infos, fixed_inputs_infos
-from test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_64, fixed_key_infos_64
+from testcases.test_lib import TestLib
+from testcases.test_lib import different_inputs_infos, fixed_inputs_infos
+from testcases.test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_64, fixed_key_infos_64
 
 from Crypto.Cipher import AES, DES3
 from Crypto import Random
