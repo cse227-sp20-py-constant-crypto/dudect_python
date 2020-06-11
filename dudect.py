@@ -136,13 +136,18 @@ def __report(t: List[__TestData]) -> None:
     max_t = abs(t[mt].compute())
     max_t_n = t[mt].n[0] + t[mt].n[1]
     max_tau = max_t / max_t_n ** 0.5
+    overall_t = abs(t[0].compute())
+    overall_t_n = t[0].n[0] + t[0].n[1]
+    overall_tau = overall_t / overall_t_n ** 0.5
+
     print(f'total measurements: {max_t_n / 1e6:7.3f} Million')
     print(
         f'class-0 mean overall: {t[0].mean[0]:.2e}, population: {t[0].n[0]};'
         f' class-1 mean overall: {t[0].mean[1]:.2e}, population: {t[0].n[0]}')
     print(
         f'class-0 mean of max_t: {t[mt].mean[0]:.2e}, population: {t[mt].n[0]};'
-        f' class-1 mean of max_t: {t[mt].mean[1]:.2e}, population: {t[mt].n[0]}')
+        f' class-1 mean of max_t: {t[mt].mean[1]:.2e}, population: {t[mt].n[1]}')
+    print(f"overall t-value: {overall_t:7.2f}, max tau: {overall_t_n:.2e}, (5/tau)^2: {(5 * 5) / (overall_tau * overall_tau):.2e}.")
     print(f"max t-value: {max_t:7.2f}, max tau: {max_tau:.2e}, (5/tau)^2: {(5 * 5) / (max_tau * max_tau):.2e}.")
     if max_t > t_threshold_bananas:
         print("Definitely not constant time.")
