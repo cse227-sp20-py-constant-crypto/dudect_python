@@ -1,5 +1,5 @@
 from dudect import test_constant, Input
-
+import sympy
 import random
 import os
 from itertools import combinations
@@ -16,42 +16,60 @@ with open("private.pem", "rb") as key_file:
          password=None,
          backend=default_backend())
 
-def generate_zero_message(n):
+
+def generate_zero_byte(n):
     return b'\x00' * n
 
 
-def generate_one_message(n):
+def generate_one_byte(n):
     return b'\xff' * n
 
 
-def generate_random_message(n):
+def generate_random_byte(n):
     return os.urandom(n)
 
 
-def generate_constant_key(n):
+def generate_constant_byte(n):
     return ((n//16 + 1) * 'Sixteen byte key')[:n].encode()
 
 
-def generate_random_key(n):
-    return os.urandom(n)
+def int_to_byte(num):
+    num_hex = hex(num).replace("0x", "")
+    if len(num_hex) % 2 != 0:
+        num_hex = '0' + num_hex
+    ascii_repr = "".join(["\\x" + num_hex[i:i + 2] for i in range(0, len(num_hex), 2)])
+    return eval("b'" + ascii_repr + "'")
+
+
+def generate_prime_byte(n):
+    prime_number = sympy.randprime(2**(8*n-1), 2**(8*n))
+    return int_to_byte(prime_number)
+
+
+def generate_given_byte(b):
+    return b
+
 
 def generate_random_rsakey():
     return rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
+
+
 def generate_constant_rsakey():
     private_key = rsaKey_preload
     return private_key
 
+
 def generate_prepare_inputs(inputs_info_pair):
     info0, info1 = inputs_info_pair
+
     def _prepare_inputs():
         inputs = []
         for i in range(number_measurements):
             class_id = random.randrange(2)
             if class_id == 0:
-                inputs.append(Input(data=(info0['func'](*info0['params'])), cla=0))
+                inputs.append(Input(data=info0.execute(), cla=0))
             else:
-                inputs.append(Input(data=(info1['func'](*info1['params'])), cla=1))  # constant input msg
-                # inputs.append(Input(data=Random.new().read(16), cla=0))  # random vs constant input msg
+                inputs.append(Input(data=info1.execute(), cla=1))
         return inputs
 
     return _prepare_inputs
@@ -62,15 +80,39 @@ def generate_init(key_info_pair, generate_do_computation, generate_do_computatio
 
     def _init(class_id: int):
         if class_id == 1:
-            key = key1['func'](*key1['params'])
+            key = key1.execute()
         else:
-            key = key0['func'](*key0['params'])
+            key = key0.execute()
 
         do_computation = generate_do_computation(key, *generate_do_computation_args, **generate_do_computation_kwargs)
 
         return do_computation
 
     return _init
+
+
+class ByteGenerator:
+    def __init__(self, func, params=(), name="", exec_once=False):
+        self.func = func
+        self.params = params
+        self.name = name
+        self.exec_once = exec_once
+        self.result = self.func(*self.params)
+
+    def get_name(self):
+        return self.name
+
+    def get_result(self):
+        return self.result
+
+    def execute(self):
+        if self.exec_once:
+            return self.result
+        else:
+            return self.func(*self.params)
+
+    def reset(self):
+        self.result = self.func(*self.params)
 
 
 class TestLib:
@@ -92,8 +134,12 @@ class TestLib:
             for info0, info1 in self.inputs_infos:
                 for key0, key1 in self.key_infos:
                     try:
-                        print("class0:", "inputs is %s," % info0["name"], "key is %s." % key0["name"])
-                        print("class1:", "inputs is %s," % info1["name"], "key is %s." % key1["name"])
+                        for g in [info0, info1, key0, key1]:
+                            g.reset()
+                        print("class0:", "inputs is %s," % info0.get_name(), "key is %s." % key0.get_name(),
+                              "key value is %s" % key0.get_result())
+                        print("class1:", "inputs is %s," % info1.get_name(), "key is %s." % key1.get_name(),
+                              "key value is %s" % key1.get_result())
                         _inputs_info_pair = (info0, info1)
                         _prepare_inputs = generate_prepare_inputs(_inputs_info_pair)
                         _key_info_pair = (key0, key1)
@@ -111,30 +157,39 @@ class TestLib:
         print(self.name, "Done.", "\n")
 
 
-inputs_zero_16 = {"name": "16-byte zero", "func": generate_zero_message, "params": (16,)}
-inputs_one_16 = {"name": "16-byte one", "func": generate_one_message, "params": (16,)}
-inputs_random_16 = {"name": "16-byte random", "func": generate_random_message, "params": (16,)}
+inputs_zero_16 = ByteGenerator(func=generate_zero_byte, params=(16,), name="16-byte zero")
+inputs_one_16 = ByteGenerator(func=generate_one_byte, params=(16,), name="16-byte one")
+inputs_random_16 = ByteGenerator(func=generate_random_byte, params=(16,), name="16-byte random")
+inputs_constant_16 = ByteGenerator(func=generate_constant_byte, params=(16,), name="16-byte constant")
 
-inputs_zero_64 = {"name": "64-byte zero", "func": generate_zero_message, "params": (64,)}
-inputs_one_64 = {"name": "64-byte one", "func": generate_one_message, "params": (64,)}
-inputs_random_64 = {"name": "64-byte random", "func": generate_random_message, "params": (64,)}
+inputs_zero_64 = ByteGenerator(func=generate_zero_byte, params=(64,), name="64-byte zero")
+inputs_one_64 = ByteGenerator(func=generate_one_byte, params=(64,), name="64-byte one")
+inputs_random_64 = ByteGenerator(func=generate_random_byte, params=(64,), name="64-byte random")
+inputs_constant_64 = ByteGenerator(func=generate_constant_byte, params=(64,), name="64-byte constant")
 
-inputs_zero_256 = {"name": "256-byte zero", "func": generate_zero_message, "params": (256,)}
-inputs_one_256 = {"name": "256-byte one", "func": generate_one_message, "params": (256,)}
-inputs_random_256 = {"name": "256-byte random", "func": generate_random_message, "params": (256,)}
+inputs_zero_256 = ByteGenerator(func=generate_zero_byte, params=(256,), name="256-byte zero")
+inputs_one_256 = ByteGenerator(func=generate_one_byte, params=(256,), name="256-byte one") 
+inputs_random_256 = ByteGenerator(func=generate_random_byte, params=(256,), name="256-byte random")
+inputs_constant_256 = ByteGenerator(func=generate_constant_byte, params=(256,), name="256-byte constant")
 
-constant_key_16 = {"func": generate_constant_key, "params": (16,), "name": "16-byte constant key"}
-random_key_16 = {"func": generate_random_key, "params": (16,), "name": "16-byte random key"}
+constant_key_16 = ByteGenerator(func=generate_constant_byte, params=(16,), name="16-byte constant key", exec_once=True)
+random_key_16 = ByteGenerator(func=generate_random_byte, params=(16,), name="16-byte random key", exec_once=True)
 
-constant_key_32 = {"func": generate_constant_key, "params": (32,), "name": "32-byte constant key"}
-random_key_32 = {"func": generate_random_key, "params": (32,), "name": "32-byte random key"}
+constant_key_32 = ByteGenerator(func=generate_constant_byte, params=(32,), name="32-byte constant key", exec_once=True)
+random_key_32 = ByteGenerator(func=generate_random_byte, params=(32,), name="32-byte random key", exec_once=True)
 
-constant_key_64 = {"func": generate_constant_key, "params": (64,), "name": "64-byte constant key"}
-random_key_64 = {"func": generate_random_key, "params": (64,), "name": "64-byte random key"}
+constant_key_64 = ByteGenerator(func=generate_constant_byte, params=(64,), name="64-byte constant key", exec_once=True)
+random_key_64 = ByteGenerator(func=generate_random_byte, params=(64,), name="64-byte random key", exec_once=True)
 
-random_key_rsa = {"func": generate_random_rsakey, "params": (), "name": "Random RSA key"}
+random_key_rsa = ByteGenerator(func=generate_random_rsakey, params=(), name="Random RSA key", exec_once=True)
 
-constant_key_rsa = {"func": generate_constant_rsakey, "params": (), "name": "Constant RSA key"}
+constant_key_rsa = ByteGenerator(func=generate_constant_rsakey, params=(), name="Constant RSA key", exec_once=True)
+
+prime_key_16 = ByteGenerator(func=generate_prime_byte, params=(16,), name="16-byte prime key", exec_once=True)
+prime_key_32 = ByteGenerator(func=generate_prime_byte, params=(32,), name="32-byte prime key", exec_once=True)
+prime_key_64 = ByteGenerator(func=generate_prime_byte, params=(64,), name="64-byte prime key", exec_once=True)
+prime_key_128 = ByteGenerator(func=generate_prime_byte, params=(128,), name="128-byte prime key", exec_once=True)
+
 
 different_inputs_infos = (
     (inputs_zero_16, inputs_one_16),
@@ -145,17 +200,66 @@ different_inputs_infos = (
     (inputs_one_64, inputs_random_64),
 )
 
-fixed_inputs_infos = ((inputs_zero_16, inputs_zero_16), (inputs_one_16, inputs_one_16))
+fixed_inputs_infos_16 = ((inputs_zero_16, inputs_zero_16), 
+                         (inputs_one_16, inputs_one_16),
+                         (inputs_constant_16, inputs_constant_16))
+fixed_inputs_infos = fixed_inputs_infos_16
 
-different_key_infos_16 = ((constant_key_16, random_key_16),)
-fixed_key_infos_16 = ((constant_key_16, constant_key_16), (random_key_16, random_key_16))
+fixed_inputs_infos_64 = ((inputs_zero_64, inputs_zero_64), 
+                         (inputs_one_64, inputs_one_64),
+                         (inputs_constant_64, inputs_constant_64))
 
-different_key_infos_32 = ((constant_key_32, random_key_32),)
-fixed_key_infos_32 = ((constant_key_32, constant_key_32), (random_key_32, random_key_32))
+different_key_infos_16 = ((constant_key_16, random_key_16),
+                          (constant_key_16, random_key_16),
+                          (constant_key_16, random_key_16),
+                          (constant_key_16, prime_key_16),
+                          (constant_key_16, prime_key_16),
+                          (constant_key_16, prime_key_16))
 
-different_key_infos_64 = ((constant_key_64, random_key_64),)
-fixed_key_infos_64 = ((constant_key_64, constant_key_64), (random_key_64, random_key_64))
+fixed_key_infos_16 = ((constant_key_16, constant_key_16), 
+                      (random_key_16, random_key_16),
+                      (random_key_16, random_key_16),
+                      (random_key_16, random_key_16),
+                      (prime_key_16, prime_key_16),
+                      (prime_key_16, prime_key_16),
+                      (prime_key_16, prime_key_16))
 
-different_key_infos_rsa = ((constant_key_rsa, random_key_rsa),)
-fixed_key_infos_rsa = ((constant_key_rsa, constant_key_rsa), (random_key_rsa, random_key_rsa))
+fixed_key_infos_32 = ((constant_key_32, constant_key_32), 
+                      (random_key_32, random_key_32),
+                      (random_key_32, random_key_32),
+                      (random_key_32, random_key_32),
+                      (prime_key_32, prime_key_32),
+                      (prime_key_32, prime_key_32),
+                      (prime_key_32, prime_key_32))
+
+fixed_key_infos_64 = ((constant_key_64, constant_key_64), 
+                      (random_key_64, random_key_64),
+                      (random_key_64, random_key_64),
+                      (random_key_64, random_key_64),
+                      (prime_key_64, prime_key_64),
+                      (prime_key_64, prime_key_64),
+                      (prime_key_64, prime_key_64))
+
+different_key_infos_32 = ((constant_key_32, random_key_32),
+                          (constant_key_32, random_key_32),
+                          (constant_key_32, random_key_32),
+                          (constant_key_32, prime_key_32),
+                          (constant_key_32, prime_key_32),
+                          (constant_key_32, prime_key_32))
+
+different_key_infos_64 = ((constant_key_64, random_key_64),
+                          (constant_key_64, random_key_64),
+                          (constant_key_64, random_key_64),
+                          (constant_key_64, prime_key_64),
+                          (constant_key_64, prime_key_64),
+                          (constant_key_64, prime_key_64))
+
+different_key_infos_rsa = ((constant_key_rsa, random_key_rsa),
+                           (constant_key_rsa, random_key_rsa),
+                           (constant_key_rsa, random_key_rsa))
+
+fixed_key_infos_rsa = ((constant_key_rsa, constant_key_rsa),
+                       (random_key_rsa, random_key_rsa),
+                       (random_key_rsa, random_key_rsa),
+                       (random_key_rsa, random_key_rsa))
 
