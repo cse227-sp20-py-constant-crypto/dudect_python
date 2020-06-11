@@ -242,7 +242,7 @@ fixed_inputs_infos_64 = ((inputs_zero_64, inputs_zero_64),
                          (inputs_constant_64, inputs_constant_64))
 
 different_key_infos_16 = ((constant_key_16, random_key_16),
-                          (constant_key_16, prime_key_16))
+                          (random_key_16, prime_key_16))
 
 fixed_key_infos_16 = ((constant_key_16, constant_key_16), 
                       (random_key_16, random_key_16),
@@ -257,10 +257,10 @@ fixed_key_infos_64 = ((constant_key_64, constant_key_64),
                       (prime_key_64, prime_key_64))
 
 different_key_infos_32 = ((constant_key_32, random_key_32),
-                          (constant_key_32, prime_key_32))
+                          (random_key_32, prime_key_32))
 
 different_key_infos_64 = ((constant_key_64, random_key_64),
-                          (constant_key_64, prime_key_64))
+                          (random_key_64, prime_key_64))
 
 different_key_infos_rsa = ((constant_key_rsa, random_key_rsa),)
 
