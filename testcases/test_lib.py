@@ -92,11 +92,13 @@ def generate_init(key_info_pair, generate_do_computation, generate_do_computatio
 
 
 class ByteGenerator:
-    def __init__(self, func, params=(), name="", exec_once=False):
+    def __init__(self, func, params=(), name="", spawn_init=False):
         self.func = func
         self.params = params
         self.name = name
-        self.exec_once = exec_once
+        self.spawn_init = spawn_init
+        self.counter = 0
+        self.max_counter = 50
         self.result = self.func(*self.params)
 
     def get_name(self):
@@ -106,12 +108,16 @@ class ByteGenerator:
         return self.result
 
     def execute(self):
-        if self.exec_once:
+        if self.spawn_init:
+            self.counter += 1
+            if self.counter > self.max_counter:
+                self.reset()
             return self.result
         else:
             return self.func(*self.params)
 
     def reset(self):
+        self.counter = 0
         self.result = self.func(*self.params)
 
 
@@ -172,23 +178,23 @@ inputs_one_256 = ByteGenerator(func=generate_one_byte, params=(256,), name="256-
 inputs_random_256 = ByteGenerator(func=generate_random_byte, params=(256,), name="256-byte random")
 inputs_constant_256 = ByteGenerator(func=generate_constant_byte, params=(256,), name="256-byte constant")
 
-constant_key_16 = ByteGenerator(func=generate_constant_byte, params=(16,), name="16-byte constant key", exec_once=True)
-random_key_16 = ByteGenerator(func=generate_random_byte, params=(16,), name="16-byte random key", exec_once=True)
+constant_key_16 = ByteGenerator(func=generate_constant_byte, params=(16,), name="16-byte constant key", spawn_init=True)
+random_key_16 = ByteGenerator(func=generate_random_byte, params=(16,), name="16-byte random key", spawn_init=True)
 
-constant_key_32 = ByteGenerator(func=generate_constant_byte, params=(32,), name="32-byte constant key", exec_once=True)
-random_key_32 = ByteGenerator(func=generate_random_byte, params=(32,), name="32-byte random key", exec_once=True)
+constant_key_32 = ByteGenerator(func=generate_constant_byte, params=(32,), name="32-byte constant key", spawn_init=True)
+random_key_32 = ByteGenerator(func=generate_random_byte, params=(32,), name="32-byte random key", spawn_init=True)
 
-constant_key_64 = ByteGenerator(func=generate_constant_byte, params=(64,), name="64-byte constant key", exec_once=True)
-random_key_64 = ByteGenerator(func=generate_random_byte, params=(64,), name="64-byte random key", exec_once=True)
+constant_key_64 = ByteGenerator(func=generate_constant_byte, params=(64,), name="64-byte constant key", spawn_init=True)
+random_key_64 = ByteGenerator(func=generate_random_byte, params=(64,), name="64-byte random key", spawn_init=True)
 
-random_key_rsa = ByteGenerator(func=generate_random_rsakey, params=(), name="Random RSA key", exec_once=True)
+random_key_rsa = ByteGenerator(func=generate_random_rsakey, params=(), name="Random RSA key", spawn_init=True)
 
-constant_key_rsa = ByteGenerator(func=generate_constant_rsakey, params=(), name="Constant RSA key", exec_once=True)
+constant_key_rsa = ByteGenerator(func=generate_constant_rsakey, params=(), name="Constant RSA key", spawn_init=True)
 
-prime_key_16 = ByteGenerator(func=generate_prime_byte, params=(16,), name="16-byte prime key", exec_once=True)
-prime_key_32 = ByteGenerator(func=generate_prime_byte, params=(32,), name="32-byte prime key", exec_once=True)
-prime_key_64 = ByteGenerator(func=generate_prime_byte, params=(64,), name="64-byte prime key", exec_once=True)
-prime_key_128 = ByteGenerator(func=generate_prime_byte, params=(128,), name="128-byte prime key", exec_once=True)
+prime_key_16 = ByteGenerator(func=generate_prime_byte, params=(16,), name="16-byte prime key", spawn_init=True)
+prime_key_32 = ByteGenerator(func=generate_prime_byte, params=(32,), name="32-byte prime key", spawn_init=True)
+prime_key_64 = ByteGenerator(func=generate_prime_byte, params=(64,), name="64-byte prime key", spawn_init=True)
+prime_key_128 = ByteGenerator(func=generate_prime_byte, params=(128,), name="128-byte prime key", spawn_init=True)
 
 
 different_inputs_infos = (
