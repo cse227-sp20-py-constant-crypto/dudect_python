@@ -6,8 +6,16 @@ from Crypto.Cipher import AES, DES3
 from Crypto import Random
 from Crypto.Cipher.blockalgo import BlockAlgo
 from Crypto.PublicKey import ElGamal
-from Crypto.Hash import SHA
+from Crypto.Hash import SHA, HMAC, SHA256, SHA3_256
 
+def generate_hmac(key):
+    h = HMAC.new(key, digestmod=SHA256)
+
+    def do_computation(msg: bytes):
+        h.update(msg)
+        h.hexdigest()
+
+    return do_computation
 
 def generate_aes(key):
     iv = Random.new().read(AES.block_size)
@@ -28,6 +36,10 @@ def generate_des3(key):
 
     return do_computation
 
+pycrypto_hmac_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
+                                   generate_hmac, name="pycrypto-hmac-inputs")
+pycrypto_hmac_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
+                                generate_hmac, name="pycrypto-hmac-key", multi_init=True)
 
 pycrypto_aes_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
                                    generate_aes, name="pycrypto-AES-inputs")
