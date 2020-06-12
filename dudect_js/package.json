@@ -1,6 +1,10 @@
 {
     "type": "module",
     "scripts": {
-        "test": "node --experimental-modules ./sample_test.js"
+        "crypto_test": "node --experimental-modules ./crypto_test.js",
+        "sjcl": "node --experimental-modules ./sjcl_test.js"
+    },
+    "dependencies": {
+        "minimist": "^1.2.5"
     }
 }

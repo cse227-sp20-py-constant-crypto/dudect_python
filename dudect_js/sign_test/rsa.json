@@ -1,0 +1,5 @@
+{ 
+    "type": "rsa",
+    "key": "./sign_test/rsa_private.pem",
+    "key_size": 2048
+}

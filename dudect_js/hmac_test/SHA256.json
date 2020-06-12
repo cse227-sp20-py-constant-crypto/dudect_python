@@ -1,0 +1,5 @@
+{ 
+    "func": "SHA256",
+    "key": "Sixteen byte key",
+    "key_size": 16
+}
