@@ -1,0 +1,6 @@
+{ 
+    "type": "dsa",
+    "key": "./sign_test/dsa_private.pem",
+    "key_size": 2048,
+    "q_size": 256
+}

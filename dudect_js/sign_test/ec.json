@@ -1,0 +1,5 @@
+{ 
+    "type": "ec",
+    "key": "./sign_test/ec_private.pem",
+    "curve": "secp256k1"
+}

@@ -3,9 +3,9 @@
 import { strict as assert } from 'assert';
 import {performance} from 'perf_hooks';
 
-const number_percentiles = 10000; //Number of t-tests we will do on the test results
-const enough_measurements = 10000; // Threshold for enough large measurements
-const number_tests = 1 + number_percentiles + 1;
+const number_percentiles = 100; //Number of percentiles we will do on the test results
+const enough_measurements = 1000; // Threshold for enough large measurements
+const number_tests = 1 + number_percentiles + 1; //Number of t-tests we will do on the test results
 
 const t_threshold_bananas = 500;
 const t_threshold_moderate = 10;
@@ -50,6 +50,9 @@ class TestData {
         this.m2[classes] = this.m2[classes] + delta * (new_data - this.mean[classes]);
     }
 
+    /**
+     * @return {number}
+     */
     compute(){
         var v = [0.0, 0.0];
         v[0] = this.m2[0] / (this.n[0] - 1);
@@ -61,58 +64,107 @@ class TestData {
     }
 }
 
+export class Input {
+    /**
+     *
+        The class representation of a single input.
+
+        Args:
+            data: the bytes data to be fed into computation.
+            cla: the categorization of this data as 0 or 1.
+
+        Attributes:
+            Data: the bytes data to be fed into computation.
+            Class: the categorization of this data as 0 or 1.
+     */
+
+
+    /**
+     * 
+     * @param {bytes} data 
+     * @param {number} cla 
+     */
+    constructor(data, cla){
+
+        /**
+         * @type {bytes}
+         */
+        this.Data = data;
+
+        /**
+         * @type {number}
+         */
+        this.Class = cla;
+    }
+    
+}
+
 /**
  * 
  * @typedef {Buffer} bytes
- * @param {function} init 
- * @param {function(any): Array.<Object.<string,(bytes|number)>>} prepare_inputs 
- * @param {function(any,bytes): any} do_one_computation 
+ * @param {function(number): (function(bytes): void)} init 
+ * @param {function(): Array.<Input>} prepare_inputs 
+ * @param {boolean} init_repeatedly
  */
-export function test_constant(init, prepare_inputs,do_one_computation){
+export function test_constant(init, prepare_inputs, init_repeatedly){
     /**
-     *  Test whether a computation is constant-time statistically against two provided classes of inputs.
+     * 
+        Test whether a computation is constant-time statistically against two provided classes of inputs.
         TODO: Make it the only public function to external in this package.
         Args:
-            init: A function, which initializes the state for measurement.
-            prepare_inputs: A function, which must take the return of `init` function as argument (you may ignore it in the
-                function body) and return a List of Dict{"data": bytes, "class_id": int}.
-                TODO: Make the inputs data representation better?
-            do_one_computation: A function, which takes as the first argument the return of `init` function and as the
-                second argument one input data (bytes) to be computed (from the return of `prepare_inputs` function), and
-                then do the to be measured computation based on them.
+            init: A function, which initializes the state for computations, returns a closure func to do one computation.
+            prepare_inputs: A function returns a List of Input.
+            init_repeatedly: decide whether the init function should be executed once for every single measurement or once
+                for all measurements.
 
         Returns:
             No return. Print the test conclusion to stdout.
      */
-    var init_result = init();
-    var inputs = prepare_inputs(init_result);
-    var number_measuremnts = inputs.length;
+    var inputs = prepare_inputs();
 
     /**
      * @type {Array.<number>}
      */
-    var measurements = do_measurement(init_result, inputs, number_measuremnts, do_one_computation);
-    var percentiles = prepare_percentiles(measurements);
-    var t = update_statics(measurements, inputs, percentiles);
+    var measurements = do_measurement(init, inputs, init_repeatedly);
+
+    var t = update_statics(measurements, inputs);
     report(t);
 }
 
 /**
  * 
- * @param {any} init 
- * @param {Array.<Object>} inputs 
- * @param {number} number_measuremnts 
- * @param {function} do_one_computation
+ * @param {function(number): (function(bytes): void)} init 
+ * @param {Array.<Input>} inputs 
+ * @param {boolean} [init_repeatedly=false] 
  * @return {Array.<number>} 
  */
-function do_measurement(init, inputs, number_measuremnts, do_one_computation){
+function do_measurement(init, inputs, init_repeatedly){
 
-    var measurements = []
-    for(var i=0; i < number_measuremnts; i++){
-        var start = performance.now();
-        do_one_computation(init, inputs[i]['data']);
-        var end = performance.now();
-        measurements.push(end-start);
+    var number_measuremnts = inputs.length;
+
+    /**
+     * @type {Array.<number>}
+     */
+    var measurements = [];
+
+    if (!init_repeatedly){
+        var do_one_computation = init(0);
+        for(var i=0; i < number_measuremnts; i++){
+            var start = performance.now();
+            do_one_computation(inputs[i].Data);
+            var end = performance.now();
+            measurements.push(end-start);
+        }
+    }
+    else {
+        for(var i=0; i < number_measuremnts; i++){
+            
+            var do_one_computation = init(inputs[i].Class);
+            var start = performance.now();
+            do_one_computation(inputs[i].Data);
+            var end = performance.now();
+            measurements.push(end-start);
+        }
     }
     
     return measurements;
@@ -125,7 +177,7 @@ function do_measurement(init, inputs, number_measuremnts, do_one_computation){
  * @return {Array.<number>} 
  */
 function prepare_percentiles(data){
-    var sorted = data.sort(function(a,b){return a-b});
+    var sorted = [...data].sort(function(a,b){return a-b});
     var ps = []
     for(var i=0; i<number_percentiles; i++){
         ps.push(percentile(sorted, 1 - 0.5 ** (10 * (i+1) / number_percentiles)));
@@ -138,12 +190,16 @@ function prepare_percentiles(data){
 /**
  * 
  * @param {Array.<number>} measurements 
- * @param {Array.<Object>} inputs 
- * @param {Array.<number>} percentiles
+ * @param {Array.<Input>} inputs 
  * @return {Array.<TestData>} 
  */
-function update_statics(measurements, inputs, percentiles){
+function update_statics(measurements, inputs){
 
+    var percentiles = prepare_percentiles(measurements);
+
+    /**
+     * @type {Array.<TestData>}
+     */
     var t = []
     for(var i=0; i < number_tests; i++){
         t.push(new TestData([0.0,0.0],[0.0, 0.0],[0,0]))
@@ -151,7 +207,7 @@ function update_statics(measurements, inputs, percentiles){
     
     for(var i=0; i < measurements.length; i++){
         var data = measurements[i];
-        var class_id = inputs[i]['class']
+        var class_id = inputs[i].Class
 
         assert(data > 0, "data should be larger than 0.");
         t[0].push(data, class_id);
@@ -183,6 +239,10 @@ function report(t){
         max_tau = max_t / max_t_n ** 0.5;
     
     console.log(`total measurements: ${(max_t_n / 1e6).toFixed(2)} Million`);
+    console.log(`class-0 mean overall: ${(t[0].mean[0]).toExponential(2)}, population: ${t[0].n[0]}; class-1 mean overall: ${(t[0].mean[1]).toExponential(2)}, population: ${t[0].n[0]}`);
+
+    console.log(`class-0 mean of max_t: ${(t[mt].mean[0]).toExponential(2)}, population: ${t[mt].n[0]}; class-1 mean of max_t: ${(t[mt].mean[1]).toExponential(2)}, population: ${t[mt].n[0]}`);
+    
     console.log(`max t-value: ${max_t.toFixed(2)}, max tau: ${max_tau.toExponential(2)}, (5.tau)^2: ${((5 * 5) / (max_tau * max_tau)).toExponential(2)}`);
 
     if (max_t > t_threshold_bananas){
@@ -193,7 +253,8 @@ function report(t){
         console.log("Probably not constant time.");
         return;
     }
-    if (max_t <= t_threshold_moderate){
+    //if (max_t <= t_threshold_moderate){
+    else{
         console.log("For the moment, maybe constant time.");
     }
     return;
@@ -208,7 +269,7 @@ function max_test(t){
     var test_id = 0, maximum = 0;
 
     for(var i=0; i < number_tests; i++){
-        if (t[i].n[0] + t[i].n[1] > enough_measurements){
+        if (t[i].n[0] > enough_measurements && t[i].n[1] > enough_measurements){
             var temp = Math.abs(t[i].compute());
             if (temp > maximum){
                 maximum = temp;

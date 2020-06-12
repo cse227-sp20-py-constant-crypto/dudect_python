@@ -1,0 +1,7 @@
+{ 
+    "algorithm": "chacha20",
+    "key": "Sixteen byte keySixteen byte key",
+    "nonce": {"type":"Buffer","data":[230,251,149,233,81,107,97,31,245,237,59,2,142,86,176,144]},
+    "key_length": 32,
+    "nonce_length": 16
+}
