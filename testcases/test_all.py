@@ -4,8 +4,7 @@ from testcases.commons import BlockCypherIv8Cases, BlockCypherIv16Cases, BlockCy
     AsymmetricCypherRSACases, AsymmetricCypherDSACases, AsymmetricCypherECDSACases, \
     HashCases, MACCases
 
-# from testcases.tests import test_cryptography, test_pycrypto, test_pycryptodomex
-from testcases.tests import test_cryptography, test_pycryptodomex
+from testcases.tests import test_cryptography, test_pycrypto, test_pycryptodomex
 
 
 class TestCase:
@@ -15,7 +14,7 @@ class TestCase:
             for count, _case in enumerate(case_info.cases):
                 case_name, inputs_pairs, key_pairs, iv_pairs = _case
                 test_name = "%s-%s. Testcase number is %s" % (func_name, case_name, count)
-                self.test_cases.append(TestLib(inputs_pairs, key_pairs, iv_pairs, func, name=test_name))
+                self.test_cases.append(TestLib(inputs_pairs, key_pairs, iv_pairs, func, name=test_name, multi_init=True))
 
     def do_test(self):
         for test_case in self.test_cases:
@@ -24,15 +23,15 @@ class TestCase:
 
 aes_test_functions = [
     ["Cryptography-AES-CBC", test_cryptography.generate_aes_cbc],
-    # ["PyCrypto-AES-CBC", test_pycrypto.generate_aes_cbc],
+    ["PyCrypto-AES-CBC", test_pycrypto.generate_aes_cbc],
     ["PyCryptodome-AES-CBC", test_pycryptodomex.generate_aes_cbc],
 
     ["Cryptography-AES-CFB", test_cryptography.generate_aes_cfb],
-    # ["PyCrypto-AES-CFB", test_pycrypto.generate_aes_cfb],
+    ["PyCrypto-AES-CFB", test_pycrypto.generate_aes_cfb],
     ["PyCryptodome-AES-CFB", test_pycryptodomex.generate_aes_cfb],
 
     ["Cryptography-AES-OFB", test_cryptography.generate_aes_ofb],
-    # ["PyCrypto-AES-OFB", test_pycrypto.generate_aes_ofb],
+    ["PyCrypto-AES-OFB", test_pycrypto.generate_aes_ofb],
     ["PyCryptodome-AES-OFB", test_pycryptodomex.generate_aes_ofb],
 ]
 aes_tests = TestCase(aes_test_functions, BlockCypherIv16Cases)
@@ -92,7 +91,7 @@ salsa20_tests = TestCase(salsa20_test_functions, StreamCypher8Cases)
 
 rsa_test_functions = [
     ["Cryptography-RSA", test_cryptography.generate_rsa],
-    # ["PyCrypto-RSA", test_pycrypto.generate_rsa],
+    ["PyCrypto-RSA", test_pycrypto.generate_rsa],
     ["PyCryptodome-RSA", test_pycryptodomex.generate_rsa],
 ]
 rsa_tests = TestCase(rsa_test_functions, AsymmetricCypherRSACases)
@@ -113,7 +112,7 @@ ecdsa_tests = TestCase(ecdsa_test_functions, AsymmetricCypherECDSACases)
 
 hash_test_functions = [
     ["Cryptography-SHA256", test_cryptography.generate_sha256],
-    # ["PyCrypto-SHA256", test_pycrypto.generate_sha256],
+    ["PyCrypto-SHA256", test_pycrypto.generate_sha256],
     ["PyCryptodome-SHA256", test_pycryptodomex.generate_sha256],
 
     ["Cryptography-SHA3-256", test_cryptography.generate_sha3_256],
@@ -124,7 +123,7 @@ hash_tests = TestCase(hash_test_functions, HashCases)
 
 mac_test_functions = [
     ["Cryptography-HMAC", test_cryptography.generate_hmac],
-    # ["PyCrypto-HMAC", test_pycrypto.generate_hmac],
+    ["PyCrypto-HMAC", test_pycrypto.generate_hmac],
     ["PyCryptodome-HMAC", test_pycryptodomex.generate_hmac],
 
     ["Cryptography-POLY1305", test_cryptography.generate_poly1305],
@@ -140,10 +139,10 @@ all_tests = [
     chacha20_16_tests,
     tls_chacha20_tests,
     salsa20_tests,
+    hash_tests,
+    mac_tests,
     rsa_tests,
     dsa_tests,
     ecdsa_tests,
-    hash_tests,
-    mac_tests
 ]
 

@@ -5,15 +5,8 @@ from cryptography.hazmat.primitives import hashes, hmac, poly1305
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import serialization
 
-import os
-import base64
-
-
-with open("testcases/private.pem", "rb") as key_file:
-    rsaKey_preload = serialization.load_pem_private_key(
-        key_file.read(),
-        password=None,
-        backend=default_backend())
+# import os
+# import base64
 
 
 def generate_aes_cbc(key, nonce_or_iv):
@@ -94,14 +87,8 @@ def generate_chacha20(key, nonce_or_iv):
 generate_tls_chacha20 = generate_chacha20
 
 
-def generate_rsa(key_info, nonce_or_iv):
-    if key_info.mode == key_info.constant:
-        private_key = rsaKey_preload
-    elif key_info.mode == key_info.random:
-        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
-    else:
-        raise Exception("key info ERROR: %s" % key_info)
-
+def generate_rsa(key, nonce_or_iv):
+    private_key = serialization.load_pem_private_key(key, password=None, backend=default_backend())
     public_key = private_key.public_key()
     
     def do_computation(msg: bytes):
@@ -110,7 +97,7 @@ def generate_rsa(key_info, nonce_or_iv):
             padding.OAEP(
                 mgf=padding.MGF1(algorithm=hashes.SHA1()),
                 algorithm=hashes.SHA1(),label=None))
-        ciphertext = str(base64.b64encode(ciphertext), encoding='utf-8')
+        # ciphertext = str(base64.b64encode(ciphertext), encoding='utf-8')
         signer = private_key.sign(
             msg,
             padding.PSS(
@@ -118,46 +105,33 @@ def generate_rsa(key_info, nonce_or_iv):
                 salt_length=padding.PSS.MAX_LENGTH),
             hashes.SHA256()
         )
-        signature = str(base64.b64encode(signer),encoding='utf-8')
-        ct=(ciphertext, signature)
+        # signature = str(base64.b64encode(signer), encoding='utf-8')
+        # ct=(ciphertext, signature)
+
     return do_computation
 
 
-def generate_dsa(key_info, nonce_or_iv):
-    if key_info.mode == key_info.constant:
-        p, q, g, x, y = key_info.args
-        para_num = dsa.DSAParameterNumbers(p, q, g)
-        pub_num = dsa.DSAPublicNumbers(y, para_num)
-        pri_num = dsa.DSAPrivateNumbers(x, pub_num)
-        private_key = pri_num.private_key(default_backend())
-    elif key_info.mode == key_info.random:
-        n = key_info.args
-        private_key = dsa.generate_private_key(key_size=n, backend=default_backend())
-    else:
-        raise Exception("key info ERROR: %s" % key_info)
+def generate_dsa(key, nonce_or_iv):
+    private_key = serialization.load_pem_private_key(key, password=None, backend=default_backend())
     
     def do_computation(msg: bytes):
         signature = private_key.sign(
             msg,
             hashes.SHA256()
         )
+
     return do_computation
 
 
-def generate_ecdsa(key_info, nonce_or_iv):
-    if key_info.mode == key_info.constant:
-        prival = key_info.args
-        private_key = ec.derive_private_key(prival,ec.SECP384R1(), backend=default_backend())
-    elif key_info.mode == key_info.random:
-        private_key = ec.generate_private_key(ec.SECP384R1(), backend=default_backend())
-    else:
-        raise Exception("key info ERROR: %s" % key_info)
+def generate_ecdsa(key, nonce_or_iv):
+    private_key = serialization.load_pem_private_key(key, password=None, backend=default_backend())
 
     def do_computation(msg: bytes):
         signature = private_key.sign(
             msg,
             ec.ECDSA(hashes.SHA256())
         )
+
     return do_computation
 
 

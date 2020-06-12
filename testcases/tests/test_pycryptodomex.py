@@ -1,12 +1,10 @@
-import OpenSSL
-import Cryptodome
 from Cryptodome.Cipher import AES, ChaCha20, Salsa20, PKCS1_OAEP
-from Cryptodome import Random
 from Cryptodome.PublicKey import RSA, ElGamal, DSA, ECC
 from Cryptodome.Signature import DSS
 from Cryptodome.Hash import SHA, SHA256, SHA3_256, HMAC, Poly1305
-import os
-import base64
+
+# import os
+# import base64
 
 
 # AES
@@ -129,62 +127,40 @@ def generate_salsa20(key, nonce_or_iv):
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
+
     return do_computation
 
 
 # RSA DSA
-with open("testcases/private.pem", "rb") as key_file:
-    rsaKey_preload = RSA.import_key(key_file.read())
-
-
-def generate_rsa(key_info, nonce_or_iv):
-    if key_info.mode == key_info.constant:
-        public_key = rsaKey_preload
-    elif key_info.mode == key_info.random:
-        public_key = RSA.generate(bits=2048)
-    else:
-        raise Exception("key info ERROR: %s" % key_info)
+def generate_rsa(key, nonce_or_iv):
+    rsa_key = RSA.import_key(key)
+    cipher_rsa = PKCS1_OAEP.new(rsa_key)
 
     def do_computation(msg: bytes):
-        ciphertext = str(base64.b64encode(msg), encoding='utf-8')
-        cipher_rsa = PKCS1_OAEP.new(public_key)
+        cipher_rsa.encrypt(msg)
+
     return do_computation
 
 
-def generate_dsa(key_info, nonce_or_iv):
-    if key_info.mode == key_info.constant:
-        p, q, g, x, y = key_info.args
-        key = DSA.construct(tup=(y,g,p,q,x))
-    elif key_info.mode == key_info.random:
-        n = key_info.args
-        key = DSA.generate(randfunc=Random.get_random_bytes(n),bits=2048)
-    else:
-        raise Exception("key info ERROR: %s" % key_info)
-
-    def do_computation(msg: bytes):
-        hash_obj = SHA256.new(msg)
-        signer = DSS.new(key, 'fips-186-3')
-        signature = signer.sign(hash_obj)
-    return do_computation
-
-
-def generate_ecdsa(key_info, nonce_or_iv):  # TODO
-    if key_info.mode == key_info.constant:
-        # signer = DSS.new(eccKey_preload, 'deterministic-rfc6979')
-        # ecdsa_prival = key_info.args
-        key = ECC.construct(curve='p256', d=1, point_x=0, point_y=0)
-    elif key_info.mode == key_info.random:
-        n = key_info.args
-        key = ECC.generate()
-        # signer = DSS.new(eccKey_preload, 'fips-186-3', randfunc=Random.get_random_bytes(n))
-    else:
-        raise Exception("key info ERROR: %s" % key_info)
-
-    signer = DSS.new(key, 'fips-186-3')
+def generate_dsa(key, nonce_or_iv):
+    dsa_key = DSA.import_key(key)
+    signer = DSS.new(dsa_key, 'fips-186-3')
 
     def do_computation(msg: bytes):
         h = SHA256.new(msg)
         signature = signer.sign(h)
+
+    return do_computation
+
+
+def generate_ecdsa(key, nonce_or_iv):
+    ec_key = ECC.import_key(key)
+    signer = DSS.new(ec_key, 'deterministic-rfc6979')
+
+    def do_computation(msg: bytes):
+        h = SHA256.new(msg)
+        signature = signer.sign(h)
+
     return do_computation
 
 

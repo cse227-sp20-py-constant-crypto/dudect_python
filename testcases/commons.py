@@ -2,11 +2,25 @@ from dudect import test_constant, Input
 import sympy
 import random
 import os
+import sys
 from itertools import combinations
-from Cryptodome.Cipher import AES
+import datetime
+
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import rsa, dsa, ec
+from cryptography.hazmat.primitives import serialization
+
 
 number_measurements = 1000000
 # tests = []
+
+
+with open("testcases/pems/rsa_private.pem", "rb") as key_file:
+    constant_rsa_pem = key_file.read()
+with open("testcases/pems/dsa_private.pem", "rb") as key_file:
+    constant_dsa_pem = key_file.read()
+with open("testcases/pems/ecdsa_private.pem", "rb") as key_file:
+    constant_ecdsa_pem = key_file.read()
 
 
 class ByteGenerator:
@@ -39,15 +53,6 @@ class ByteGenerator:
         self.result = self.func(*self.params)
 
 
-class KeyInfo:
-    def __init__(self, mode, args):
-        self.mode = mode
-        self.args = args
-
-    random = "random"
-    constant = "constant"
-
-
 class TestLib:
     def __init__(self, inputs_infos, key_infos, nonce_or_iv_infos,
                  generate_do_computation, generate_do_computation_args=(), generate_do_computation_kwargs={},
@@ -63,7 +68,9 @@ class TestLib:
         self.multi_init = multi_init
 
     def do_test(self):
-        print("Now testing", self.name, '\n')
+        time_stamp = datetime.datetime.now()
+        print("[%s] Now testing %s \n" % (time_stamp.strftime('%Y-%m-%d %H:%M:%S'), self.name), flush=True)
+        sys.stdout.flush()
         try:
             for info0, info1 in self.inputs_infos:
                 for key0, key1 in self.key_infos:
@@ -196,34 +203,47 @@ def generate_given_byte(b):
     return b
 
 
-def generate_random_rsa_key_info():
-    return KeyInfo(mode=KeyInfo.random, args=None)
+def generate_random_rsa_key():
+    private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
+    pem = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=serialization.NoEncryption()
+    )
+    return pem
 
 
-def generate_constant_rsa_key_info():
-    return KeyInfo(mode=KeyInfo.constant, args=None)
+def generate_constant_rsa_key():
+    return constant_rsa_pem
 
 
-def generate_random_dsa_key_info(n):
-    return KeyInfo(mode=KeyInfo.random, args=n)
+def generate_random_dsa_key():
+    n = 1024
+    private_key = dsa.generate_private_key(key_size=n, backend=default_backend())
+    pem = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=serialization.NoEncryption()
+    )
+    return pem
 
 
-def generate_constant_dsa_key_info():
-    p_dsa = 178011905478542266528237562450159990145232156369120674273274450314442865788737020770612695252123463079567156784778466449970650770920727857050009668388144034129745221171818506047231150039301079959358067395348717066319802262019714966524135060945913707594956514672855690606794135837542707371727429551343320695239
-    q_dsa = 864205495604807476120572616017955259175325408501
-    g_dsa = 174068207532402095185811980123523436538604490794561350978495831040599953488455823147851597408940950725307797094915759492368300574252438761037084473467180148876118103083043754985190983472601550494691329488083395492313850000361646482644608492304078721818959999056496097769368017749273708962006689187956744210730
-    x_dsa = 774290984479563168206130828532207106685994961942
-    y_dsa = 114139536920622570869938062331723306749387755293373930319777713731297469469109142401130232217217777321368184441397443931576984650449330134427587575682738623671153548160095548080912063040969633652666498299669170854742832973750730854597032012872351800053401243970059348061331526243448471205166130497310892424132
-    return KeyInfo(mode=KeyInfo.constant, args=(p_dsa, q_dsa, g_dsa, x_dsa, y_dsa))
+def generate_constant_dsa_key():
+    return constant_dsa_pem
 
 
-def generate_random_ecdsa_key_info():
-    return KeyInfo(mode=KeyInfo.random, args=None)
+def generate_random_ecdsa_key():
+    private_key = ec.generate_private_key(ec.SECP384R1(), backend=default_backend())
+    pem = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.TraditionalOpenSSL,
+        encryption_algorithm=serialization.NoEncryption()
+    )
+    return pem
 
 
-def generate_constant_ecdsa_key_info():
-    ecdsa_prival = 27527805980884633574585232869131596258838654964678772054133772215664562466556135475295268497357775554885493077544888
-    return KeyInfo(mode=KeyInfo.constant, args=ecdsa_prival)
+def generate_constant_ecdsa_key():
+    return constant_ecdsa_pem
 
 
 # input message
@@ -262,14 +282,14 @@ key_zero_64 = ByteGenerator(func=generate_zero_byte, params=(64,), name="64-byte
 key_one_64 = ByteGenerator(func=generate_one_byte, params=(64,), name="64-byte one key", spawn_init=True)
 key_prime_64 = ByteGenerator(func=generate_prime_byte, params=(64,), name="64-byte prime key", spawn_init=True)
 
-key_info_random_rsa = ByteGenerator(func=generate_random_rsa_key_info, params=(), name="Random RSA key", spawn_init=True)
-key_info_constant_rsa = ByteGenerator(func=generate_constant_rsa_key_info, params=(), name="Constant RSA key", spawn_init=True)
+key_random_rsa = ByteGenerator(func=generate_random_rsa_key, params=(), name="Random RSA key", spawn_init=True)
+key_constant_rsa = ByteGenerator(func=generate_constant_rsa_key, params=(), name="Constant RSA key", spawn_init=True)
 
-key_info_random_dsa = ByteGenerator(func=generate_random_dsa_key_info, params=(1024,), name="Random DSA key", spawn_init=True)
-key_info_constant_dsa = ByteGenerator(func=generate_constant_dsa_key_info, params=(), name="Constant DSA key", spawn_init=True)
+key_random_dsa = ByteGenerator(func=generate_random_dsa_key, params=(), name="Random DSA key", spawn_init=True)
+key_constant_dsa = ByteGenerator(func=generate_constant_dsa_key, params=(), name="Constant DSA key", spawn_init=True)
 
-key_info_random_ecdsa = ByteGenerator(func=generate_random_ecdsa_key_info, params=(), name="Random ECDSA key", spawn_init=True)
-key_info_constant_ecdsa = ByteGenerator(func=generate_constant_ecdsa_key_info, params=(), name="Constant ECDSA key", spawn_init=True)
+key_random_ecdsa = ByteGenerator(func=generate_random_ecdsa_key, params=(), name="Random ECDSA key", spawn_init=True)
+key_constant_ecdsa = ByteGenerator(func=generate_constant_ecdsa_key, params=(), name="Constant ECDSA key", spawn_init=True)
 
 
 # nonce
@@ -444,8 +464,8 @@ class StreamCypher16Cases:
 
 class AsymmetricCypherRSACases:
     baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
-    baseline_key_pairs = ((key_info_constant_rsa, key_info_constant_rsa), )
-    varying_key_pairs = ((key_info_constant_rsa, key_info_random_rsa), )
+    baseline_key_pairs = ((key_constant_rsa, key_constant_rsa), )
+    varying_key_pairs = ((key_constant_rsa, key_random_rsa), )
     varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
     special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
@@ -460,8 +480,8 @@ class AsymmetricCypherRSACases:
 
 class AsymmetricCypherDSACases:
     baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
-    baseline_key_pairs = ((key_info_constant_dsa, key_info_constant_dsa), )
-    varying_key_pairs = ((key_info_constant_dsa, key_info_random_dsa), )
+    baseline_key_pairs = ((key_constant_dsa, key_constant_dsa), )
+    varying_key_pairs = ((key_constant_dsa, key_random_dsa), )
     varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
     special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
@@ -476,8 +496,8 @@ class AsymmetricCypherDSACases:
 
 class AsymmetricCypherECDSACases:
     baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
-    baseline_key_pairs = ((key_info_constant_ecdsa, key_info_constant_ecdsa), )
-    varying_key_pairs = ((key_info_constant_ecdsa, key_info_random_ecdsa), )
+    baseline_key_pairs = ((key_constant_ecdsa, key_constant_ecdsa), )
+    varying_key_pairs = ((key_constant_ecdsa, key_random_ecdsa), )
     varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
     special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
