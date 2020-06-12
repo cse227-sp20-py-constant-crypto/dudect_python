@@ -1,1 +1,6 @@
 numpy
+pycrypto
+cryptography
+pycryptodomex
+sympy
+pyOpenSSL
