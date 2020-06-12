@@ -5,7 +5,7 @@ import os
 from itertools import combinations
 from Cryptodome.Cipher import AES
 
-number_measurements = 100000
+number_measurements = 10#0000
 # tests = []
 
 
