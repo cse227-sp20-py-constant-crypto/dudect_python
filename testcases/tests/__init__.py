@@ -30,8 +30,14 @@ tests.append(test_cryptography.cryptography_ecdsa_test_inputs)
 tests.append(test_cryptography.cryptography_ecdsa_test_key)
 
 # pycryptodomex
-tests.append(test_pycryptodomex.pycryptodomex_aes_test_inputs)
-tests.append(test_pycryptodomex.pycryptodomex_aes_test_key)
+tests.append(test_pycryptodomex.pycryptodomex_aes_cbc_test_inputs)
+tests.append(test_pycryptodomex.pycryptodomex_aes_cbc_test_key)
 
-tests.append(test_pycryptodomex.pycryptodomex_des3_test_inputs)
-tests.append(test_pycryptodomex.pycryptodomex_des3_test_key)
+tests.append(test_pycryptodomex.pycryptodomex_aes_cfb_test_inputs)
+tests.append(test_pycryptodomex.pycryptodomex_aes_cfb_test_key)
+
+tests.append(test_pycryptodomex.pycryptodomex_aes_ofb_test_inputs)
+tests.append(test_pycryptodomex.pycryptodomex_aes_ofb_test_key)
+
+tests.append(test_pycryptodomex.pycryptodomex_aes_ctr_test_inputs)
+tests.append(test_pycryptodomex.pycryptodomex_aes_cbc_test_key)
