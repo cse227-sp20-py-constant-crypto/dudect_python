@@ -6,6 +6,7 @@ __pycache__/
 *.so
 
 # idea
-.idea
+.idea/
+.vscode/
 
 test_results/
