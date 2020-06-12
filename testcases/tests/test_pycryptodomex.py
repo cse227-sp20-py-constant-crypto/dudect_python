@@ -2,7 +2,7 @@ from testcases.test_lib import TestLib
 from testcases.test_lib import different_inputs_infos, fixed_inputs_infos
 from testcases.test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_64, fixed_key_infos_64
 
-from Cryptodome.Cipher import AES, DES3, ChaCha20
+from Cryptodome.Cipher import AES, ChaCha20
 from Cryptodome import Random
 from Cryptodome.PublicKey import RSA, ElGamal
 from Cryptodome.Hash import SHA
@@ -11,7 +11,7 @@ import base64
 
 
 # AES
-def generate_aes_cbc(key):
+def generate_aes_cbc(key, nounce_or_iv):
     iv = Random.new().read(AES.block_size)
     cipher = AES.new(key, AES.MODE_CBC, iv)
 
@@ -21,7 +21,7 @@ def generate_aes_cbc(key):
     return do_computation
 
 
-def generate_aes_cfb(key):
+def generate_aes_cfb(key, nounce_or_iv):
     iv = Random.new().read(AES.block_size)
     cipher = AES.new(key, AES.MODE_CFB, iv)
 
@@ -31,7 +31,7 @@ def generate_aes_cfb(key):
     return do_computation
 
 
-def generate_aes_ofb(key):
+def generate_aes_ofb(key, nounce_or_iv):
     iv = Random.new().read(AES.block_size)
     cipher = AES.new(key, AES.MODE_OFB, iv)
 
@@ -41,7 +41,7 @@ def generate_aes_ofb(key):
     return do_computation
 
 
-def generate_aes_ctr(key):
+def generate_aes_ctr(key, nounce_or_iv):
     iv = Random.new().read(AES.block_size)
     cipher = AES.new(key, AES.MODE_CTR, iv)
 
