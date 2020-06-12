@@ -51,34 +51,34 @@ def generate_given_byte(b):
 
 
 def generate_random_rsakey():
-    return rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
+    return KeyInfo(mode=KeyInfo.random, args=None)
 
 
 def generate_constant_rsakey():
-    private_key = rsaKey_preload
-    return private_key
+    return KeyInfo(mode=KeyInfo.constant, args=None)
 
-p_dsa = 178011905478542266528237562450159990145232156369120674273274450314442865788737020770612695252123463079567156784778466449970650770920727857050009668388144034129745221171818506047231150039301079959358067395348717066319802262019714966524135060945913707594956514672855690606794135837542707371727429551343320695239
-q_dsa = 864205495604807476120572616017955259175325408501
-g_dsa = 174068207532402095185811980123523436538604490794561350978495831040599953488455823147851597408940950725307797094915759492368300574252438761037084473467180148876118103083043754985190983472601550494691329488083395492313850000361646482644608492304078721818959999056496097769368017749273708962006689187956744210730
-x_dsa = 774290984479563168206130828532207106685994961942
-y_dsa = 114139536920622570869938062331723306749387755293373930319777713731297469469109142401130232217217777321368184441397443931576984650449330134427587575682738623671153548160095548080912063040969633652666498299669170854742832973750730854597032012872351800053401243970059348061331526243448471205166130497310892424132
+
 def generate_random_dsakey(n):
-    return dsa.generate_private_key(key_size=n, backend=default_backend())
+    return KeyInfo(mode=KeyInfo.random, args=n)
 
-def generate_constant_dsakey(p, q, g, x, y):
-    ParaNum = dsa.DSAParameterNumbers(p,q,g)
-    PubNum=dsa.DSAPublicNumbers(y,ParaNum)
-    PriNum=dsa.DSAPrivateNumbers(x,PubNum)
-    private_key=PriNum.private_key(default_backend())
-    return private_key
 
-ecdsa_prival=27527805980884633574585232869131596258838654964678772054133772215664562466556135475295268497357775554885493077544888
+def generate_constant_dsakey():
+    p_dsa = 178011905478542266528237562450159990145232156369120674273274450314442865788737020770612695252123463079567156784778466449970650770920727857050009668388144034129745221171818506047231150039301079959358067395348717066319802262019714966524135060945913707594956514672855690606794135837542707371727429551343320695239
+    q_dsa = 864205495604807476120572616017955259175325408501
+    g_dsa = 174068207532402095185811980123523436538604490794561350978495831040599953488455823147851597408940950725307797094915759492368300574252438761037084473467180148876118103083043754985190983472601550494691329488083395492313850000361646482644608492304078721818959999056496097769368017749273708962006689187956744210730
+    x_dsa = 774290984479563168206130828532207106685994961942
+    y_dsa = 114139536920622570869938062331723306749387755293373930319777713731297469469109142401130232217217777321368184441397443931576984650449330134427587575682738623671153548160095548080912063040969633652666498299669170854742832973750730854597032012872351800053401243970059348061331526243448471205166130497310892424132
+    return KeyInfo(mode=KeyInfo.constant, args=(p_dsa, q_dsa, g_dsa, x_dsa, y_dsa)) # private_key
+
+
 def generate_random_ecdsakey():
-    return ec.generate_private_key(ec.SECP384R1(), backend=default_backend())
+    return KeyInfo(mode=KeyInfo.random, args=None)
 
-def generate_constant_ecdsakey(prival):
-    return ec.derive_private_key(prival,ec.SECP384R1(), backend=default_backend())
+
+def generate_constant_ecdsakey():
+    ecdsa_prival = 27527805980884633574585232869131596258838654964678772054133772215664562466556135475295268497357775554885493077544888
+    return KeyInfo(mode=KeyInfo.constant, args=ecdsa_prival)
+
 
 def generate_prepare_inputs(inputs_info_pair):
     info0, info1 = inputs_info_pair
@@ -140,6 +140,15 @@ class ByteGenerator:
     def reset(self):
         self.counter = 0
         self.result = self.func(*self.params)
+
+
+class KeyInfo:
+    def __init__(self, mode, args):
+        self.mode = mode
+        self.args = args
+    
+    random = "random"
+    constant = "constant"
 
 
 class TestLib:
@@ -212,10 +221,10 @@ random_key_rsa = ByteGenerator(func=generate_random_rsakey, params=(), name="Ran
 constant_key_rsa = ByteGenerator(func=generate_constant_rsakey, params=(), name="Constant RSA key", spawn_init=True)
 
 random_key_dsa = ByteGenerator(func=generate_random_dsakey, params=(1024,), name="Random DSA key", spawn_init=True)
-constant_key_dsa = ByteGenerator(func=generate_constant_dsakey, params=(p_dsa,q_dsa,g_dsa,x_dsa,y_dsa,), name="Constant DSA key", spawn_init=True)
+constant_key_dsa = ByteGenerator(func=generate_constant_dsakey, params=(), name="Constant DSA key", spawn_init=True)
 
 random_key_ecdsa = ByteGenerator(func=generate_random_ecdsakey, params=(), name="Random ECDSA key", spawn_init=True)
-constant_key_ecdsa = ByteGenerator(func=generate_constant_ecdsakey, params=(ecdsa_prival,), name="Constant ECDSA key", spawn_init=True)
+constant_key_ecdsa = ByteGenerator(func=generate_constant_ecdsakey, params=(), name="Constant ECDSA key", spawn_init=True)
 
 prime_key_16 = ByteGenerator(func=generate_prime_byte, params=(16,), name="16-byte prime key", spawn_init=True)
 prime_key_32 = ByteGenerator(func=generate_prime_byte, params=(32,), name="32-byte prime key", spawn_init=True)
