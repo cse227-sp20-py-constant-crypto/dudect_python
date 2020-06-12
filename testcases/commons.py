@@ -5,7 +5,7 @@ import os
 from itertools import combinations
 from Cryptodome.Cipher import AES
 
-number_measurements = 10#0000
+number_measurements = 1000000
 # tests = []
 
 
@@ -70,11 +70,26 @@ class TestLib:
                     for nounce_or_iv0, nounce_or_iv1 in self.nounce_or_iv_infos:
                         try:
                             for g in [info0, info1, key0, key1, nounce_or_iv0, nounce_or_iv1]:
-                                g.reset()
-                            print("class-0:", "inputs is %s," % info0.get_name(), "key is %s." % key0.get_name(),
-                                  "nounce_or_iv is %s" % nounce_or_iv0.get_name())
-                            print("class-1:", "inputs is %s," % info1.get_name(), "key is %s." % key1.get_name(),
-                                  "nounce_or_iv is %s" % nounce_or_iv1.get_name())
+                                if g is not None:
+                                    g.reset()
+                            print("class-0:", end=" ")
+                            if info0 is not None:
+                                print("inputs is %s," % info0.get_name(), end=" ")
+                            if key0 is not None:
+                                print("key is %s." % key0.get_name(), end=" ")
+                            if nounce_or_iv0 is not None:
+                                print("nounce_or_iv is %s" % nounce_or_iv0.get_name(), end=" ")
+                            print()
+
+                            print("class-1:", end=" ")
+                            if info1 is not None:
+                                print("inputs is %s," % info1.get_name(), end=" ")
+                            if key1 is not None:
+                                print("key is %s." % key1.get_name(), end=" ")
+                            if nounce_or_iv1 is not None:
+                                print("nounce_or_iv is %s" % nounce_or_iv1.get_name(), end=" ")
+                            print()
+
                             _inputs_info_pair = (info0, info1)
                             _prepare_inputs = generate_prepare_inputs(_inputs_info_pair)
                             _key_info_pair = (key0, key1)
@@ -101,9 +116,16 @@ def generate_prepare_inputs(inputs_info_pair):
         for i in range(number_measurements):
             class_id = random.randrange(2)
             if class_id == 0:
-                inputs.append(Input(data=info0.execute(), cla=0))
+                if info0 is not None:
+                    _inputs_data = info0.execute()
+                else:
+                    _inputs_data = []
             else:
-                inputs.append(Input(data=info1.execute(), cla=1))
+                if info1 is not None:
+                    _inputs_data = info1.execute()
+                else:
+                    _inputs_data = []
+            inputs.append(Input(data=_inputs_data, cla=class_id))
         return inputs
 
     return _prepare_inputs
@@ -115,12 +137,24 @@ def generate_init(key_info_pair, _nounce_or_iv_pairs,
     nounce_or_iv0, nounce_or_iv1 = _nounce_or_iv_pairs
 
     def _init(class_id: int):
-        if class_id == 1:
-            key = key1.execute()
-            nounce_or_iv = nounce_or_iv1.execute()
+        if class_id == 0:
+            if key0 is not None:
+                key = key0.execute()
+            else:
+                key = None
+            if nounce_or_iv0 is not None:
+                nounce_or_iv = nounce_or_iv0.execute()
+            else:
+                nounce_or_iv = None
         else:
-            key = key0.execute()
-            nounce_or_iv = nounce_or_iv0.execute()
+            if key1 is not None:
+                key = key1.execute()
+            else:
+                key = None
+            if nounce_or_iv1 is not None:
+               nounce_or_iv = nounce_or_iv1.execute()
+            else:
+                nounce_or_iv = None
 
         do_computation = generate_do_computation(key, nounce_or_iv, *generate_do_computation_args, **generate_do_computation_kwargs)
 
