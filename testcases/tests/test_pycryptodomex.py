@@ -10,6 +10,7 @@ import os
 import base64
 
 
+# AES
 def generate_aes_cbc(key):
     iv = Random.new().read(AES.block_size)
     cipher = AES.new(key, AES.MODE_CBC, iv)
@@ -50,8 +51,29 @@ def generate_aes_ctr(key):
     return do_computation
 
 
-def generate_chacha20(key):
-    nonce = os.urandom(16)
+def generate_aes_ccm(key, nounce_or_iv):
+    pass
+
+
+def generate_aes_eax(key, nounce_or_iv):
+    pass
+
+
+def generate_aes_gcm(key, nounce_or_iv):
+    pass
+
+
+def generate_aes_siv(key, nounce_or_iv):
+    pass
+
+
+def generate_aes_ocb(key, nounce_or_iv):
+    pass
+
+
+# ChaCha20
+def generate_chacha20(key, nounce_or_iv):
+    nonce = nounce_or_iv
     cipher = ChaCha20.new(key=key, nonce=nonce)
 
     def do_computation(msg: bytes):
@@ -60,34 +82,63 @@ def generate_chacha20(key):
     return do_computation
 
 
-def generate_rsa(key_info):
+def generate_tls_chacha20(key, nounce_or_iv):
     pass
 
 
-def generate_dsa(key_info):
+# Salsa20
+def generate_salsa20(key, nounce_or_iv):
     pass
 
 
-def generate_ecdsa(key_info):
+# RSA DSA
+def generate_rsa(key_info, nounce_or_iv):
+    if key_info.mode == key_info.constant:
+        pass
+    elif key_info.mode == key_info.random:
+        pass
+    else:
+        raise Exception("key info error: %s")
+
     pass
 
 
-pycryptodomex_aes_cbc_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
-                                        generate_aes_cbc, name="pycryptodomex-AES-cbc-inputs")
-pycryptodomex_aes_cbc_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
-                                     generate_aes_cbc, name="pycryptodomex-AES-cbc-key", multi_init=True)
+def generate_dsa(key_info, nounce_or_iv):
+    if key_info.mode == key_info.constant:
+        pass
+    elif key_info.mode == key_info.random:
+        pass
+    else:
+        raise Exception("key info error: %s")
 
-pycryptodomex_aes_cfb_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
-                                        generate_aes_cfb, name="pycryptodomex-AES-cfb-inputs")
-pycryptodomex_aes_cfb_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
-                                     generate_aes_cfb, name="pycryptodomex-AES-cfb-key", multi_init=True)
+    pass
 
-pycryptodomex_aes_ofb_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
-                                        generate_aes_ofb, name="pycryptodomex-AES-ofb-inputs")
-pycryptodomex_aes_ofb_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
-                                     generate_aes_ofb, name="pycryptodomex-AES-ofb-key", multi_init=True)
 
-pycryptodomex_aes_ctr_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_16,
-                                        generate_aes_cbc, name="pycryptodomex-AES-cbc-inputs")
-pycryptodomex_aes_cbc_test_key = TestLib(fixed_inputs_infos, different_key_infos_16,
-                                     generate_aes_cbc, name="pycryptodomex-AES-cbc-key", multi_init=True)
+def generate_ecdsa(key_info, nounce_or_iv):
+    if key_info.mode == key_info.constant:
+        pass
+    elif key_info.mode == key_info.random:
+        pass
+    else:
+        raise Exception("key info error: %s")
+
+    pass
+
+
+# HASH
+def generate_sha256(key, nounce_or_iv):
+    pass
+
+
+def generate_sha3_256(key, nounce_or_iv):
+    pass
+
+
+# MAC
+def generate_hmac(key, nounce_or_iv):
+    pass
+
+
+def generate_poly1305(key, nounce_or_iv):
+    pass
+
