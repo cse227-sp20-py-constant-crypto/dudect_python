@@ -168,20 +168,22 @@ def generate_dsa(key_info, nonce_or_iv):
     return do_computation
 
 
-def generate_ecdsa(key_info, nonce_or_iv):
+def generate_ecdsa(key_info, nonce_or_iv):  # TODO
     if key_info.mode == key_info.constant:
         # signer = DSS.new(eccKey_preload, 'deterministic-rfc6979')
-        p, q, g, x, y = key_info.args
-        key = ECC.construct(tup=(y,g,p,q,x))
+        # ecdsa_prival = key_info.args
+        key = ECC.construct(curve='p256', d=1, point_x=0, point_y=0)
     elif key_info.mode == key_info.random:
         n = key_info.args
-        key = ECC.generate(randfunc=Random.get_random_bytes(n),bits=2048)
+        key = ECC.generate()
         # signer = DSS.new(eccKey_preload, 'fips-186-3', randfunc=Random.get_random_bytes(n))
     else:
         raise Exception("key info ERROR: %s" % key_info)
+
+    signer = DSS.new(key, 'fips-186-3')
+
     def do_computation(msg: bytes):
         h = SHA256.new(msg)
-        signer = DSS.new(key, 'fips-186-3')
         signature = signer.sign(h)
     return do_computation
 
@@ -189,16 +191,18 @@ def generate_ecdsa(key_info, nonce_or_iv):
 # HASH
 def generate_sha256(key, nonce_or_iv):
     h = SHA256.new()
+
     def do_computation(msg: bytes):
         h.update(msg)
-        h.hexdigest()
+        # h.hexdigest()
     return do_computation
 
 def generate_sha3_256(key, nonce_or_iv):
     h = SHA3_256.new()
+
     def do_computation(msg: bytes):
         h.update(msg)
-        h.hexdigest()
+        # h.hexdigest()
     return do_computation
 
 
@@ -207,7 +211,7 @@ def generate_hmac(key, nonce_or_iv):
     h = HMAC.new(key, digestmod=SHA256)
     def do_computation(msg: bytes):
         h.update(msg)
-        h.hexdigest()
+        # h.hexdigest()
     return do_computation
 
 
@@ -215,7 +219,7 @@ def generate_poly1305(key, nonce_or_iv):
     mac = Poly1305.new(key=key, cipher=AES)
     def do_computation(msg: bytes):
         mac.update(msg)
-        mac.nonce.hex()
-        mac.hexdigest()
+        # mac.nonce.hex()
+        # mac.hexdigest()
     return do_computation
 

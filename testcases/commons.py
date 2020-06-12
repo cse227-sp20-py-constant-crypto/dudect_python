@@ -105,7 +105,7 @@ class TestLib:
         except Exception as e:
             print("ERROR:", e)
             print()
-        print(self.name, "Done.", "\n")
+        # print(self.name, "Done.", "\n")
 
 
 def generate_prepare_inputs(inputs_info_pair):
@@ -285,6 +285,12 @@ nonce_zero_12 = ByteGenerator(func=generate_zero_byte, params=(12,), name="12-by
 nonce_one_12 = ByteGenerator(func=generate_one_byte, params=(12,), name="12-byte one nonce", spawn_init=True)
 nonce_prime_12 = ByteGenerator(func=generate_prime_byte, params=(12,), name="12-byte prime nonce", spawn_init=True)
 
+nonce_constant_16 = ByteGenerator(func=generate_constant_byte, params=(16,), name="16-byte constant nonce", spawn_init=True)
+nonce_random_16 = ByteGenerator(func=generate_random_byte, params=(16,), name="16-byte random nonce", spawn_init=True)
+nonce_zero_16 = ByteGenerator(func=generate_zero_byte, params=(16,), name="16-byte zero nonce", spawn_init=True)
+nonce_one_16 = ByteGenerator(func=generate_one_byte, params=(16,), name="16-byte one nonce", spawn_init=True)
+nonce_prime_16 = ByteGenerator(func=generate_prime_byte, params=(16,), name="16-byte prime nonce", spawn_init=True)
+
 
 # iv
 iv_constant_8 = ByteGenerator(func=generate_constant_byte, params=(8,), name="8-byte AES constant iv", spawn_init=True)
@@ -413,6 +419,29 @@ class StreamCypher12Cases:
     ]
 
 
+class StreamCypher16Cases:
+    # nonce length is 16
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
+    baseline_key_pairs = ((key_constant_32, key_constant_32), )
+    baseline_nonce_pairs = ((nonce_random_16, nonce_random_16), )
+    varying_key_pairs = ((key_constant_32, key_random_32), )
+    special_key_pairs = ((key_constant_32, key_zero_32), (key_constant_32, key_one_32))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
+    varying_nonce_pairs = ((nonce_constant_16, nonce_random_16), )
+    special_nonce_pairs = ((nonce_constant_16, nonce_zero_16), (nonce_constant_16, nonce_one_16))
+
+    cases = [
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_nonce_pairs],
+        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_nonce_pairs],
+        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_nonce", baseline_inputs_pairs, baseline_key_pairs, varying_nonce_pairs],
+        ["special_nonce", baseline_inputs_pairs, baseline_key_pairs, special_nonce_pairs],
+    ]
+
+
 class AsymmetricCypherRSACases:
     baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_info_constant_rsa, key_info_constant_rsa), )
@@ -475,14 +504,15 @@ class HashCases:
 
 
 class MACCases:
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_constant_32, key_constant_32), )
     varying_key_pairs = ((key_constant_32, key_random_32), )
     special_key_pairs = ((key_constant_32, key_zero_32), (key_constant_32, key_one_32))
     none_pairs = ((None, None), )
 
     cases = [
-        ["baseline", none_pairs, baseline_key_pairs, none_pairs],
-        ["varying_key", none_pairs, varying_key_pairs, none_pairs],
-        ["baseline", none_pairs, baseline_key_pairs, none_pairs],
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, none_pairs],
+        ["varying_key", baseline_inputs_pairs, varying_key_pairs, none_pairs],
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, none_pairs],
     ]
 

@@ -187,7 +187,7 @@ def generate_hmac(key, nonce_or_iv):
     
     def do_computation(msg: bytes):
         h.update(msg)
-        h.finalize()
+        # h.finalize()
 
     return do_computation
 
@@ -197,7 +197,7 @@ def generate_poly1305(key, nonce_or_iv):
     
     def do_computation(msg: bytes):
         p.update(msg)
-        p.finalize()
+        # p.finalize()
 
     return do_computation
 
