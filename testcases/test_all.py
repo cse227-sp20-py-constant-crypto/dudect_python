@@ -1,9 +1,12 @@
 from testcases.commons import TestLib
-from testcases.commons import BlockCypherCases, StreamCypher8Cases, StreamCypher12Cases, \
+from testcases.commons import BlockCypherIv8Cases, BlockCypherIv16Cases, BlockCypherNonce8Cases, \
+    StreamCypher8Cases, StreamCypher12Cases, \
     AsymmetricCypherRSACases, AsymmetricCypherDSACases, AsymmetricCypherECDSACases, \
     HashCases, MACCases
 
-from testcases.tests import test_cryptography, test_pycrypto, test_pycryptodomex
+# from testcases.tests import test_cryptography, test_pycrypto, test_pycryptodomex
+from testcases.tests import test_cryptography, test_pycryptodomex
+from testcases.tests import test_pycryptodomex as test_pycrypto  # TODO: pycrypto
 
 
 class TestCase:
@@ -32,7 +35,10 @@ aes_test_functions = [
     ["Cryptography-AES-OFB", test_cryptography.generate_aes_ofb],
     ["PyCrypto-AES-OFB", test_pycrypto.generate_aes_ofb],
     ["PyCryptodome-AES-OFB", test_pycryptodomex.generate_aes_ofb],
+]
+aes_tests = TestCase(aes_test_functions, BlockCypherIv16Cases)
 
+aes_nonce_test_functions = [
     ["Cryptography-AES-CTR", test_cryptography.generate_aes_ctr],
     ["PyCrypto-AES-CTR", test_pycrypto.generate_aes_ctr],
     ["PyCryptodome-AES-CTR", test_pycryptodomex.generate_aes_ctr],
@@ -58,25 +64,25 @@ aes_test_functions = [
     ["PyCryptodome-AES-OCB", test_pycryptodomex.generate_aes_ocb],
 
 ]
-aes_tests = TestCase(aes_test_functions, BlockCypherCases)
+aes_nonce_tests = TestCase(aes_test_functions, BlockCypherNonce8Cases)
 
 chacha20_test_functions = [
     ["Cryptography-ChaCha20-CBC", test_cryptography.generate_chacha20],
-    ["PyCrypto-ChaCha20-CBC", test_pycrypto.generate_chacha20],
+    # ["PyCrypto-ChaCha20-CBC", test_pycrypto.generate_chacha20],
     ["PyCryptodome-ChaCha20-CBC", test_pycryptodomex.generate_chacha20],
 ]
 chacha20_tests = TestCase(chacha20_test_functions, StreamCypher8Cases)
 
 tls_chacha20_test_functions = [
-    # ["Cryptography-TLSChaCha20-CBC", test_cryptography.generate_tls_chacha20],
-    ["PyCrypto-TLSChaCha20-CBC", test_pycrypto.generate_tls_chacha20],
+    ["Cryptography-TLSChaCha20-CBC", test_cryptography.generate_tls_chacha20],
+    # ["PyCrypto-TLSChaCha20-CBC", test_pycrypto.generate_tls_chacha20],
     ["PyCryptodome-TLSChaCha20-CBC", test_pycryptodomex.generate_tls_chacha20],
 ]
 tls_chacha20_tests = TestCase(tls_chacha20_test_functions, StreamCypher12Cases)
 
 salsa20_test_functions = [
     # ["Cryptography-Salsa20-CBC", test_cryptography.generate_salsa20],
-    ["PyCrypto-Salsa20-CBC", test_pycrypto.generate_salsa20],
+    # ["PyCrypto-Salsa20-CBC", test_pycrypto.generate_salsa20],
     ["PyCryptodome-Salsa20-CBC", test_pycryptodomex.generate_salsa20],
 ]
 salsa20_tests = TestCase(salsa20_test_functions, StreamCypher8Cases)
@@ -90,14 +96,14 @@ rsa_tests = TestCase(rsa_test_functions, AsymmetricCypherRSACases)
 
 dsa_test_functions = [
     ["Cryptography-DSA", test_cryptography.generate_dsa],
-    ["PyCrypto-DSA", test_pycrypto.generate_dsa],
+    # ["PyCrypto-DSA", test_pycrypto.generate_dsa],
     ["PyCryptodome-DSA", test_pycryptodomex.generate_dsa],
 ]
 dsa_tests = TestCase(dsa_test_functions, AsymmetricCypherDSACases)
 
 ecdsa_test_functions = [
     ["Cryptography-ECDSA", test_cryptography.generate_ecdsa],
-    ["PyCrypto-ECDSA", test_pycrypto.generate_ecdsa],
+    # ["PyCrypto-ECDSA", test_pycrypto.generate_ecdsa],
     ["PyCryptodome-ECDSA", test_pycryptodomex.generate_ecdsa],
 ]
 ecdsa_tests = TestCase(ecdsa_test_functions, AsymmetricCypherECDSACases)
@@ -108,7 +114,7 @@ hash_test_functions = [
     ["PyCryptodome-SHA256", test_pycryptodomex.generate_sha256],
 
     ["Cryptography-SHA3-256", test_cryptography.generate_sha3_256],
-    ["PyCrypto-SHA3-256", test_pycrypto.generate_sha3_256],
+    # ["PyCrypto-SHA3-256", test_pycrypto.generate_sha3_256],
     ["PyCryptodome-SHA3-256", test_pycryptodomex.generate_sha3_256],
 ]
 hash_tests = TestCase(hash_test_functions, HashCases)
@@ -119,13 +125,14 @@ mac_test_functions = [
     ["PyCryptodome-HMAC", test_pycryptodomex.generate_hmac],
 
     ["Cryptography-POLY1305", test_cryptography.generate_poly1305],
-    ["PyCrypto-POLY1305", test_pycrypto.generate_poly1305],
+    # ["PyCrypto-POLY1305", test_pycrypto.generate_poly1305],
     ["PyCryptodome-POLY1305", test_pycryptodomex.generate_poly1305],
 ]
 mac_tests = TestCase(mac_test_functions, MACCases)
 
 all_tests = [
     aes_tests,
+    aes_nonce_tests,
     chacha20_tests,
     tls_chacha20_tests,
     salsa20_tests,

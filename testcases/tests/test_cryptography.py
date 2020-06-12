@@ -16,9 +16,9 @@ with open("testcases/private.pem", "rb") as key_file:
         backend=default_backend())
 
 
-def generate_aes_cbc(key, nounce_or_iv):
+def generate_aes_cbc(key, nonce_or_iv):
     backend = default_backend()
-    iv = nounce_or_iv
+    iv = nonce_or_iv
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
 
     def do_computation(msg: bytes):
@@ -29,9 +29,9 @@ def generate_aes_cbc(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_cfb(key, nounce_or_iv):
+def generate_aes_cfb(key, nonce_or_iv):
     backend = default_backend()
-    iv = nounce_or_iv
+    iv = nonce_or_iv
     cipher = Cipher(algorithms.AES(key), modes.CFB(iv), backend=backend)
 
     def do_computation(msg: bytes):
@@ -41,9 +41,9 @@ def generate_aes_cfb(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_ofb(key, nounce_or_iv):
+def generate_aes_ofb(key, nonce_or_iv):
     backend = default_backend()
-    iv = nounce_or_iv
+    iv = nonce_or_iv
     cipher = Cipher(algorithms.AES(key), modes.OFB(iv), backend=backend)
 
     def do_computation(msg: bytes):
@@ -53,9 +53,9 @@ def generate_aes_ofb(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_ctr(key, nounce_or_iv):
+def generate_aes_ctr(key, nonce_or_iv):
     backend = default_backend()
-    iv = nounce_or_iv
+    iv = nonce_or_iv
     cipher = Cipher(algorithms.AES(key), modes.CTR(iv), backend=backend)
 
     def do_computation(msg: bytes):
@@ -67,9 +67,9 @@ def generate_aes_ctr(key, nounce_or_iv):
 
 
 
-def generate_aes_gcm(key, nounce_or_iv):
+def generate_aes_gcm(key, nonce_or_iv):
     backend = default_backend()
-    iv = nounce_or_iv
+    iv = nonce_or_iv
     cipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=backend)
 
     def do_computation(msg: bytes):
@@ -79,11 +79,9 @@ def generate_aes_gcm(key, nounce_or_iv):
     return do_computation
 
 
-
-
-def generate_chacha20(key, nounce_or_iv):
+def generate_chacha20(key, nonce_or_iv):
     backend = default_backend()
-    nonce = os.urandom(16)
+    nonce = nonce_or_iv
     cipher = Cipher(algorithms.ChaCha20(key, nonce), mode=None, backend=backend)
 
     def do_computation(msg: bytes):
@@ -93,7 +91,10 @@ def generate_chacha20(key, nounce_or_iv):
     return do_computation
 
 
-def generate_rsa(key_info, nounce_or_iv):
+generate_tls_chacha20 = generate_chacha20
+
+
+def generate_rsa(key_info, nonce_or_iv):
     if key_info.mode == key_info.constant:
         private_key = rsaKey_preload
     elif key_info.mode == key_info.random:
@@ -122,7 +123,7 @@ def generate_rsa(key_info, nounce_or_iv):
     return do_computation
 
 
-def generate_dsa(key_info, nounce_or_iv):
+def generate_dsa(key_info, nonce_or_iv):
     if key_info.mode == key_info.constant:
         p, q, g, x, y = key_info.args
         para_num = dsa.DSAParameterNumbers(p, q, g)
@@ -143,7 +144,7 @@ def generate_dsa(key_info, nounce_or_iv):
     return do_computation
 
 
-def generate_ecdsa(key_info, nounce_or_iv):
+def generate_ecdsa(key_info, nonce_or_iv):
     if key_info.mode == key_info.constant:
         prival = key_info.args
         private_key = ec.derive_private_key(prival,ec.SECP384R1(), backend=default_backend())
@@ -160,28 +161,28 @@ def generate_ecdsa(key_info, nounce_or_iv):
     return do_computation
 
 
-def generate_sha256(key, nounce_or_iv):
+def generate_sha256(key, nonce_or_iv):
     digest = hashes.Hash(hashes.SHA256(), backend=default_backend())
     
     def do_computation(msg: bytes):
         digest.update(msg)
-        digest.finalize()
+        # digest.finalize()
 
     return do_computation
 
 
-def generate_sha3_256(key, nounce_or_iv):
-    digest = hashes.Hash(hashes.SHA3_256, backend=default_backend())
+def generate_sha3_256(key, nonce_or_iv):
+    digest = hashes.Hash(hashes.SHA3_256(), backend=default_backend())
     
     def do_computation(msg: bytes):
         digest.update(msg)
-        digest.finalize()
+        # digest.finalize()
 
     return do_computation
 
 
 # HMAC
-def generate_hmac(key, nounce_or_iv):
+def generate_hmac(key, nonce_or_iv):
     h = hmac.HMAC(key, hashes.SHA256(), backend=default_backend())
     
     def do_computation(msg: bytes):
@@ -191,7 +192,7 @@ def generate_hmac(key, nounce_or_iv):
     return do_computation
 
 
-def generate_poly1305(key, nounce_or_iv):
+def generate_poly1305(key, nonce_or_iv):
     p = poly1305.Poly1305(key)
     
     def do_computation(msg: bytes):

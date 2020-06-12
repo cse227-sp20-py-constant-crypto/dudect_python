@@ -10,9 +10,9 @@ import base64
 
 
 # AES
-def generate_aes_cbc(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv 
-    cipher = AES.new(key, AES.MODE_CBC, iv)
+def generate_aes_cbc(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_CBC, iv=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -20,9 +20,9 @@ def generate_aes_cbc(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_cfb(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_CFB, iv)
+def generate_aes_cfb(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_CFB, iv=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -30,9 +30,9 @@ def generate_aes_cfb(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_ofb(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_OFB, iv)
+def generate_aes_ofb(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_OFB, iv=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -40,9 +40,9 @@ def generate_aes_ofb(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_ctr(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_CTR, iv)
+def generate_aes_ctr(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_CTR, nonce=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -50,9 +50,9 @@ def generate_aes_ctr(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_ccm(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_CCM, iv)
+def generate_aes_ccm(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_CCM, nonce=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -60,9 +60,9 @@ def generate_aes_ccm(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_eax(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_EAX, iv)
+def generate_aes_eax(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_EAX, nonce=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -70,9 +70,9 @@ def generate_aes_eax(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_gcm(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_GCM, iv)
+def generate_aes_gcm(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_GCM, nonce=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -80,9 +80,9 @@ def generate_aes_gcm(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_siv(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_SIV, iv)
+def generate_aes_siv(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_SIV, nonce=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -90,9 +90,9 @@ def generate_aes_siv(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_aes_ocb(key, nounce_or_iv = os.urandom(16)):
-    iv = nounce_or_iv
-    cipher = AES.new(key, AES.MODE_OCB, iv)
+def generate_aes_ocb(key, nonce_or_iv):
+    iv = nonce_or_iv
+    cipher = AES.new(key, AES.MODE_OCB, nonce=iv)
 
     def do_computation(msg: bytes):
         cipher.encrypt(msg)
@@ -101,8 +101,8 @@ def generate_aes_ocb(key, nounce_or_iv = os.urandom(16)):
 
 
 # ChaCha20
-def generate_chacha20(key, nounce_or_iv = os.urandom(16)):
-    nonce = nounce_or_iv
+def generate_chacha20(key, nonce_or_iv):
+    nonce = nonce_or_iv
     cipher = ChaCha20.new(key=key, nonce=nonce)
 
     def do_computation(msg: bytes):
@@ -111,8 +111,8 @@ def generate_chacha20(key, nounce_or_iv = os.urandom(16)):
     return do_computation
 
 
-def generate_tls_chacha20(key, nounce_or_iv = os.urandom(16)):
-    nonce = nounce_or_iv
+def generate_tls_chacha20(key, nonce_or_iv):
+    nonce = nonce_or_iv
     cipher = ChaCha20.new(key=key, nonce=nonce)
 
     def do_computation(msg: bytes):
@@ -122,12 +122,13 @@ def generate_tls_chacha20(key, nounce_or_iv = os.urandom(16)):
 
 
 # Salsa20
-def generate_salsa20(key, nounce_or_iv = os.urandom(16)):
-    secret = key
-    nonce = nounce_or_iv
+def generate_salsa20(key, nonce_or_iv):
+    key = key
+    nonce = nonce_or_iv
+    cipher = Salsa20.new(key=key, nonce=nonce)
+
     def do_computation(msg: bytes):
-        cipher = Salsa20.new(key=secret)
-        message = nonce + cipher.encrypt(msg)
+        cipher.encrypt(msg)
     return do_computation
 
 
@@ -135,23 +136,22 @@ def generate_salsa20(key, nounce_or_iv = os.urandom(16)):
 with open("testcases/private.pem", "rb") as key_file:
     rsaKey_preload = RSA.import_key(key_file.read())
 
-def generate_rsa(key_info, nounce_or_iv):
+
+def generate_rsa(key_info, nonce_or_iv):
     if key_info.mode == key_info.constant:
-        private_key = rsaKey_preload
+        public_key = rsaKey_preload
     elif key_info.mode == key_info.random:
-        private_key = RSA.generate(bits=2048)
+        public_key = RSA.generate(bits=2048)
     else:
         raise Exception("key info ERROR: %s" % key_info)
 
-    public_key = private_key.public_key()
-    
     def do_computation(msg: bytes):
         ciphertext = str(base64.b64encode(msg), encoding='utf-8')
         cipher_rsa = PKCS1_OAEP.new(public_key)
     return do_computation
 
 
-def generate_dsa(key_info, nounce_or_iv):
+def generate_dsa(key_info, nonce_or_iv):
     if key_info.mode == key_info.constant:
         p, q, g, x, y = key_info.args
         key = DSA.construct(tup=(y,g,p,q,x))
@@ -167,10 +167,8 @@ def generate_dsa(key_info, nounce_or_iv):
         signature = signer.sign(hash_obj)
     return do_computation
 
-# with open("testcases/public_key.der", "rb") as key_file:
-#     eccKey_preload = ECC.import_key(key_file.read())
 
-def generate_ecdsa(key_info, nounce_or_iv):
+def generate_ecdsa(key_info, nonce_or_iv):
     if key_info.mode == key_info.constant:
         # signer = DSS.new(eccKey_preload, 'deterministic-rfc6979')
         p, q, g, x, y = key_info.args
@@ -189,14 +187,14 @@ def generate_ecdsa(key_info, nounce_or_iv):
 
 
 # HASH
-def generate_sha256(key, nounce_or_iv):
+def generate_sha256(key, nonce_or_iv):
     h = SHA256.new()
     def do_computation(msg: bytes):
         h.update(msg)
         h.hexdigest()
     return do_computation
 
-def generate_sha3_256(key, nounce_or_iv):
+def generate_sha3_256(key, nonce_or_iv):
     h = SHA3_256.new()
     def do_computation(msg: bytes):
         h.update(msg)
@@ -205,7 +203,7 @@ def generate_sha3_256(key, nounce_or_iv):
 
 
 # MAC
-def generate_hmac(key, nounce_or_iv):
+def generate_hmac(key, nonce_or_iv):
     h = HMAC.new(key, digestmod=SHA256)
     def do_computation(msg: bytes):
         h.update(msg)
@@ -213,7 +211,7 @@ def generate_hmac(key, nounce_or_iv):
     return do_computation
 
 
-def generate_poly1305(key, nounce_or_iv):
+def generate_poly1305(key, nonce_or_iv):
     mac = Poly1305.new(key=key, cipher=AES)
     def do_computation(msg: bytes):
         mac.update(msg)

@@ -49,14 +49,14 @@ class KeyInfo:
 
 
 class TestLib:
-    def __init__(self, inputs_infos, key_infos, nounce_or_iv_infos,
+    def __init__(self, inputs_infos, key_infos, nonce_or_iv_infos,
                  generate_do_computation, generate_do_computation_args=(), generate_do_computation_kwargs={},
                  name="no name", multi_init=False, **kwargs):
         self.name = name
         self.inputs_infos = inputs_infos
 
         self.key_infos = key_infos
-        self.nounce_or_iv_infos = nounce_or_iv_infos
+        self.nonce_or_iv_infos = nonce_or_iv_infos
         self.generate_do_computation = generate_do_computation
         self.generate_do_computation_args = generate_do_computation_args
         self.generate_do_computation_kwargs = generate_do_computation_kwargs
@@ -67,9 +67,9 @@ class TestLib:
         try:
             for info0, info1 in self.inputs_infos:
                 for key0, key1 in self.key_infos:
-                    for nounce_or_iv0, nounce_or_iv1 in self.nounce_or_iv_infos:
+                    for nonce_or_iv0, nonce_or_iv1 in self.nonce_or_iv_infos:
                         try:
-                            for g in [info0, info1, key0, key1, nounce_or_iv0, nounce_or_iv1]:
+                            for g in [info0, info1, key0, key1, nonce_or_iv0, nonce_or_iv1]:
                                 if g is not None:
                                     g.reset()
                             print("class-0:", end=" ")
@@ -77,8 +77,8 @@ class TestLib:
                                 print("inputs is %s," % info0.get_name(), end=" ")
                             if key0 is not None:
                                 print("key is %s." % key0.get_name(), end=" ")
-                            if nounce_or_iv0 is not None:
-                                print("nounce_or_iv is %s" % nounce_or_iv0.get_name(), end=" ")
+                            if nonce_or_iv0 is not None:
+                                print("nonce_or_iv is %s" % nonce_or_iv0.get_name(), end=" ")
                             print()
 
                             print("class-1:", end=" ")
@@ -86,15 +86,15 @@ class TestLib:
                                 print("inputs is %s," % info1.get_name(), end=" ")
                             if key1 is not None:
                                 print("key is %s." % key1.get_name(), end=" ")
-                            if nounce_or_iv1 is not None:
-                                print("nounce_or_iv is %s" % nounce_or_iv1.get_name(), end=" ")
+                            if nonce_or_iv1 is not None:
+                                print("nonce_or_iv is %s" % nonce_or_iv1.get_name(), end=" ")
                             print()
 
                             _inputs_info_pair = (info0, info1)
                             _prepare_inputs = generate_prepare_inputs(_inputs_info_pair)
                             _key_info_pair = (key0, key1)
-                            _nounce_or_iv_pairs = (nounce_or_iv0, nounce_or_iv1)
-                            _init = generate_init(_key_info_pair, _nounce_or_iv_pairs, self.generate_do_computation,
+                            _nonce_or_iv_pairs = (nonce_or_iv0, nonce_or_iv1)
+                            _init = generate_init(_key_info_pair, _nonce_or_iv_pairs, self.generate_do_computation,
                                                   self.generate_do_computation_args,
                                                   self.generate_do_computation_kwargs)
                             test_constant(_init, _prepare_inputs, self.multi_init)
@@ -131,10 +131,10 @@ def generate_prepare_inputs(inputs_info_pair):
     return _prepare_inputs
 
 
-def generate_init(key_info_pair, _nounce_or_iv_pairs,
+def generate_init(key_info_pair, _nonce_or_iv_pairs,
                   generate_do_computation, generate_do_computation_args, generate_do_computation_kwargs):
     key0, key1 = key_info_pair
-    nounce_or_iv0, nounce_or_iv1 = _nounce_or_iv_pairs
+    nonce_or_iv0, nonce_or_iv1 = _nonce_or_iv_pairs
 
     def _init(class_id: int):
         if class_id == 0:
@@ -142,21 +142,21 @@ def generate_init(key_info_pair, _nounce_or_iv_pairs,
                 key = key0.execute()
             else:
                 key = None
-            if nounce_or_iv0 is not None:
-                nounce_or_iv = nounce_or_iv0.execute()
+            if nonce_or_iv0 is not None:
+                nonce_or_iv = nonce_or_iv0.execute()
             else:
-                nounce_or_iv = None
+                nonce_or_iv = None
         else:
             if key1 is not None:
                 key = key1.execute()
             else:
                 key = None
-            if nounce_or_iv1 is not None:
-               nounce_or_iv = nounce_or_iv1.execute()
+            if nonce_or_iv1 is not None:
+               nonce_or_iv = nonce_or_iv1.execute()
             else:
-                nounce_or_iv = None
+                nonce_or_iv = None
 
-        do_computation = generate_do_computation(key, nounce_or_iv, *generate_do_computation_args, **generate_do_computation_kwargs)
+        do_computation = generate_do_computation(key, nonce_or_iv, *generate_do_computation_args, **generate_do_computation_kwargs)
 
         return do_computation
 
@@ -232,6 +232,11 @@ inputs_random_64 = ByteGenerator(func=generate_random_byte, params=(64,), name="
 inputs_zero_64 = ByteGenerator(func=generate_zero_byte, params=(64,), name="64-byte zero")
 inputs_one_64 = ByteGenerator(func=generate_one_byte, params=(64,), name="64-byte one")
 
+inputs_constant_128 = ByteGenerator(func=generate_constant_byte, params=(128,), name="128-byte constant")
+inputs_random_128 = ByteGenerator(func=generate_random_byte, params=(128,), name="128-byte random")
+inputs_zero_128 = ByteGenerator(func=generate_zero_byte, params=(128,), name="128-byte zero")
+inputs_one_128 = ByteGenerator(func=generate_one_byte, params=(128,), name="128-byte one")
+
 inputs_constant_256 = ByteGenerator(func=generate_constant_byte, params=(256,), name="256-byte constant")
 inputs_random_256 = ByteGenerator(func=generate_random_byte, params=(256,), name="256-byte random")
 inputs_zero_256 = ByteGenerator(func=generate_zero_byte, params=(256,), name="256-byte zero")
@@ -267,40 +272,45 @@ key_info_random_ecdsa = ByteGenerator(func=generate_random_ecdsa_key_info, param
 key_info_constant_ecdsa = ByteGenerator(func=generate_constant_ecdsa_key_info, params=(), name="Constant ECDSA key", spawn_init=True)
 
 
-# nounce
-nounce_constant_8 = ByteGenerator(func=generate_constant_byte, params=(8,), name="8-byte constant nounce", spawn_init=True)
-nounce_random_8 = ByteGenerator(func=generate_random_byte, params=(8,), name="8-byte random nounce", spawn_init=True)
-nounce_zero_8 = ByteGenerator(func=generate_zero_byte, params=(8,), name="8-byte zero nounce", spawn_init=True)
-nounce_one_8 = ByteGenerator(func=generate_one_byte, params=(8,), name="8-byte one nounce", spawn_init=True)
-nounce_prime_8 = ByteGenerator(func=generate_prime_byte, params=(8,), name="8-byte prime nounce", spawn_init=True)
+# nonce
+nonce_constant_8 = ByteGenerator(func=generate_constant_byte, params=(8,), name="8-byte constant nonce", spawn_init=True)
+nonce_random_8 = ByteGenerator(func=generate_random_byte, params=(8,), name="8-byte random nonce", spawn_init=True)
+nonce_zero_8 = ByteGenerator(func=generate_zero_byte, params=(8,), name="8-byte zero nonce", spawn_init=True)
+nonce_one_8 = ByteGenerator(func=generate_one_byte, params=(8,), name="8-byte one nonce", spawn_init=True)
+nonce_prime_8 = ByteGenerator(func=generate_prime_byte, params=(8,), name="8-byte prime nonce", spawn_init=True)
 
-nounce_constant_12 = ByteGenerator(func=generate_constant_byte, params=(12,), name="12-byte constant nounce", spawn_init=True)
-nounce_random_12 = ByteGenerator(func=generate_random_byte, params=(12,), name="12-byte random nounce", spawn_init=True)
-nounce_zero_12 = ByteGenerator(func=generate_zero_byte, params=(12,), name="12-byte zero nounce", spawn_init=True)
-nounce_one_12 = ByteGenerator(func=generate_one_byte, params=(12,), name="12-byte one nounce", spawn_init=True)
-nounce_prime_12 = ByteGenerator(func=generate_prime_byte, params=(12,), name="12-byte prime nounce", spawn_init=True)
+nonce_constant_12 = ByteGenerator(func=generate_constant_byte, params=(12,), name="12-byte constant nonce", spawn_init=True)
+nonce_random_12 = ByteGenerator(func=generate_random_byte, params=(12,), name="12-byte random nonce", spawn_init=True)
+nonce_zero_12 = ByteGenerator(func=generate_zero_byte, params=(12,), name="12-byte zero nonce", spawn_init=True)
+nonce_one_12 = ByteGenerator(func=generate_one_byte, params=(12,), name="12-byte one nonce", spawn_init=True)
+nonce_prime_12 = ByteGenerator(func=generate_prime_byte, params=(12,), name="12-byte prime nonce", spawn_init=True)
 
 
 # iv
-aes_key_len = AES.block_size
-iv_constant_aes = ByteGenerator(func=generate_constant_byte, params=(aes_key_len,), name="AES constant iv", spawn_init=True)
-iv_random_aes = ByteGenerator(func=generate_random_byte, params=(aes_key_len,), name="AES random iv", spawn_init=True)
-iv_zero_aes = ByteGenerator(func=generate_zero_byte, params=(aes_key_len,), name="AES zero iv", spawn_init=True)
-iv_one_aes = ByteGenerator(func=generate_one_byte, params=(aes_key_len,), name="AES one iv", spawn_init=True)
-iv_prime_aes = ByteGenerator(func=generate_prime_byte, params=(aes_key_len,), name="AES prime iv", spawn_init=True)
+iv_constant_8 = ByteGenerator(func=generate_constant_byte, params=(8,), name="8-byte AES constant iv", spawn_init=True)
+iv_random_8 = ByteGenerator(func=generate_random_byte, params=(8,), name="8-byte AES random iv", spawn_init=True)
+iv_zero_8 = ByteGenerator(func=generate_zero_byte, params=(8,), name="8-byte AES zero iv", spawn_init=True)
+iv_one_8 = ByteGenerator(func=generate_one_byte, params=(8,), name="8-byte AES one iv", spawn_init=True)
+iv_prime_8 = ByteGenerator(func=generate_prime_byte, params=(8,), name="8-byte AES prime iv", spawn_init=True)
+
+iv_constant_16 = ByteGenerator(func=generate_constant_byte, params=(16,), name="16-byte AES constant iv", spawn_init=True)
+iv_random_16 = ByteGenerator(func=generate_random_byte, params=(16,), name="16-byte AES random iv", spawn_init=True)
+iv_zero_16 = ByteGenerator(func=generate_zero_byte, params=(16,), name="16-byte AES zero iv", spawn_init=True)
+iv_one_16 = ByteGenerator(func=generate_one_byte, params=(16,), name="16-byte AES one iv", spawn_init=True)
+iv_prime_16 = ByteGenerator(func=generate_prime_byte, params=(16,), name="16-byte AES prime iv", spawn_init=True)
 
 
 # combinations
-class BlockCypherCases:
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
+class BlockCypherIv8Cases:
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_constant_16, key_constant_16), )
-    baseline_iv_pairs = ((iv_random_aes, iv_random_aes), )
+    baseline_iv_pairs = ((iv_random_8, iv_random_8), )
     varying_key_pairs = ((key_constant_16, key_random_16), )
     special_key_pairs = ((key_constant_16, key_zero_16), (key_constant_16, key_one_16))
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
-    varying_iv_pairs = ((iv_constant_aes, iv_random_aes), )
-    special_iv_pairs = ((iv_constant_aes, iv_zero_aes), (iv_constant_aes, iv_one_aes))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
+    varying_iv_pairs = ((iv_constant_8, iv_random_8), )
+    special_iv_pairs = ((iv_constant_8, iv_zero_8), (iv_constant_8, iv_one_8))
 
     cases = [
         ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_iv_pairs],
@@ -313,58 +323,102 @@ class BlockCypherCases:
     ]
 
 
-class StreamCypher8Cases:
-    # nounce length is 8
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
+class BlockCypherIv16Cases:
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_constant_16, key_constant_16), )
-    baseline_nounce_pairs = ((nounce_random_8, nounce_random_8), )
+    baseline_iv_pairs = ((iv_random_16, iv_random_16), )
     varying_key_pairs = ((key_constant_16, key_random_16), )
     special_key_pairs = ((key_constant_16, key_zero_16), (key_constant_16, key_one_16))
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
-    varying_nounce_pairs = ((nounce_constant_8, nounce_random_8), )
-    special_nounce_pairs = ((nounce_constant_8, nounce_zero_8), (nounce_constant_8, nounce_one_8))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
+    varying_iv_pairs = ((iv_constant_16, iv_random_16), )
+    special_iv_pairs = ((iv_constant_16, iv_zero_16), (iv_constant_16, iv_one_16))
 
     cases = [
-        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_nounce_pairs],
-        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_nounce_pairs],
-        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_nounce_pairs],
-        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_nounce_pairs],
-        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_nounce_pairs],
-        ["varying_nounce", baseline_inputs_pairs, baseline_key_pairs, varying_nounce_pairs],
-        ["special_nounce", baseline_inputs_pairs, baseline_key_pairs, special_nounce_pairs],
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_iv_pairs],
+        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_iv_pairs],
+        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_iv_pairs],
+        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_iv_pairs],
+        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_iv_pairs],
+        ["varying_iv", baseline_inputs_pairs, baseline_key_pairs, varying_iv_pairs],
+        ["special_iv", baseline_inputs_pairs, baseline_key_pairs, special_iv_pairs],
+    ]
+
+
+class BlockCypherNonce8Cases:
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
+    baseline_key_pairs = ((key_constant_16, key_constant_16), )
+    baseline_nonce_pairs = ((nonce_random_8, nonce_random_8), )
+    varying_key_pairs = ((key_constant_16, key_random_16), )
+    special_key_pairs = ((key_constant_16, key_zero_16), (key_constant_16, key_one_16))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
+    varying_nonce_pairs = ((nonce_constant_8, nonce_random_8), )
+    special_nonce_pairs = ((nonce_constant_8, nonce_zero_8), (nonce_constant_8, nonce_one_8))
+
+    cases = [
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_nonce_pairs],
+        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_nonce_pairs],
+        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_nonce", baseline_inputs_pairs, baseline_key_pairs, varying_nonce_pairs],
+        ["special_nonce", baseline_inputs_pairs, baseline_key_pairs, special_nonce_pairs],
+    ]
+
+
+class StreamCypher8Cases:
+    # nonce length is 8
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
+    baseline_key_pairs = ((key_constant_32, key_constant_32), )
+    baseline_nonce_pairs = ((nonce_random_8, nonce_random_8), )
+    varying_key_pairs = ((key_constant_32, key_random_32), )
+    special_key_pairs = ((key_constant_32, key_zero_32), (key_constant_32, key_one_32))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
+    varying_nonce_pairs = ((nonce_constant_8, nonce_random_8), )
+    special_nonce_pairs = ((nonce_constant_8, nonce_zero_8), (nonce_constant_8, nonce_one_8))
+
+    cases = [
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_nonce_pairs],
+        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_nonce_pairs],
+        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_nonce", baseline_inputs_pairs, baseline_key_pairs, varying_nonce_pairs],
+        ["special_nonce", baseline_inputs_pairs, baseline_key_pairs, special_nonce_pairs],
     ]
 
 
 class StreamCypher12Cases:
-    # nounce length is 12
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
-    baseline_key_pairs = ((key_constant_16, key_constant_16), )
-    baseline_nounce_pairs = ((nounce_random_12, nounce_random_12), )
-    varying_key_pairs = ((key_constant_16, key_random_16), )
-    special_key_pairs = ((key_constant_16, key_zero_16), (key_constant_16, key_one_16))
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
-    varying_nounce_pairs = ((nounce_constant_12, nounce_random_12), )
-    special_nounce_pairs = ((nounce_constant_12, nounce_zero_12), (nounce_constant_12, nounce_one_12))
+    # nonce length is 12
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
+    baseline_key_pairs = ((key_constant_32, key_constant_32), )
+    baseline_nonce_pairs = ((nonce_random_12, nonce_random_12), )
+    varying_key_pairs = ((key_constant_32, key_random_32), )
+    special_key_pairs = ((key_constant_32, key_zero_32), (key_constant_32, key_one_32))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
+    varying_nonce_pairs = ((nonce_constant_12, nonce_random_12), )
+    special_nonce_pairs = ((nonce_constant_12, nonce_zero_12), (nonce_constant_12, nonce_one_12))
 
     cases = [
-        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_nounce_pairs],
-        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_nounce_pairs],
-        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_nounce_pairs],
-        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_nounce_pairs],
-        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_nounce_pairs],
-        ["varying_nounce", baseline_inputs_pairs, baseline_key_pairs, varying_nounce_pairs],
-        ["special_nounce", baseline_inputs_pairs, baseline_key_pairs, special_nounce_pairs],
+        ["baseline", baseline_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_key", baseline_inputs_pairs, varying_key_pairs, baseline_nonce_pairs],
+        ["special_key", baseline_inputs_pairs, special_key_pairs, baseline_nonce_pairs],
+        ["varying_inputs", varying_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["special_inputs", special_inputs_pairs, baseline_key_pairs, baseline_nonce_pairs],
+        ["varying_nonce", baseline_inputs_pairs, baseline_key_pairs, varying_nonce_pairs],
+        ["special_nonce", baseline_inputs_pairs, baseline_key_pairs, special_nonce_pairs],
     ]
 
 
 class AsymmetricCypherRSACases:
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_info_constant_rsa, key_info_constant_rsa), )
     varying_key_pairs = ((key_info_constant_rsa, key_info_random_rsa), )
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
 
     cases = [
@@ -376,11 +430,11 @@ class AsymmetricCypherRSACases:
 
 
 class AsymmetricCypherDSACases:
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_info_constant_dsa, key_info_constant_dsa), )
     varying_key_pairs = ((key_info_constant_dsa, key_info_random_dsa), )
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
 
     cases = [
@@ -392,11 +446,11 @@ class AsymmetricCypherDSACases:
 
 
 class AsymmetricCypherECDSACases:
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
     baseline_key_pairs = ((key_info_constant_ecdsa, key_info_constant_ecdsa), )
     varying_key_pairs = ((key_info_constant_ecdsa, key_info_random_ecdsa), )
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
 
     cases = [
@@ -408,9 +462,9 @@ class AsymmetricCypherECDSACases:
 
 
 class HashCases:
-    baseline_inputs_pairs = ((inputs_constant_256, inputs_constant_256), )
-    varying_inputs_pairs = ((inputs_constant_256, inputs_random_256), )
-    special_inputs_pairs = ((inputs_constant_256, inputs_zero_256), (inputs_constant_256, inputs_one_256))
+    baseline_inputs_pairs = ((inputs_constant_128, inputs_constant_128), )
+    varying_inputs_pairs = ((inputs_constant_128, inputs_random_128), )
+    special_inputs_pairs = ((inputs_constant_128, inputs_zero_128), (inputs_constant_128, inputs_one_128))
     none_pairs = ((None, None), )
 
     cases = [
