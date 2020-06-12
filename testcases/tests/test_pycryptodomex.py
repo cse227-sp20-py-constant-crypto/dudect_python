@@ -1,3 +1,11 @@
+# from testcases.test_lib import TestLib
+# from testcases.test_lib import different_inputs_infos, fixed_inputs_infos
+# from testcases.test_lib import different_key_infos_16, fixed_key_infos_16, different_key_infos_32, fixed_key_infos_32, \
+#     different_key_infos_64, fixed_key_infos_64, fixed_key_infos_rsa, different_key_infos_rsa,fixed_key_infos_dsa, different_key_infos_dsa,\
+#         fixed_key_infos_ecdsa, different_key_infos_ecdsa
+
+import OpenSSL
+import Cryptodome
 from Cryptodome.Cipher import AES, ChaCha20, Salsa20, PKCS1_OAEP
 from Cryptodome import Random
 from Cryptodome.PublicKey import RSA, ElGamal, DSA, ECC
@@ -8,8 +16,8 @@ import base64
 
 
 # AES
-def generate_aes_cbc(key, nounce_or_iv):
-    iv = nounce_or_iv
+def generate_aes_cbc(key, nounce_or_iv = os.urandom(16)):
+    iv = nounce_or_iv 
     cipher = AES.new(key, AES.MODE_CBC, iv)
 
     def do_computation(msg: bytes):
@@ -18,7 +26,7 @@ def generate_aes_cbc(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_cfb(key, nounce_or_iv):
+def generate_aes_cfb(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_CFB, iv)
 
@@ -28,7 +36,7 @@ def generate_aes_cfb(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_ofb(key, nounce_or_iv):
+def generate_aes_ofb(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_OFB, iv)
 
@@ -38,7 +46,7 @@ def generate_aes_ofb(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_ctr(key, nounce_or_iv):
+def generate_aes_ctr(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_CTR, iv)
 
@@ -48,7 +56,7 @@ def generate_aes_ctr(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_ccm(key, nounce_or_iv):
+def generate_aes_ccm(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_CCM, iv)
 
@@ -58,7 +66,7 @@ def generate_aes_ccm(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_eax(key, nounce_or_iv):
+def generate_aes_eax(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_EAX, iv)
 
@@ -68,7 +76,7 @@ def generate_aes_eax(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_gcm(key, nounce_or_iv):
+def generate_aes_gcm(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_GCM, iv)
 
@@ -78,7 +86,7 @@ def generate_aes_gcm(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_siv(key, nounce_or_iv):
+def generate_aes_siv(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_SIV, iv)
 
@@ -88,7 +96,7 @@ def generate_aes_siv(key, nounce_or_iv):
     return do_computation
 
 
-def generate_aes_ocb(key, nounce_or_iv):
+def generate_aes_ocb(key, nounce_or_iv = os.urandom(16)):
     iv = nounce_or_iv
     cipher = AES.new(key, AES.MODE_OCB, iv)
 
@@ -99,7 +107,7 @@ def generate_aes_ocb(key, nounce_or_iv):
 
 
 # ChaCha20
-def generate_chacha20(key, nounce_or_iv):
+def generate_chacha20(key, nounce_or_iv = os.urandom(16)):
     nonce = nounce_or_iv
     cipher = ChaCha20.new(key=key, nonce=nonce)
 
@@ -109,7 +117,7 @@ def generate_chacha20(key, nounce_or_iv):
     return do_computation
 
 
-def generate_tls_chacha20(key, nounce_or_iv):
+def generate_tls_chacha20(key, nounce_or_iv = os.urandom(16)):
     nonce = nounce_or_iv
     cipher = ChaCha20.new(key=key, nonce=nonce)
 
@@ -120,7 +128,7 @@ def generate_tls_chacha20(key, nounce_or_iv):
 
 
 # Salsa20
-def generate_salsa20(key, nounce_or_iv):
+def generate_salsa20(key, nounce_or_iv = os.urandom(16)):
     secret = key
     nonce = nounce_or_iv
     def do_computation(msg: bytes):
@@ -165,19 +173,23 @@ def generate_dsa(key_info, nounce_or_iv):
         signature = signer.sign(hash_obj)
     return do_computation
 
-with open("testcases/private.pem", "rb") as key_file:
-    eccKey_preload = ECC.import_key(key_file.read())
+# with open("testcases/public_key.der", "rb") as key_file:
+#     eccKey_preload = ECC.import_key(key_file.read())
 
 def generate_ecdsa(key_info, nounce_or_iv):
     if key_info.mode == key_info.constant:
-        signer = DSS.new(eccKey_preload, 'deterministic-rfc6979')
+        # signer = DSS.new(eccKey_preload, 'deterministic-rfc6979')
+        p, q, g, x, y = key_info.args
+        key = ECC.construct(tup=(y,g,p,q,x))
     elif key_info.mode == key_info.random:
         n = key_info.args
-        signer = DSS.new(eccKey_preload, 'fips-186-3', randfunc=Random.get_random_bytes(n))
+        key = ECC.generate(randfunc=Random.get_random_bytes(n),bits=2048)
+        # signer = DSS.new(eccKey_preload, 'fips-186-3', randfunc=Random.get_random_bytes(n))
     else:
         raise Exception("key info ERROR: %s" % key_info)
     def do_computation(msg: bytes):
         h = SHA256.new(msg)
+        signer = DSS.new(key, 'fips-186-3')
         signature = signer.sign(h)
     return do_computation
 
@@ -215,3 +227,38 @@ def generate_poly1305(key, nounce_or_iv):
         mac.hexdigest()
     return do_computation
 
+
+# pycryptodomex_aes_cbc_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_aes_cbc, name="pycryptodomex_aes-inputs")
+# pycryptodomex_aes_cbc_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_aes_cbc, name="pycryptodomex_aes-key", multi_init=True)
+
+# pycryptodomex_chacha20_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_chacha20, name="pycryptodomex_chacha20-inputs")
+# pycryptodomex_chacha20_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_chacha20, name="pycryptodomex_chacha20-key", multi_init=True)
+
+# pycryptodomex_tls_chacha20_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_tls_chacha20, name="generate_tls_chacha20-inputs")
+# pycryptodomex_tls_chacha20_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_tls_chacha20, name="generate_tls_chacha20-key", multi_init=True)
+
+# pycryptodomex_salsa20_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_salsa20, name="generate_salsa20-inputs")
+# pycryptodomex_salsa20_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_salsa20, name="generate_salsa20-key", multi_init=True)
+
+# pycryptodomex_rsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_rsa, name="generate_rsa-inputs")
+# pycryptodomex_rsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_rsa, name="generate_rsa-key", multi_init=True)
+                
+# pycryptodomex_dsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_dsa, name="generate_dsa-inputs")
+# pycryptodomex_dsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_dsa, name="generate_dsa-key", multi_init=True)
+
+# pycryptodomex_ecdsa_test_inputs = TestLib(different_inputs_infos, fixed_key_infos_ecdsa,
+#                                         generate_ecdsa, name="generate_ecdsa-inputs")
+# pycryptodomex_ecdsa_test_key = TestLib(fixed_inputs_infos, different_key_infos_ecdsa,
+#                                     generate_ecdsa, name="generate_ecdsa-key", multi_init=True)
