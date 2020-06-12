@@ -4,17 +4,8 @@ import random
 import os
 from itertools import combinations
 
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.asymmetric import rsa, dsa, ec
-from cryptography.hazmat.primitives import serialization
-
 number_measurements = 100000
 # tests = []
-with open("testcases/private.pem", "rb") as key_file:
-     rsaKey_preload = serialization.load_pem_private_key(
-         key_file.read(),
-         password=None,
-         backend=default_backend())
 
 
 def generate_zero_byte(n):
