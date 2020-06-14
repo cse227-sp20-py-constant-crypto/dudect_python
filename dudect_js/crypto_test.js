@@ -58,7 +58,8 @@ function generate_dsa_pair(key_size,q_size){
 
 /**
  * 
- * @param {number} num_bytes
+ * @param {number} num_bytes1
+ * @param {number} num_bytes1
  * @param {function} func1 
  * @param {function} func2 
  * @param {string|Buffer|number} const_byte1
@@ -90,10 +91,22 @@ function init_cipher(filepath,fix_key=true,fix_nonce=true,special_test=false){
     let conf = fs.readFileSync(filepath);
     var conf_json = JSON.parse(conf.toString());
     const conf_algorithm = conf_json.algorithm;
-    const conf_key = conf_json.key;
+    const conf_key = Buffer.from(conf_json.key);
     const conf_key_length = conf_json.key_length;
     const conf_nonce = Buffer.from(conf_json.nonce);
     const conf_nonce_length = conf_json.nonce_length;
+
+    const special_key = generate_constant_tv(conf_key_length,0);
+    var random_keys = [];
+    for(var i=0; i<5000;i++){
+        random_keys.push(generate_random_tv(conf_key_length));
+    }
+
+    const special_iv = generate_constant_tv(conf_nonce_length,0);
+    var random_ivs = [];
+    for(var i=0; i<5000;i++){
+        random_ivs.push(generate_random_tv(conf_key_length));
+    }
 
     /**
      * 
@@ -104,20 +117,26 @@ function init_cipher(filepath,fix_key=true,fix_nonce=true,special_test=false){
         var key = conf_key;
         if (class_id == 1 && !fix_key){
             if(special_test){
-                key = generate_constant_tv(conf_key_length,0);
+                //key = generate_constant_tv(conf_key_length,0);
+                key = special_key;
             }
             else{
-                key = generate_random_tv(conf_key_length);
+                var idx = getRandomArbitrary(0,5000);
+                key = random_keys[idx];
+                //key = generate_random_tv(conf_key_length);
             }
         }
 
         var iv = conf_nonce;
         if(class_id == 1 && !fix_nonce){
             if(special_test){
-                iv = generate_constant_tv(conf_nonce_length,0);
+                //iv = generate_constant_tv(conf_nonce_length,0);
+                iv = special_iv;
             }
             else{
-                iv = generate_random_tv(conf_nonce_length);
+                //iv = generate_random_tv(conf_nonce_length);
+                var idx = getRandomArbitrary(0,5000);
+                iv = random_ivs[idx];
             }
         }
 
@@ -145,6 +164,11 @@ function init_rsa(filepath,fix_key=true){
     const conf_key = fs.readFileSync(conf_json.key).toString();
     const conf_key_size = conf_json.key_size;
 
+    var random_keys = [];
+    for(var i=0; i<1000;i++){
+        random_keys.push(generate_rsa_pair(conf_key_size)['privateKey']);
+    }
+
     /**
      * 
      * @param {number} class_id 
@@ -154,9 +178,11 @@ function init_rsa(filepath,fix_key=true){
         /**
          * @type {string|crypto.KeyObject}
          */
-        var private_key = conf_key;
+        var private_key = crypto.createPrivateKey(conf_key);
         if (class_id == 1 && !fix_key){
-            private_key = generate_rsa_pair(conf_key_size)['privateKey'];
+            //private_key = generate_rsa_pair(conf_key_size)['privateKey'];
+            var idx = getRandomArbitrary(0,1000);
+            private_key = random_keys[idx];
         }
         const sign = crypto.createSign('SHA256');
         /**
@@ -166,7 +192,7 @@ function init_rsa(filepath,fix_key=true){
         function do_computation(in_msg){
             sign.update(in_msg);
             sign.end();
-            const signature = sign.sign(private_key);
+            sign.sign(private_key);
         }
 
         return do_computation;
@@ -183,6 +209,11 @@ function init_dsa(filepath,fix_key=true){
     const conf_key_size = conf_json.key_size;
     const conf_q_size = conf_json.q_size;
 
+    var random_keys = [];
+    for(var i=0; i<1000;i++){
+        random_keys.push(generate_dsa_pair(conf_key_size,conf_q_size)['privateKey']);
+    }
+
     /**
      * 
      * @param {number} class_id 
@@ -192,9 +223,11 @@ function init_dsa(filepath,fix_key=true){
         /**
          * @type {string|crypto.KeyObject}
          */
-        var private_key = conf_key;
+        var private_key = crypto.createPrivateKey(conf_key);
         if (class_id == 1 && !fix_key){
-            private_key = generate_dsa_pair(conf_key_size,conf_q_size)['privateKey'];
+            //private_key = generate_dsa_pair(conf_key_size,conf_q_size)['privateKey'];
+            var idx = getRandomArbitrary(0,1000);
+            private_key = random_keys[idx];
         }
         const sign = crypto.createSign('SHA256');
         /**
@@ -203,6 +236,7 @@ function init_dsa(filepath,fix_key=true){
          */
         function do_computation(in_msg){
             sign.update(in_msg);
+            sign.end();
             sign.sign(private_key);
         }
 
@@ -219,6 +253,11 @@ function init_ec(filepath,fix_key=true){
     const conf_key = fs.readFileSync(conf_json.key).toString();
     const conf_curve = conf_json.curve;
 
+    var random_keys = [];
+    for(var i=0; i<5000;i++){
+        random_keys.push(generate_ec_pair(conf_curve)['privateKey']);
+    }
+
     /**
      * 
      * @param {number} class_id 
@@ -228,9 +267,11 @@ function init_ec(filepath,fix_key=true){
         /**
          * @type {string|crypto.KeyObject}
          */
-        var private_key = conf_key;
+        var private_key = crypto.createPrivateKey(conf_key);
         if (class_id == 1 && !fix_key){
-            private_key = generate_ec_pair(conf_curve)['privateKey'];
+            //private_key = generate_ec_pair(conf_curve)['privateKey'];
+            var idx = getRandomArbitrary(0,5000);
+            private_key = random_keys[idx];
         }
         const sign = crypto.createSign('SHA256');
         /**
@@ -277,8 +318,13 @@ function init_hmac(filepath,fix_key=true){
     let conf = fs.readFileSync(filepath);
     var conf_json = JSON.parse(conf.toString());
     const conf_func = conf_json.func;
-    const conf_key = conf_json.key;
+    const conf_key = Buffer.from(conf_json.key);
     const conf_key_size = conf_json.key_size;
+
+    var random_keys = [];
+    for(var i=0; i<5000;i++){
+        random_keys.push(generate_random_tv(conf_key_size));
+    }
     /**
      * 
      * @param {number} class_id 
@@ -287,7 +333,10 @@ function init_hmac(filepath,fix_key=true){
 
         var key = conf_key;
         if (class_id == 1 && !fix_key){           
-            key = generate_random_tv(conf_key_size);
+            //key = generate_random_tv(conf_key_size);
+            //key = generate_constant_tv(conf_key_size,"key byte sixteen");
+            var idx = getRandomArbitrary(0,5000);
+            key = random_keys[idx];
         }
         const hmac = crypto.createHmac(conf_func, key);
         /**
@@ -295,7 +344,7 @@ function init_hmac(filepath,fix_key=true){
          * @param {Buffer} in_msg 
          */
         function do_computation(in_msg){
-            hmac.update(in_msg);
+            //hmac.update(in_msg);
             hmac.digest();
         }
 
@@ -313,7 +362,7 @@ function init_equality(target){
      */
     function init(class_id){
 
-        const default_str = generate_constant_tv(128);
+        const default_str = generate_constant_tv(1024);
         // var str1, str2;
         // if(class_id == 0){
         //     str1 = generate_constant_tv(16);
@@ -471,7 +520,7 @@ function equality_tests(idx,target){
     switch(idx){
         case 1:
             console.log(`test1 for ${target}`);
-            test_constant(init_equality(target),prepare_inputs(128,128,generate_constant_tv,generate_random_tv),false);
+            test_constant(init_equality(target),prepare_inputs(1024,1024,generate_constant_tv,generate_random_tv),false);
             break;
     
     }

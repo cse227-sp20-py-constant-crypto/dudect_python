@@ -9,6 +9,8 @@ const number_tests = 1 + number_percentiles + 1; //Number of t-tests we will do 
 
 const t_threshold_bananas = 500;
 const t_threshold_moderate = 10;
+const zAlphaHalf         = 1.96  // alpha = 0.05
+const zBeta              = 1.645 // beta = 0.05
 
 class TestData {
 
@@ -61,6 +63,41 @@ class TestData {
         var den = (v[0] / this.n[0] + v[1] / this.n[1]) ** 0.5;
         var t_value = num / den;
         return t_value;
+    }
+
+    /**
+     * 
+     * @param {boolean} verbose
+     */
+    enoughSample(verbose){
+        
+        if(this.n[0] <= 1 || this.n[1] <= 1){
+            return {'enough':false,'dis':0.0};
+        }
+        var variance = [0.0,0.0];
+        variance[0] = (this.m2[0] / (this.n[0] - 1)) ** 0.5;
+        variance[1] = (this.m2[1] / (this.n[1] - 1)) ** 0.5;
+
+        var r = this.n[0] / this.n[1];
+        if(r < 1){
+            r = 1/r;
+        }
+        if(verbose){
+            console.log(`variance: ${variance}`);
+            console.log(`ratio: ${r}`);
+            console.log(`mean delta: ${this.mean[0]-this.mean[1]}`);
+        }
+
+        var n = (variance[0]**2 + (variance[1]**2)/r) * ((zAlphaHalf+zBeta)**2) / ((this.mean[0]-this.mean[1])**2);
+        var smallerSample = Math.min(this.n[0], this.n[1]);
+        if(smallerSample < n){
+            if(verbose){
+                console.log(`${n.toFixed(0)} is suggested, while the smaller class has only ${smallerSample.toFixed(2)} population (${(smallerSample/n*100).toFixed(2)})`);
+            }
+            return {'enough': false, 'dis': smallerSample/n};
+        }
+        return {'enough': true, 'dis': 1};
+
     }
 }
 
@@ -236,13 +273,18 @@ function report(t){
     var mt = max_test(t),
         max_t = Math.abs(t[mt].compute()),
         max_t_n = t[mt].n[0] + t[mt].n[1],
-        max_tau = max_t / max_t_n ** 0.5;
-    
-    console.log(`total measurements: ${(max_t_n / 1e6).toFixed(2)} Million`);
-    console.log(`class-0 mean overall: ${(t[0].mean[0]).toExponential(2)}, population: ${t[0].n[0]}; class-1 mean overall: ${(t[0].mean[1]).toExponential(2)}, population: ${t[0].n[0]}`);
+        max_tau = max_t / (max_t_n ** 0.5),
+        overall_t = Math.abs(t[0].compute()),
+        overall_t_n = t[0].n[0] + t[0].n[1],
+        overall_tau = overall_t / (overall_t_n ** 0.5);
 
-    console.log(`class-0 mean of max_t: ${(t[mt].mean[0]).toExponential(2)}, population: ${t[mt].n[0]}; class-1 mean of max_t: ${(t[mt].mean[1]).toExponential(2)}, population: ${t[mt].n[0]}`);
+    console.log(`total measurements: ${(max_t_n / 1e6).toFixed(2)} Million`);
+    console.log(`class-0 mean overall: ${(t[0].mean[0]).toExponential(2)}, population: ${t[0].n[0]}; class-1 mean overall: ${(t[0].mean[1]).toExponential(2)}, population: ${t[0].n[1]}`);
+
+    console.log(`class-0 mean of max_t: ${(t[mt].mean[0]).toExponential(2)}, population: ${t[mt].n[0]}; class-1 mean of max_t: ${(t[mt].mean[1]).toExponential(2)}, population: ${t[mt].n[1]}`);
     
+    console.log(`overall t-value: ${overall_t.toFixed(2)}, max tau: ${overall_tau.toExponential(2)}, (5.tau)^2: ${((5 * 5) / (overall_tau * overall_tau)).toExponential(2)}`);
+
     console.log(`max t-value: ${max_t.toFixed(2)}, max tau: ${max_tau.toExponential(2)}, (5.tau)^2: ${((5 * 5) / (max_tau * max_tau)).toExponential(2)}`);
 
     if (max_t > t_threshold_bananas){
@@ -266,16 +308,32 @@ function report(t){
  * @return {number} 
  */
 function max_test(t){
-    var test_id = 0, maximum = 0;
+    var test_id = 0, maximum = 0, max_dis = 0;
 
     for(var i=0; i < number_tests; i++){
-        if (t[i].n[0] > enough_measurements && t[i].n[1] > enough_measurements){
+        var {enough,dis} = t[i].enoughSample(false);
+        
+        if(enough){
             var temp = Math.abs(t[i].compute());
             if (temp > maximum){
                 maximum = temp;
                 test_id = i;
             }
         }
+        else{
+            if (dis > max_dis){
+                max_dis = dis;
+                test_id = i;
+            }
+        }
+    }
+
+    if (maximum == 0){
+        console.log(`Sample size is not large enough, using ${test_id}-th smaple closest to the suggested size for t-value computation.`);
+        t[test_id].enoughSample(true);
+    }
+    else{
+        console.log(`Sample under percentile ${((1 - 0.5**(10*test_id/number_percentiles))*100).toFixed(2)} is computed to have the max-t`);
     }
 
     return test_id;
