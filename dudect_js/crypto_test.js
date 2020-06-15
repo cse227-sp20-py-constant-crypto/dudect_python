@@ -105,7 +105,7 @@ function init_cipher(filepath,fix_key=true,fix_nonce=true,special_test=false){
     const special_iv = generate_constant_tv(conf_nonce_length,0);
     var random_ivs = [];
     for(var i=0; i<5000;i++){
-        random_ivs.push(generate_random_tv(conf_key_length));
+        random_ivs.push(generate_random_tv(conf_nonce_length));
     }
 
     /**
